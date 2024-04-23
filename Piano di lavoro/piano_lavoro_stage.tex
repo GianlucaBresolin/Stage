@@ -1,0 +1,348 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage[parfill]{parskip}
+\geometry{a4paper,top=1.25cm,bottom=4cm,left=3cm,right=3cm}
+\graphicspath{{../includes/pics/}}
+
+%TITOLO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\thetitle}{Piano di lavoro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%VERSIONE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\theversion}{ X.X.X }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%DATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\thedate}{ G Mese Anno }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%DESCRIZIONE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\descript}{\input{../includes/description}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex]{hyperref}
+\else
+\usepackage{hyperref}
+\fi
+\usepackage{color}
+\hypersetup{%
+colorlinks=true,
+linkcolor=black,
+citecolor=black,
+urlcolor=blue}
+\usepackage[nonumberlist]{glossaries}
+\usepackage{afterpage}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\usepackage{subfig}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth
+\pgfkeys{/pgf/number format/.cd,
+set decimal separator={,\!},
+1000 sep={\,},
+}
+\renewcommand{\baselinestretch}{1.05}
+\usepackage{multirow}
+\usepackage{longtable}
+
+%FANCYPAGESTYLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\thetitle}
+\fancyfoot[C]{}
+\fancyhead[R]{\includegraphics[width=0.08\textwidth]{unipd.png}}
+\fancyhead[L]{\bfseries\nouppercase{\leftmark}}
+\setlength{\headheight}{50pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let\headruleORIG\headrule
+\renewcommand{\headrule}{\color{black} \headruleORIG}
+\renewcommand{\headrulewidth}{1.0pt}
+\usepackage{colortbl}
+\arrayrulecolor{black}
+
+\let\footruleORIG\footrule
+\renewcommand{\footrule}{\color{black} \footruleORIG}
+\renewcommand{\footrulewidth}{1.0pt}
+
+\fancypagestyle{plain}{
+    \fancyhead{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\usepackage{amsthm}
+\usepackage{amssymb,amsmath}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage[footnote]{acronym}
+
+\newcommand\blankpage{%
+\null
+\newpage}
+
+\parskip=5pt
+
+\setlength{\arrayrulewidth}{0.2mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+%PRIMA PAGINA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{unipd.png}\\
+
+        {\large Laurea in Informatica}\\[0.5cm]
+
+        \rule{\linewidth}{0.5mm} \\[0.4cm]
+        { \huge \bfseries Piano di lavoro \\[0.4cm] } %TITOLO
+
+        \rule{\linewidth}{0.5mm} \\[1.cm]
+        \noindent
+
+        {\Large \textsc{Gianluca Bresolin} \\[0.2cm] \par}
+        {\large \textit{2034316} \\[2cm] \par}
+
+        {\large 24 Aprile 2024\\[1.5cm] \par}
+
+        {\large Datasoil s.r.l. \\[1.5cm] \par}
+
+        \vfill
+        {\large \href{https://datasoil.it/}{https://datasoil.it/}} %BOTTOM
+    \end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage %pagina nuova
+
+\tableofcontents
+\clearpage
+
+\pagestyle{fancy}
+
+\section{Contatti}
+
+\subsection{Studente}
+\begin{itemize}
+    \item Gianluca Bresolin
+    \item \href{mailto:gianluca.bresolin@studenti.unipd.it}{gianluca.bresolin@studenti.unipd.it}
+    \item \href{mailto:gianbreso02@gmail.com}{gianbreso02@gmail.com}
+    \item +39 391 30 47 314
+\end{itemize}
+
+\subsection{Tutor interno}
+\begin{itemize}
+    \item Paolo Baldan
+    \item \href{mailto:baldan@math.unipd.it}{baldan@math.unipd.it}
+\end{itemize}
+
+\subsection{Tutor aziendale}
+\begin{itemize}
+    \item Pietro De Caro
+    \item \href{mailto:pietro.decaro@datasoil.it}{pietro.decaro@datasoil.it}
+\end{itemize}
+
+\subsection{Azienda}
+\begin{itemize}
+    \item Datasoil s.r.l.
+    \item Viale Codalunga, Padova (PD)
+    \item \href{https://datasoil.it/}{https://datasoil.it/}
+    \item P.I./C.F.: 05013950281
+\end{itemize}
+
+\clearpage
+
+\section{Scopo dello stage}
+
+\subsection{Informazioni sull'azienda}
+
+%TODO: Aggiungere informazioni sull'azienda
+
+\subsection{Informazioni sullo stage}
+
+Lo scopo del progetto consiste nell'eseguire il refactor e l’ottimizzazione di una libreria ReactJS per la visualizzazione di dashboard parametriche. \\
+L’SDK (\textit{Software Development Kit}), integrato nei prodotti Datasoil attraverso un micro servizio dedicato, rende immediata la composizione di dashboard dinamiche e personalizzate 
+per la visualizzazione dei dati. Il progetto mira a ridurre la dimensione della codebase, aggiungere nuovi grafici e funzionalità ed aumentare le 
+performance attraverso l’impiego di librerie di charting aggiornate e data model più performanti. \\
+In quanto la componente è già live su diversi prodotti, la relativa analisi dei requisiti è già stata condotta e non è dunque oggetto del progetto.
+
+\subsection{Contenuti formativi}
+Le tecnologie coinvolte nello sviluppo dell'SDK sono:
+\begin{itemize}
+    \item Typescript;
+    \item ReactJS;
+    \item CSS;
+    \item D3.js.
+\end{itemize}
+
+\newpage
+\section{Interazione Studente - Tutor aziendale}
+
+%TODO: Aggiungere informazioni sull'interazione
+
+\newpage
+\section{Pianificazione del lavoro}
+
+La pianificazione, in termini di quantità di ore lavorative, sarà così distribuita:
+
+\subsection{Distribuzione delle ore}
+
+% \begin{longtable}[c]{|p{1cm}|p{1cm}|p{8cm}|}
+%     \hline
+%     \multicolumn{2}{|c|}{\textbf{Durata in ore}} & \textbf{Descrizione dell'attività} \\
+%     \endfirsthead
+%     %
+%     \hline
+%     \multicolumn{3}{|c|}%
+%     {{\bfseries Distribuzione delle ore \thetable\ continua dalla pagina precedente}} \\
+%     \multicolumn{2}{|c|}{\textbf{Durata in ore}} & \textbf{Descrizione dell'attività} \\
+%     \endhead
+%     \hline
+%     %
+%     \multicolumn{2}{|c|}{80} & Formazione:
+%     \begin{itemize}
+%         \item Studio data visualization in letteratura;
+%         \item Studio infografiche in letteratura;
+%         \item Approfondimento su criteri di valutazione per infografiche.
+%     \end{itemize} \\ \hline
+%     \multirow{3}{*}{98} &  & Progettazione e sviluppo \\ \cline{2-3}
+%     & 2 & \begin{itemize}
+%         \item Analisi di software gestionali esistenti
+%         \item Analisi dell'impianto commerciale del gestionale
+%         \item Analisi dell'integrazione del software gestionale con l'applicazione Android
+%     \end{itemize} \\ \cline{2-3}
+%     & 2 & \begin{itemize}
+%         \item Analisi di software gestionali esistenti
+%         \item Analisi dell'impianto commerciale del gestionale
+%         \item Analisi dell'integrazione del software gestionale con l'applicazione Android
+%     \end{itemize} \\ \hline
+%     \multicolumn{2}{|c|}{80} & Verifica e documentazione:
+%     \begin{itemize}
+%         \item Sviluppo ed esecuzione di test sui sistemi prodotti;
+%         \item Produzione documentazione dei sistemi prodotti.
+%     \end{itemize} \\ \hline
+%     1& 2 & 3 \\
+%     1& 2 & 3 \\
+%     1& 2 & 3 \\
+%     1& 2 & 3 \\ \hline
+% \end{longtable}
+
+\begin{center}
+    \begin{tabular}{ |p{3cm}|p{7cm}|  }
+        \hline
+        \textbf{Durata in ore} & \textbf{Descrizione dell'attività} \\
+        \hline
+        56                     & Formazione:
+
+        \begin{itemize}
+            \item Studio della libreria ReactJS;
+            \item Studio della libreria D3.js;
+            \item Studio del SDK Datasoil esistente;
+            \item Infografiche e criteri di valutazione;
+        \end{itemize}
+
+        \\ \hline
+        40                     & Analisi:
+
+        %\begin{itemize}
+            %TODO: Aggiungere attività
+        %\end{itemize}
+
+        \\ \hline
+        172                    & Progettazione e Sviluppo:
+
+        %\begin{itemize}
+            %TODO: Aggiungere attività
+        %\end{itemize}
+
+        \\ \hline
+        40                     & Verifica e stime:
+
+        \begin{itemize}
+            \item Esecuzione di test dell'SDK prodotto;
+            \item Analisi e stima di nuove richieste dei clienti.
+        \end{itemize}
+
+        \\ \hline
+        \multicolumn{2}{|c|}{\textbf{308 ore totali}}               \\ \hline
+    \end{tabular}
+\end{center}
+
+\clearpage
+
+\section{Obiettivi}
+
+Si farà riferimento ai requisiti secondo le seguenti notazioni:
+
+\begin{itemize}
+    \item \textbf{OB} per i requisiti obbligatori, vincolanti in quanto obiettivo primario richiesto dal committente;
+    \item \textbf{DE} per i requisiti desiderabili, non vincolanti o strettamente necessari, ma dal riconoscibile valore aggiunto;
+    \item \textbf{OP} per i requisiti opzionali, rappresentanti valore aggiunto non strettamente competitivo.
+\end{itemize}
+
+{Le sigle precedentemente indicate saranno seguite da un numero, identificativo del requisito. Si prevede lo svolgimento dei seguenti obiettivi: \\[0.5cm] \par}
+
+%\begin{center}
+%    \begin{tabular}{ |p{3cm}|p{7cm}|  }
+%        \hline
+%        \multicolumn{2}{|c|}{\textbf{Obbligatorio}}                                                                                \\ \hline
+%        \textbf{OB1} & Progettazione del software gestionale ed integrazione con dispositivi mobili, quali telefoni e tablet       \\ \hline
+%        \textbf{OB2} & Progettazione database SQL                                                                                  \\ \hline
+%        \textbf{OB3} & Realizzazione software Delphi con il framework Firemonkey                                                   \\ \hline
+%        \textbf{OB4} & Realizzazione applicazione Android con Java                                                                 \\ \hline
+%        \multicolumn{2}{|c|}{\textbf{Desiderabile}}                                                                                \\ \hline
+%        \textbf{DE1} & Autonomia della gestione con il cliente per raccogliere nuove richieste                                     \\ \hline
+%        \textbf{DE2} & Realizzazione di un thread-pool efficiente per gestire operazioni ricorrenti in modo efficace ed efficiente \\ \hline
+%        \multicolumn{2}{|c|}{\textbf{Opzionale}}                                                                                   \\ \hline
+%        \textbf{OP1} & Realizzazione di un componente Android Studio per l'interazione ad hoc con il gestionale                    \\ \hline
+%    \end{tabular}
+%\end{center}
+
+\newpage
+\section{Approvazione}
+ {Il presente piano di lavoro è stato approvato dai seguenti:}
+
+\vspace*{2cm}
+\begin{tabular}{p{4cm}p{4cm}}
+                   &                 \\ \hline
+    Pietro De Caro & Tutor aziendale
+\end{tabular}
+
+\vspace*{2cm}
+\begin{tabular}{p{4cm}p{4cm}}
+                      &          \\ \hline
+    Gianluca Bresolin & Stagista
+\end{tabular}
+
+\vspace*{2cm}
+\begin{tabular}{p{4cm}p{4cm}}
+                 &               \\ \hline
+    Paolo Baldan & Tutor interno
+\end{tabular}
+
+\end{document}
