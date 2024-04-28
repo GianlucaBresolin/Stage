@@ -1,0 +1,12 @@
+All'interno della seguente tesi viene presentata l'esperienza di Stage svolta presso 
+l'azienda Datasoil s.r.l., dalla durata complessiva di 300 ore.
+Lo stage ha previsto la realizzazione di una libreria Javascript attraverso il refactor
+e l'ottimizzazione di una libreria ReactJS per la visualizzazione di dashboard parametriche,
+volta ad ampliare soluzioni e servizi nel contesto di applicazioni SPA e nella 
+realizzazione di interfacce utente, ponendo attenzione ai requisiti di scalabilità, 
+usabilità e performance.
+La libreria realizzata, integrata nei prodotti Datasoil attraverso un micro servizio
+dedicato, rende immediata la composizione di dashboard dinamiche e
+personalizzate per la visualizzazione dei dati, riducendo la dimensione della codebase e  
+aggiungendo nuovi grafici e funzionalità rispetto all'SDK precedentemente utilizzato 
+dall'azienda.
