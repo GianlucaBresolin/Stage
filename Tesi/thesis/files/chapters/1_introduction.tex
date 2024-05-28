@@ -1,6 +1,15 @@
 \chapter{Introduzione}
 \label{chap:introduzione}
 
+% * INTRODUZIONE
+
+% - Breve descrizione del progetto
+% - Principali problematiche
+% - Soluzione scelta
+% - Strumenti utilizzati
+% - Descrizione del prodotto ottenuto
+% - Struttura del resto della relazione
+
 \section{L'azienda}
 Lo stage è stato svolto presso l'azienda Datasoil S.r.l. situata nei dintorni della stazione ferroviaria di Padova.
 Fondata nel XXXX, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0, 
@@ -15,7 +24,7 @@ Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fert
     \centering
     \includegraphics[alt={Logo Datasoil S.r.l.}, width=0.25\columnwidth]{img/datasoil_logo.jpg}
     \caption{Logo Datasoil S.r.l.}
-    \label{fig:data_soil}
+    \label{fig:datasoil}
 \end{figure}
 
 \section{L'idea}
@@ -23,40 +32,115 @@ Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fert
 L'azienda Datasoil S.r.l., essendo un'azienda di prodotto, nasce con l'idea di proporre servizi di monitoraggio e controllo
 di impianti industriali, smart building e smart city, offrendo come principale prodotto la piattaforma SYN.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Logo SYN}, width=0.25\columnwidth]{img/syn_logo.jpg}
+    \caption{Logo SYN}
+    \label{fig:syn}
+\end{figure}
+
 SYN è una piattaforma di monitoraggio e controllo di impianti industriali che raccoglie dati da sensori e dispositivi
 distribuiti all'interno di un impianto o su più stabilimenti, permettendo di visualizzare in tempo reale lo stato di
 funzionamento dei vari asset, di analizzare i dati raccolti e di attuare azioni di controllo o segnalazione tramite 
-ticketing.
+ticketing. All'interno della piattaforma, a seconda dei piani attivati dal cliente, è possibile visualizzare dashboard dinamiche
+in merito ad informazioni filtrate e aggiornate live, permettendo di raggiungere una panoramica completa dello stato dei vari 
+asset monitorati in modo rapido, intuitivo ed efficace, grazie all'utilizzo di molteplici grafici e widget.
 
-\subsection{Il progetto libreria dashboard dinamiche}
+\subsection{Il progetto}
+Il progetto svolto durante lo stage consiste nello sviluppo di una libreria TypeScript di componenti per la creazione di dashboard dinamiche. 
+Questo è stato realizzato tramite il refactoring e l'ottimizzazione di un tool grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l., 
+tra cui \textit{SYN}. La libreria è stata implementata a partire da una libreria open-source utilizzata in \textit{Redash}, 
+una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
+L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni 
+correnti delle dipendenze utilizzate, raggiungendo una maggior performance e una maggiore manutenibilità del codice rispetto alla versione
+preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali.
+
+\section{Principali problematiche}
+Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse a fronte di una 
+revisione del codice sorgente alcune problematiche legate alla manutenibilità e alla performance del tool grafico.
+
+\subsection{Dipendenze obsolete}
+La libreria preesistente utilizzava versioni obsolete delle dipendenze esterne, con conseguente rallentamento delle prestazioni in termini
+di utilizzo di spazio e di tempo di caricamente delle risorse, data l'assenza di ottimizzazioni e di aggiornamenti del codice sorgente. \newline
+Essendo inoltre la libreria preesistente basata su una versione della piattaforma \textit{Redash}, i moduli utilizzati il più delle volte
+rappresentavono alternative a quelli già utilizzati all'interno dei prodotti Datasoil S.r.l., creando una dipendenze non necessarie che 
+causavano un aumento delle dimensioni del SDK utilizzato per la creazione delle dashboard.
+
+\subsection{Manutenibilità del codice}
+Il codice sorgente della libreria preesistente, essendo stato sviluppato a fronte di una esigenza specifica dell'azienda Datasoil S.r.l.,
+risultava essere poco manutenibile e assente di documentazione. \newline
+Inoltre, la libreria utilizzata da \textit{Redash}, inizialmente era stata sviluppata in JavaScript, subendo solo successivamente un 
+refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta 
+di tipi \textit{any} per le variabili e i parametri delle funzioni, rendendo il codice poco leggibile e difficile da mantenere.
+
+\subsection{Componenti inutilizzate}
+In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti 
+in essa trovavano utilizzo all'interno dei prodotti realizzati da Datasoil S.r.l.: questo in gran parte era dovuto da una offerta di grafici inopportuni
+per quello che è il contesto applicativo dell'azienda.
+
+\subsection{Assenza di funzionalità}
+La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di Datasoil S.r.l., mancando di alcune funzionalità fondamentali. 
+Questa limitazione ha reso necessario un intervento di refactoring per colmare le lacune e migliorare le prestazioni complessive.
+
+\section{Soluzione scelta}
+Per risolvere le problematiche emerse durante l'analisi iniziale della libreria preesistente, si è optato per il refactoring e l'ottimizzazione
+del codice sorgente, individuando le soluzioni presentate di seguito.
+
+\subsection{Aggiornamento delle dipendenze}
+Per risolvere il problema delle dipendenze obsolete, è stata effettuata un'analisi delle versioni correnti delle dipendenze utilizzate all'interno della libreria,
+verificando che le funzionalità utilizzate non fossero state deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile, che tenesse conto 
+inoltre delle nuove funzionalità introdotte nelle versioni più recenti. \newline
+Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.r.l., è stato possibile sostituire con librerie equivalenti dipendenze preesistenti, 
+riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali. 
+
+\subsection{Introduzione di interfacce e tipi}
+Al fine di migliorare la manutenibilità e la comprensione del codice sorgente, è stato svolto un lavoro di introduzione di interfacce e tipi per le variabili e i parametri
+delle funzioni, in modo da rendere il codice più leggibile e permettere controlli statici sul codice sorgente. \newline
+Questo lavoro ha permesso di ridurre la presenza di tipi \textit{any} all'interno del codice sorgente, garantendo una maggiore sicurezza e affidabilità del prodotto finale.
+
+\subsection{Refactoring del codice}
+Per migliorare la comprensione e la manutenibilità del codice sorgente, è stato intrapreso un lavoro di refactoring su alcune porzioni della libreria preesistente. 
+Questo intervento ha comportato la riscrittura di diverse funzioni e la rimozione di componenti minori utilizzate per eseguire funzionalità semplici, attraverso un codice
+più leggibile e immediato, eliminando complessità superflue e mantenendo l'efficacia nell'implementazione di operazioni elementari.
+
+\subsection{Rimozione di componenti inutilizzate}
+In merito alla presenza di componenti inutilizzate all'interno della libreria preesistente, è stata effettuata un'accurata analisi delle componenti presenti, selezionando
+quelle che non trovavano un diretto utilizzo all'interno dei prodotti Datasoil S.r.l. e procedendo con la loro rimozione. \newline
+Questo lavoro ha permesso di ridurre le dimensioni del codice sorgente e di migliorare le prestazioni complessive della libreria, diminuendo inoltre il numero di dipendenze
+esterne richiesto per il corretto funzionamento dell'SDK prodotto. 
+
+\subsection{Implementazione di nuove funzionalità}
+Per colmare le lacune riscontrate nella libreria preesistente in merito all'assenza di alcune funzionalità richieste dai clienti di Datasoil S.r.l. all'interno dei prodotti forniti,
+è stato condotto un lavoro di implementazione di nuove funzionalità. \newline
+In questo processo, si è cercato preferibilmente di utilizzare dipendenze esterne già esistenti o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non 
+fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni 
+finali dell'SDK prodotto.
 
 
+\section{Strumenti utilizzati}
 
-Lorem Figure \ref{fig:entanglement}
-
-Esempio di utilizzo di un termine nel glossario \gls{api}.
-
-Esempio di citazione in linea \cite{site:agile-manifesto}.
-
-Esempio di citazione nel piè di pagina citazione\footcite{womak:lean-thinking}
-
-\lipsum[1-2]
+\section{Descrizione del prodotto ottenuto}
 
 \section{Organizzazione del testo}
-\begin{description}
-    \item[{\hyperref[chap:processi-metodologie]{Il secondo capitolo}}] descrive ...
-    
-    \item[{\hyperref[chap:descrizione-stage]{Il terzo capitolo}}] approfondisce ...
-    
-    \item[{\hyperref[chap:analisi-requisiti]{Il quarto capitolo}}] approfondisce ...
-    
-    \item[{\hyperref[chap:progettazione-codifica]{Il quinto capitolo}}] approfondisce ...
-    
-    \item[{\hyperref[chap:verifica-validazione]{Il sesto capitolo}}] approfondisce ...
-    
-    \item[{\hyperref[chap:conclusioni]{Nel settimo capitolo}}] descrive ...
-\end{description}
+Nel presente capitolo viene presentata l'introduzione della tesi, fornendo una panoramica sull'azienda, sul contesto applicativo, 
+sul progetto e sul prodotto portato a termine durante lo svolgimento dello stage. \newline
+In seguito il documento presenterà la seguente organizzazione:
 
+\begin{description}
+    \item[{\hyperref[chap:processi-metodologie]{Analisi dei requisiti}}] descrive la fase di analisi dei requisiti che è stata
+    svolta dall'azienda antecedentemente all'inizio dell'attività di stage, in modo da permettere una comprensione più profonda
+    di quelle che sono le necessità da soddisfare e gli obiettivi da raggiungere all'interno di questo progetto;
+    
+    \item[{\hyperref[chap:descrizione-stage]{Progettazione}}] illustra l'attività di progettazione che è stata svolta in vista dell'implementazione
+    dei grafici prodotti, definendo le tecnologie e le soluzioni implementative che sono state attuate durante la successiva attività di codifica;
+    
+    \item[{\hyperref[chap:analisi-requisiti]{Realizzazione e Testing}}] approfondisce l'attività di codifica delle componenti grafiche presentate 
+    all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
+    
+    \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
+    degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
+    La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
+    
 Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
 	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
@@ -64,16 +148,5 @@ Riguardo la stesura del testo, relativamente al documento sono state adottate le
 	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
 \end{itemize}
 
-\begin{listing}[H]
-\begin{minted}{c}
-#include <stdio.h>
-int main() {
-    print("Hello, world!");
-    return 0;
-}
-\end{minted}
-\caption{Example of code}
-\label{listing:a}
-\end{listing}
 
 \newpage
