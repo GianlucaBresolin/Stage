@@ -12,11 +12,11 @@
 
 \section{L'azienda}
 Lo stage è stato svolto presso l'azienda Datasoil S.r.l. situata nei dintorni della stazione ferroviaria di Padova.
-Fondata nel XXXX, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0, 
-smart building e smart city. 
-L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare insight proattivi 
+Fondata nel XXXX, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
+smart building e smart city.
+L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare insight proattivi
 in tempo reale, garantendo che le informazioni corrette raggiungano le persone giuste al momento più opportuno.
-Il punto di partenza è la spazialità aziendale e tutti gli asset che risiedono all'interno di essa, da cui 
+Il punto di partenza è la spazialità aziendale e tutti gli asset che risiedono all'interno di essa, da cui
 provengono tutti i dati che vengono analizzati trasversalmente grazie a sempre più persone e dispositivi connessi.
 Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fertile di dati da cui siamo circondati.
 
@@ -41,57 +41,57 @@ di impianti industriali, smart building e smart city, offrendo come principale p
 
 SYN è una piattaforma di monitoraggio e controllo di impianti industriali che raccoglie dati da sensori e dispositivi
 distribuiti all'interno di un impianto o su più stabilimenti, permettendo di visualizzare in tempo reale lo stato di
-funzionamento dei vari asset, di analizzare i dati raccolti e di attuare azioni di controllo o segnalazione tramite 
+funzionamento dei vari asset, di analizzare i dati raccolti e di attuare azioni di controllo o segnalazione tramite
 ticketing. All'interno della piattaforma, a seconda dei piani attivati dal cliente, è possibile visualizzare dashboard dinamiche
-in merito ad informazioni filtrate e aggiornate live, permettendo di raggiungere una panoramica completa dello stato dei vari 
+in merito ad informazioni filtrate e aggiornate live, permettendo di raggiungere una panoramica completa dello stato dei vari
 asset monitorati in modo rapido, intuitivo ed efficace, grazie all'utilizzo di molteplici grafici e widget.
 
 \subsection{Il progetto}
-Il progetto svolto durante lo stage consiste nello sviluppo di una libreria TypeScript di componenti per la creazione di dashboard dinamiche. 
-Questo è stato realizzato tramite il refactoring e l'ottimizzazione di un tool grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l., 
-tra cui \textit{SYN}. La libreria è stata implementata a partire da una libreria open-source utilizzata in \textit{Redash}, 
+Il progetto svolto durante lo stage consiste nello sviluppo di una libreria TypeScript di componenti per la creazione di dashboard dinamiche.
+Questo è stato realizzato tramite il refactoring e l'ottimizzazione di un tool grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l.,
+tra cui \textit{SYN}. La libreria è stata implementata a partire da una libreria open-source utilizzata in \textit{Redash},
 una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
-L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni 
+L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
 correnti delle dipendenze utilizzate, raggiungendo una maggior performance e una maggiore manutenibilità del codice rispetto alla versione
 preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali.
 
 \section{Principali problematiche}
-Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse a fronte di una 
+Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse a fronte di una
 revisione del codice sorgente alcune problematiche legate alla manutenibilità e alla performance del tool grafico.
 
 \subsection{Dipendenze obsolete}
 La libreria preesistente utilizzava versioni obsolete delle dipendenze esterne, con conseguente rallentamento delle prestazioni in termini
 di utilizzo di spazio e di tempo di caricamente delle risorse, data l'assenza di ottimizzazioni e di aggiornamenti del codice sorgente. \newline
 Essendo inoltre la libreria preesistente basata su una versione della piattaforma \textit{Redash}, i moduli utilizzati il più delle volte
-rappresentavono alternative a quelli già utilizzati all'interno dei prodotti Datasoil S.r.l., creando una dipendenze non necessarie che 
+rappresentavono alternative a quelli già utilizzati all'interno dei prodotti Datasoil S.r.l., creando una dipendenze non necessarie che
 causavano un aumento delle dimensioni del SDK utilizzato per la creazione delle dashboard.
 
 \subsection{Manutenibilità del codice}
 Il codice sorgente della libreria preesistente, essendo stato sviluppato a fronte di una esigenza specifica dell'azienda Datasoil S.r.l.,
 risultava essere poco manutenibile e assente di documentazione. \newline
-Inoltre, la libreria utilizzata da \textit{Redash}, inizialmente era stata sviluppata in JavaScript, subendo solo successivamente un 
-refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta 
+Inoltre, la libreria utilizzata da \textit{Redash}, inizialmente era stata sviluppata in JavaScript, subendo solo successivamente un
+refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta
 di tipi \textit{any} per le variabili e i parametri delle funzioni, rendendo il codice poco leggibile e difficile da mantenere.
 
 \subsection{Componenti inutilizzate}
-In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti 
+In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti
 in essa trovavano utilizzo all'interno dei prodotti realizzati da Datasoil S.r.l.: questo in gran parte era dovuto da una offerta di grafici inopportuni
 per quello che è il contesto applicativo dell'azienda.
 
 \subsection{Assenza di funzionalità}
-La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di Datasoil S.r.l., mancando di alcune funzionalità fondamentali. 
+La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di Datasoil S.r.l., mancando di alcune funzionalità fondamentali.
 Questa limitazione ha reso necessario un intervento di refactoring per colmare le lacune e migliorare le prestazioni complessive.
 
-\section{Soluzione scelta}
+\section{Soluzione scelte}
 Per risolvere le problematiche emerse durante l'analisi iniziale della libreria preesistente, si è optato per il refactoring e l'ottimizzazione
 del codice sorgente, individuando le soluzioni presentate di seguito.
 
 \subsection{Aggiornamento delle dipendenze}
 Per risolvere il problema delle dipendenze obsolete, è stata effettuata un'analisi delle versioni correnti delle dipendenze utilizzate all'interno della libreria,
-verificando che le funzionalità utilizzate non fossero state deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile, che tenesse conto 
-inoltre delle nuove funzionalità introdotte nelle versioni più recenti. \newline
-Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.r.l., è stato possibile sostituire con librerie equivalenti dipendenze preesistenti, 
-riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali. 
+verificando che le funzionalità utilizzate non fossero deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile, che inoltre tenesse conto
+delle nuove funzionalità introdotte nelle versioni più recenti. \newline
+Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.r.l., è stato possibile sostituire con librerie equivalenti dipendenze preesistenti,
+riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali.
 
 \subsection{Introduzione di interfacce e tipi}
 Al fine di migliorare la manutenibilità e la comprensione del codice sorgente, è stato svolto un lavoro di introduzione di interfacce e tipi per le variabili e i parametri
@@ -99,7 +99,7 @@ delle funzioni, in modo da rendere il codice più leggibile e permettere control
 Questo lavoro ha permesso di ridurre la presenza di tipi \textit{any} all'interno del codice sorgente, garantendo una maggiore sicurezza e affidabilità del prodotto finale.
 
 \subsection{Refactoring del codice}
-Per migliorare la comprensione e la manutenibilità del codice sorgente, è stato intrapreso un lavoro di refactoring su alcune porzioni della libreria preesistente. 
+Per migliorare la comprensione e la manutenibilità del codice sorgente, è stato intrapreso un lavoro di refactoring su alcune porzioni della libreria preesistente.
 Questo intervento ha comportato la riscrittura di diverse funzioni e la rimozione di componenti minori utilizzate per eseguire funzionalità semplici, attraverso un codice
 più leggibile e immediato, eliminando complessità superflue e mantenendo l'efficacia nell'implementazione di operazioni elementari.
 
@@ -107,45 +107,121 @@ più leggibile e immediato, eliminando complessità superflue e mantenendo l'eff
 In merito alla presenza di componenti inutilizzate all'interno della libreria preesistente, è stata effettuata un'accurata analisi delle componenti presenti, selezionando
 quelle che non trovavano un diretto utilizzo all'interno dei prodotti Datasoil S.r.l. e procedendo con la loro rimozione. \newline
 Questo lavoro ha permesso di ridurre le dimensioni del codice sorgente e di migliorare le prestazioni complessive della libreria, diminuendo inoltre il numero di dipendenze
-esterne richiesto per il corretto funzionamento dell'SDK prodotto. 
+esterne richiesto per il corretto funzionamento dell'SDK prodotto.
 
 \subsection{Implementazione di nuove funzionalità}
 Per colmare le lacune riscontrate nella libreria preesistente in merito all'assenza di alcune funzionalità richieste dai clienti di Datasoil S.r.l. all'interno dei prodotti forniti,
 è stato condotto un lavoro di implementazione di nuove funzionalità. \newline
-In questo processo, si è cercato preferibilmente di utilizzare dipendenze esterne già esistenti o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non 
-fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni 
+In questo processo, si è cercato preferibilmente di utilizzare dipendenze esterne già esistenti o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non
+fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni
 finali dell'SDK prodotto.
 
 
 \section{Strumenti utilizzati}
+Nella seguente sezione vengono presentati gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
+Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
+\begin{itemize}
+    \item \textbf{Nome strumento}: breve descrizione dello strumento e del suo utilizzo;
+    \item \textbf{Versione}: versione utilizzata durante lo stage;
+    \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
+    \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
+    \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
+    \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
+    \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
+          su di esse e la motivazione per cui non sono state selezionate. \textit{(Opzionale)}
+\end{itemize}
+
+\subsection{Yarn}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Yarn
+    \item \textbf{Versione}: 1.22.22
+    \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
+    \item \textbf{Descrizione}: Yarn è un package manager per JavaScript, sviluppato da Facebook, Google e Tilde.
+    \item \textbf{Vantaggi}: Yarn è più veloce di npm, ha un sistema di cache più efficiente e permette di installare pacchetti in modo deterministico.
+    \item \textbf{Svantaggi}: Yarn è meno flessibile di npm e non supporta alcune funzionalità di npm.
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{npm}: npm è il package manager di default per Node.js, ma è più lento di Yarn e ha un sistema di cache meno efficiente.
+          \end{itemize}
+\end{itemize}
+
+% \subsection{React}
+
+\subsection{Plotly.js}
+\begin{itemize}
+\item \textbf{Nome strumento}: Plotly.js
+\item \textbf{Versione}: custom-boundle: 2.33.0
+\item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
+\item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
+Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
+\item \textbf{Vantaggi}:
+\begin{itemize}
+    \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
+    \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
+          all'interno della libreria grafica;
+    \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
+          online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
+    \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
+          così le dimensioni del pacchetto finale;
+    \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
+          utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
+    \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
+          e migliorando le prestazioni complessive della libreria.
+\end{itemize}
+\item \textbf{Svantaggi}:
+\begin{itemize}
+    \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
+          che impedisce l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
+    \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
+    \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
+          \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-boundle di Plotly.js.
+\end{itemize}
+\item \textbf{Alternative Esaminate}:
+\begin{itemize}
+    \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
+          essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
+    \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
+          ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
+\end{itemize}
+
+
+\subsection{TypeScript}
+\begin{itemize}
+    \item \textbf{Nome strumento}: TypeScript
+    \item \textbf{Versione}: 5.1.6
+    \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
+    \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript,
+          permettendo di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice.
+\end{itemize}
+
 
 \section{Descrizione del prodotto ottenuto}
 
 \section{Organizzazione del testo}
-Nel presente capitolo viene presentata l'introduzione della tesi, fornendo una panoramica sull'azienda, sul contesto applicativo, 
+Nel presente capitolo viene presentata l'introduzione della tesi, fornendo una panoramica sull'azienda, sul contesto applicativo,
 sul progetto e sul prodotto portato a termine durante lo svolgimento dello stage. \newline
 In seguito il documento presenterà la seguente organizzazione:
 
 \begin{description}
-    \item[{\hyperref[chap:processi-metodologie]{Analisi dei requisiti}}] descrive la fase di analisi dei requisiti che è stata
-    svolta dall'azienda antecedentemente all'inizio dell'attività di stage, in modo da permettere una comprensione più profonda
-    di quelle che sono le necessità da soddisfare e gli obiettivi da raggiungere all'interno di questo progetto;
-    
-    \item[{\hyperref[chap:descrizione-stage]{Progettazione}}] illustra l'attività di progettazione che è stata svolta in vista dell'implementazione
-    dei grafici prodotti, definendo le tecnologie e le soluzioni implementative che sono state attuate durante la successiva attività di codifica;
-    
-    \item[{\hyperref[chap:analisi-requisiti]{Realizzazione e Testing}}] approfondisce l'attività di codifica delle componenti grafiche presentate 
-    all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
-    
-    \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
-    degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
-    La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
-    
+\item[{\hyperref[chap:processi-metodologie]{Analisi dei requisiti}}] descrive la fase di analisi dei requisiti che è stata
+svolta dall'azienda antecedentemente all'inizio dell'attività di stage, in modo da permettere una comprensione più profonda
+di quelle che sono le necessità da soddisfare e gli obiettivi da raggiungere all'interno di questo progetto;
+
+\item[{\hyperref[chap:descrizione-stage]{Progettazione}}] illustra l'attività di progettazione che è stata svolta in vista dell'implementazione
+dei grafici prodotti, definendo le tecnologie e le soluzioni implementative che sono state attuate durante la successiva attività di codifica;
+
+\item[{\hyperref[chap:analisi-requisiti]{Realizzazione e Testing}}] approfondisce l'attività di codifica delle componenti grafiche presentate
+all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
+
+\item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
+degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
+La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
+
 Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
-	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
-	\item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
-	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
+    \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+    \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
+    \item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
 \end{itemize}
 
 
