@@ -1,0 +1,180 @@
+\chapter{Analisi dei requisiti}
+\label{chap:analisi-requisiti}
+Nel seguente capito verrà descritta l'attività di analisi dei requisiti inerente al progetto di stage. \newline
+In quanto l'SDK in questione è uno strumento live sui diversi prodotti Datasoil S.r.l., l'analisi dei requisiti è stata svolta
+in fase antecedente all'inizio dello stage da parte del team di sviluppo frontend dell'azienda. \newline
+A fronte di tale contesto, nella seguente sezione verranno riportati i requisiti individuati in modo da poter fornire il contesto
+necessario alla comprensione del progetto, senza approfondire l'attività di analisi svolta.
+
+\section{Classificazione dei requisiti}
+I requisiti presentati all'interno del documento vengono classificati in tre categorie, in base alle esigenze che definiscono, venendo inoltre
+associati ad un livello di priorità che ne determina l'obbligatorietà o l'opzionalità. \newline
+
+\newline
+Le categorie di classificazione definite all'interno del progetto di stage sono:
+
+\begin{itemize}
+    \item[\textbf{F}:] \textit{Funzionale}: il requisito definisce le funzionalità che il sistema deve offrire;
+    \item[\textbf{A}:] \textit{Di attributo}: il requisito definisce le caratteristiche che il sistema deve avere;
+    \item[\textbf{V}:] \textit{Di vincolo}: il requisito definisce i vincoli che il sistema deve rispettare.
+\end{itemize}
+
+\newline
+I livelli di priorità definiti all'interno del progetto di stage sono:
+
+\begin{itemize}
+    \item[\textbf{O}:] \textit{Obbligatorio}: requisito essenziale al fine di concludere il progetto di stage con successo;
+    \item[\textbf{OP}:] \textit{Opzionale}: requisito non essenziale al fine di concludere il progetto di stage con successo, ma che aggiunge valore al prodotto finale.
+\end{itemize}
+
+\newline
+La nomeclatura utilizzata per la classificazione dei requisiti all'interno del progetto di stage è la seguente:
+\begin{itemize}
+    \item \textbf{R}: dove R sta per requisito;
+    \item \textbf{X.}: dove X indica la categoria di classificazione del requisito;
+    \item \textbf{Y.}: dove Y indica il livello di priorità del requisito;
+    \item \textbf{Z}: dove Z indica il numero progressivo del requisito. Nel caso di sotto-requisiti, il numero progressivo è composto da due cifre, separate da un punto,
+          dove la prima cifra rappresenta il requisito padre e la seconda cifra rappresenta il sotto-requisito.
+\end{itemize}
+
+\newpage
+\section{Requisiti}
+
+\subsection{Requisiti funzionali}
+Nella seguente sezione viene presentata la lista dei requisiti funzionali. \newline
+
+\begin{center}
+    \rowcolors{1}{white}{tableGray}
+    \begin{longtable}{|p{2.5cm}|p{10cm}|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                          \\
+        \hline
+        \endfirsthead
+        \multicolumn{2}{c}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                                       \\
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                          \\
+        \endhead
+        \hline
+        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                               \\
+        \hline
+        \endfoot
+        \hline
+        \endlastfoot
+        R.F.O.1            & La libreria deve permettere la visualizzazione di grafici.                                         \\
+        \hline
+        R.F.O.1.1          & La libreria deve permettere la visualizzazione di grafici a barre (\textit{bar or columns}).       \\
+        \hline
+        R.F.O.1.2          & La libreria deve permettere la visualizzazione di grafici a torta (\textit{pie}).                  \\
+        \hline
+        R.F.O.1.3          & La libreria deve permettere la visualizzazione di grafici a scatola (\textit{box-plot}).           \\
+        \hline
+        R.F.O.1.4          & La libreria deve permettere la visualizzazione di grafici a bolle (\textit{bubbles}).              \\
+        \hline
+        R.F.O.1.5          & La libreria deve permettere la visualizzazione di grafici a dispersione (\textit{scatter}).        \\
+        \hline
+        R.F.O.1.6          & La libreria deve permettere la visualizzazione di grafici a mappe di calore (\textit{heatmap}).    \\
+        \hline
+        R.F.O.2            & La libreria deve permettere la visualizzazione di contatori.                                       \\
+        \hline
+        R.F.O.2.1          & La libreria deve permettere la visualizzazione di contatori con target.                            \\
+        \hline
+        R.F.O.2.2          & La libreria deve permettere la visualizzazione di contatori senza target.                          \\
+        \hline
+        R.F.O.3            & La libreria deve permettere la visualizzazione di tabelle.                                         \\
+        \hline
+        R.F.O.4            & La libreria deve permettere di zoomare i vari grafici.                                             \\
+        \hline
+        R.F.O.5            & La libreria deve permettere di effettuare il download in \textit{.png} dei grafici renderizzati.   \\
+        \hline
+        R.F.O.6            & La libreria deve permettere di effettuare il download in \textit{.csv} delle tabelle visualizzate. \\
+        \hline
+        R.F.O.7            & I widget renderizzati devono adattarsi alla dimensione del contenitore in modo responsivo.         \\
+    \end{longtable}
+    \captionof{table}{Tabella del tracciamento dei requisiti funzionali.}
+    \label{tab:requisiti_funzionali}
+\end{center}
+
+\subsection{Requisiti qualitativi}
+Nella seguente sezione viene presentata la lista dei requisiti qualitativi. \newline
+
+\begin{center}
+    \rowcolors{1}{white}{tableGray}
+    \begin{longtable}{|p{2.5cm}|p{10cm}|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                                    \\
+        \hline
+        \endfirsthead
+        \multicolumn{2}{c}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                                                                 \\
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                                    \\
+        \endhead
+        \hline
+        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                                                         \\
+        \hline
+        \endfoot
+        \hline
+        \endlastfoot
+        \hline
+        R.A.O.1            & La libreria deve essere facilmente manutenibile, rispettando le convenzioni di codifica
+        attualmente in atto all'interno dell'azienda Datasoil S.r.l.                                                                                      \\
+        \hline
+        R.A.O.2            & La libreria deve essere performante in termini di velocità di rendering dei widget forniti.                                  \\
+        \hline
+        R.A.O.3            & La libreria deve essere ottimizzata per richiedere il minor numero di rendering possibili durante l'interazione dell'utente,
+        eseguendoli in modo efficiente per minimizzare l'uso delle risorse.                                                                               \\
+        \hline
+        R.A.O.3            & La libreria deve essere leggera in termini di dimensione di memoria occupata.                                                \\
+        \hline
+        R.A.O.3.1          & Le dipendenze esterne devono essere ridotte al minimo indispensabile.                                                        \\
+        \hline
+        R.A.0.3.2          & La libreria deve essere composta esclusivamente da codice effettivamente utilizzato per le funzionalità e i widget resi
+        disponibili. Ciò comporta che qualsiasi componente di codice inutilizzata, superflua o non necessaria deve essere identificata e rimossa.         \\
+    \end{longtable}
+    \captionof{table}{Tabella del tracciamento dei requisiti qualitativi.}
+    \label{tab:requisiti_qualitativi}
+\end{center}
+
+\subsection{Requisiti di vincolo}
+Nella seguente sezione viene presentata la lista dei requisiti di vincolo. \newline
+
+\begin{center}
+\rowcolors{1}{white}{tableGray}
+\begin{longtable}{|p{2.5cm}|p{10cm}|}
+    \hline
+    \rowcolor{gray!30}
+    \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                 \\
+    \hline
+    \endfirsthead
+    \multicolumn{2}{c}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                              \\
+    \hline
+    \rowcolor{gray!30}
+    \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                 \\
+    \endhead
+    \hline
+    \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                      \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \hline
+    R.V.O.1            & La libreria deve essere sviluppata in \textit{TypeScript}.                                \\
+    \hline
+    R.V.O.2            & La libreria deve essere sviluppata con \textit{React}.                                    \\
+    \hline
+    R.V.O.3            & La libreria deve essere sviluppata con l'utilizzo di componenti di \textit{PrimeReact}.   \\
+    \hline
+    R.V.O.4            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeFlex}.                  \\
+    \hline
+    R.V.O.5            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeIcons}.                 \\
+    \hline
+    R.V.O.6            & Il codice della libreria deve essere formattato mediante l'utilizzo di \textit{Prettier}. \\
+\end{longtable}
+\captionof{table}{Tabella del tracciamento dei requisiti di vincolo.}
+\label{tab:requisiti_vincolo}
+
+
+\newpage
