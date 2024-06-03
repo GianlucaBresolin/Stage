@@ -21,10 +21,10 @@ provengono tutti i dati che vengono analizzati trasversalmente grazie a sempre p
 Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fertile di dati da cui siamo circondati.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[alt={Logo Datasoil S.r.l.}, width=0.25\columnwidth]{img/datasoil_logo.jpg}
-    \caption{Logo Datasoil S.r.l.}
-    \label{fig:datasoil}
+      \centering
+      \includegraphics[alt={Logo Datasoil S.r.l.}, width=0.25\columnwidth]{img/datasoil_logo.jpg}
+      \caption{Logo Datasoil S.r.l.}
+      \label{fig:datasoil}
 \end{figure}
 
 \section{L'idea}
@@ -33,10 +33,10 @@ L'azienda Datasoil S.r.l., essendo un'azienda di prodotto, nasce con l'idea di p
 di impianti industriali, smart building e smart city, offrendo come principale prodotto la piattaforma SYN.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[alt={Logo SYN}, width=0.25\columnwidth]{img/syn_logo.jpg}
-    \caption{Logo SYN}
-    \label{fig:syn}
+      \centering
+      \includegraphics[alt={Logo SYN}, width=0.25\columnwidth]{img/syn_logo.jpg}
+      \caption{Logo SYN}
+      \label{fig:syn}
 \end{figure}
 
 SYN è una piattaforma di monitoraggio e controllo di impianti industriali che raccoglie dati da sensori e dispositivi
@@ -117,84 +117,6 @@ fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionat
 finali dell'SDK prodotto.
 
 
-\section{Strumenti utilizzati}
-Nella seguente sezione vengono presentati gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
-Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
-\begin{itemize}
-    \item \textbf{Nome strumento}: breve descrizione dello strumento e del suo utilizzo;
-    \item \textbf{Versione}: versione utilizzata durante lo stage;
-    \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
-    \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
-    \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
-    \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
-    \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
-          su di esse e la motivazione per cui non sono state selezionate. \textit{(Opzionale)}
-\end{itemize}
-
-\subsection{Yarn}
-\begin{itemize}
-    \item \textbf{Nome strumento}: Yarn
-    \item \textbf{Versione}: 1.22.22
-    \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
-    \item \textbf{Descrizione}: Yarn è un package manager per JavaScript, sviluppato da Facebook, Google e Tilde.
-    \item \textbf{Vantaggi}: Yarn è più veloce di npm, ha un sistema di cache più efficiente e permette di installare pacchetti in modo deterministico.
-    \item \textbf{Svantaggi}: Yarn è meno flessibile di npm e non supporta alcune funzionalità di npm.
-    \item \textbf{Alternative Esaminate}:
-          \begin{itemize}
-              \item \textit{npm}: npm è il package manager di default per Node.js, ma è più lento di Yarn e ha un sistema di cache meno efficiente.
-          \end{itemize}
-\end{itemize}
-
-% \subsection{React}
-
-\subsection{Plotly.js}
-\begin{itemize}
-\item \textbf{Nome strumento}: Plotly.js
-\item \textbf{Versione}: custom-boundle: 2.33.0
-\item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
-\item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
-Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
-\item \textbf{Vantaggi}:
-\begin{itemize}
-    \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
-    \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
-          all'interno della libreria grafica;
-    \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
-          online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
-    \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
-          così le dimensioni del pacchetto finale;
-    \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
-          utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
-    \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
-          e migliorando le prestazioni complessive della libreria.
-\end{itemize}
-\item \textbf{Svantaggi}:
-\begin{itemize}
-    \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
-          che impedisce l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
-    \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
-    \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
-          \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-boundle di Plotly.js.
-\end{itemize}
-\item \textbf{Alternative Esaminate}:
-\begin{itemize}
-    \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
-          essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
-    \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
-          ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
-\end{itemize}
-
-
-\subsection{TypeScript}
-\begin{itemize}
-    \item \textbf{Nome strumento}: TypeScript
-    \item \textbf{Versione}: 5.1.6
-    \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
-    \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript,
-          permettendo di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice.
-\end{itemize}
-
-
 \section{Descrizione del prodotto ottenuto}
 
 \section{Organizzazione del testo}
@@ -217,11 +139,11 @@ all'interno della libreria implementata e dei relativi test effettuati per garan
 degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
 La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
 
-Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
+In merito alla stesura del testo, all'interno del presente documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
-    \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
-    \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
-    \item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
+      \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+      \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
+      \item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
 \end{itemize}
 
 

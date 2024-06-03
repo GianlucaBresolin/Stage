@@ -1,0 +1,111 @@
+\chapter{Progettazione}
+\label{chap:progettazione}
+Nel presente capitolo viene presentata l'attività di progettazione relativa al progetto di stage focalizzato sul refactoring e
+sull'ottimizzazione dello SDK impiegato dall'azienda Datasoil S.r.l. per lo sviluppo di dashboard dinamiche.
+Verrà analizzato l'approcio adottato per individuare le soluzioni volte al soddisfacimento dei requisiti individuati durante
+la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica
+e gli strumenti utilizzati per la sua realizzazione, concludendo con la progettazione delle singole componenti individuate.
+
+\section{Metodologia di Progettazione}
+La metodologia di progettazione adottata durante lo svolgimento del progetto di stage ha seguito inizialmente un approccio
+\textit{top-down}, che permettesse, attraverso uno studio generale della libreria preesistente e della sua architettura, di invididuare
+il flusso di dati tra le varie componenti, fornendo una visione globale delle interazioni e delle dipendenze esistenti.
+Successivamente, è stato adottato un approccio \textit{bottom-up}, analizzando le singole componenti e le loro funzionalità,
+in modo da identificare le possibili ottimizzazioni e le modifiche necessarie per il miglioramento delle prestazioni, della leggibilità e
+della manutenibilità del codice.\newline
+L'attività di progettazione è stata condotta in collaborazione stretta con il tutor aziendale, il quale ha fornito supporto e orientamento
+riguardo alle decisioni progettuali individuate.
+
+\section{Design dell'Architettura}
+L'architettura progettata per la realizzazione della libreria grafica si basa su un pattern comunemente utilizzato nello sviluppo di packages
+di componenti frontend per \textit{React}, ovvero il pattern \textit{Component Library Architecture}: questa architettura si fonda sulla creazione di una libreria di
+componenti riutilizzabili, modulari e indipendenti tra loro. \newline
+Tale pattern permette di creare l'architettura ideale per librerie che offrono collezioni di componenti riutilizzabili, permettendo e agevolando
+la condivisione e il riutilizzo di codice all'interno del progetto, garantendo una maggior manuntenibilità del codice. \newline
+Il modello proposto prevede la seguente struttura, la quale si riflette nella definizione delle macro-directory all'interno del progetto:
+\begin{itemize}
+      \item \textbf{components}: directory contenente i componenti della libreria grafica, suddivisi in sottodirectory per categoria;
+      \item \textbf{hooks}: directory contenente i custom hooks utilizzati all'interno della libreria grafica;
+      \item \textbf{utils}: directory contenente le funzioni di utilità utilizzate all'interno della libreria grafica;
+      \item \textbf{models}: directory contenente le definizioni dei tipi e interfacce utilizzate all'interno della libreria grafica;
+      \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate.
+\end{itemize}
+
+\section{Strumenti Utilizzati}
+La seguente sezione fornisce gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
+Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
+\begin{itemize}
+      \item \textbf{Nome strumento}: breve descrizione dello strumento e del suo utilizzo;
+      \item \textbf{Versione}: versione utilizzata durante lo stage;
+      \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
+      \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
+      \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
+      \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
+      \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
+            su di esse e la motivazione per cui non sono state selezionate. \textit{(Opzionale)}
+\end{itemize}
+
+\subsection{Yarn}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Yarn
+      \item \textbf{Versione}: 1.22.22
+      \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
+      \item \textbf{Descrizione}: Yarn è un package manager per JavaScript, sviluppato da Facebook, Google e Tilde.
+      \item \textbf{Vantaggi}: Yarn è più veloce di npm, ha un sistema di cache più efficiente e permette di installare pacchetti in modo deterministico.
+      \item \textbf{Svantaggi}: Yarn è meno flessibile di npm e non supporta alcune funzionalità di npm.
+      \item \textbf{Alternative Esaminate}:
+            \begin{itemize}
+                  \item \textit{npm}: npm è il package manager di default per Node.js, ma è più lento di Yarn e ha un sistema di cache meno efficiente.
+            \end{itemize}
+\end{itemize}
+
+% \subsection{React}
+
+\subsection{Plotly.js}
+\begin{itemize}
+\item \textbf{Nome strumento}: Plotly.js
+\item \textbf{Versione}: custom-boundle: 2.33.0
+\item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
+\item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
+Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
+\item \textbf{Vantaggi}:
+\begin{itemize}
+      \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
+      \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
+            all'interno della libreria grafica;
+      \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
+            online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
+      \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
+            così le dimensioni del pacchetto finale;
+      \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
+            utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
+      \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
+            e migliorando le prestazioni complessive della libreria.
+\end{itemize}
+\item \textbf{Svantaggi}:
+\begin{itemize}
+      \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
+            che impedisce l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
+      \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
+      \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
+            \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-boundle di Plotly.js.
+\end{itemize}
+\item \textbf{Alternative Esaminate}:
+\begin{itemize}
+      \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
+            essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
+      \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
+            ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
+\end{itemize}
+
+
+\subsection{TypeScript}
+\begin{itemize}
+      \item \textbf{Nome strumento}: TypeScript
+      \item \textbf{Versione}: 5.1.6
+      \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
+      \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript,
+            permettendo di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice.
+\end{itemize}
+
+\section{Progettazione delle componenti}
