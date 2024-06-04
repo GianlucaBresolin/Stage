@@ -30,82 +30,61 @@ Il modello proposto prevede la seguente struttura, la quale si riflette nella de
       \item \textbf{models}: directory contenente le definizioni dei tipi e interfacce utilizzate all'interno della libreria grafica;
       \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate.
 \end{itemize}
-
-\section{Strumenti Utilizzati}
-La seguente sezione fornisce gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
-Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
-\begin{itemize}
-      \item \textbf{Nome strumento}: breve descrizione dello strumento e del suo utilizzo;
-      \item \textbf{Versione}: versione utilizzata durante lo stage;
-      \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
-      \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
-      \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
-      \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
-      \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
-            su di esse e la motivazione per cui non sono state selezionate. \textit{(Opzionale)}
-\end{itemize}
-
-\subsection{Yarn}
-\begin{itemize}
-      \item \textbf{Nome strumento}: Yarn
-      \item \textbf{Versione}: 1.22.22
-      \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
-      \item \textbf{Descrizione}: Yarn è un package manager per JavaScript, sviluppato da Facebook, Google e Tilde.
-      \item \textbf{Vantaggi}: Yarn è più veloce di npm, ha un sistema di cache più efficiente e permette di installare pacchetti in modo deterministico.
-      \item \textbf{Svantaggi}: Yarn è meno flessibile di npm e non supporta alcune funzionalità di npm.
-      \item \textbf{Alternative Esaminate}:
-            \begin{itemize}
-                  \item \textit{npm}: npm è il package manager di default per Node.js, ma è più lento di Yarn e ha un sistema di cache meno efficiente.
-            \end{itemize}
-\end{itemize}
-
-% \subsection{React}
-
-\subsection{Plotly.js}
-\begin{itemize}
-\item \textbf{Nome strumento}: Plotly.js
-\item \textbf{Versione}: custom-boundle: 2.33.0
-\item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
-\item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
-Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
-\item \textbf{Vantaggi}:
-\begin{itemize}
-      \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
-      \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
-            all'interno della libreria grafica;
-      \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
-            online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
-      \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
-            così le dimensioni del pacchetto finale;
-      \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
-            utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
-      \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
-            e migliorando le prestazioni complessive della libreria.
-\end{itemize}
-\item \textbf{Svantaggi}:
-\begin{itemize}
-      \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
-            che impedisce l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
-      \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
-      \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
-            \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-boundle di Plotly.js.
-\end{itemize}
-\item \textbf{Alternative Esaminate}:
-\begin{itemize}
-      \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
-            essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
-      \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
-            ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
-\end{itemize}
+L'entry point della libreria grafica è il file \textit{index.ts}, il quale si occupa di esportare il \textit{Renderer}, il componente principale
+della liberia che si occupa di renderizzare il corretto componente a seconda del tipo di visualizzazione richiesto: tali informazioni necessarie
+vengono passate come props dalle componenti del modulo \textit{dashboard} che utilizzano il \textit{Renderer}, riducendo così la dipendenza tra le
+componenti di librerie differenti, agevolando la manutenibilità e la scalabilità del codice.
 
 
-\subsection{TypeScript}
+\section{Progettazione dei Tipi e delle Interfacce}
+Nella seguente sezione verranno presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
+delle informazioni che rappresentano. \newline
+I tipi e le interfacce verranno presentati in ordine alfabetico.
+
+\subsection{RendererProps}
+Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Renderer, Counter, Chart} e \textit{Table}.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      export interface RendererProps {
+      type: string;
+      visualizationName: string;
+      data: {
+      [x: string]: any;
+      };
+      options: VisualizationOptions;
+      }
+      \end{minted}
+      \caption{Definizione dell'interfaccia RendererProps}
+      \label{listing:rendererProps}
+\end{listing}
 \begin{itemize}
-      \item \textbf{Nome strumento}: TypeScript
-      \item \textbf{Versione}: 5.1.6
-      \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
-      \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript,
-            permettendo di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice.
+      \item \textbf{type}: stringa che definisce il tipo componente da renderizzazre. Può assumere i seguenti valori: \textit{COUNTER}, \textit{CHART} e \textit{TABLE};
+      \item \textbf{visualizationName}: stringa che definisce il titolo di visualizzazione della componente;
+      \item \textbf{data}: oggetto che contiene i dati da visualizzare all'interno della componente;
+      \item \textbf{options}: oggetto che contiene le opzioni di visualizzazione della componente di tipo \textit{VisualizationOptions}.
 \end{itemize}
+
 
 \section{Progettazione delle componenti}
+Nella seguente sezione verranno presentate le componenti individuate durante l'attività di progettazione, con una descrizione dettagliata delle
+funzionalità offerte e delle possibili ottimizzazioni individuate. \newline
+Le componenti verranno presentate in ordine alfabetico.
+
+\subsection{Counter}
+La componente Counter prevede la visualizzazione di un contatore, il cui valore viene definito a partire dai dati passati come props tra le varie componenti e
+forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+La componente permette inoltre di confrontare il valore attuale del contatore con un valore target (opzionale) da raggiungere, anch'esso ricavato
+dalla risposta in formato JSON ricevuta dal server. \newline
+I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking delle informazioni
+\textit{data, options} e \textit{visualizationName}. \newline
+Il valore del contatore può essere formattato in base alle preferenze definite lato backend, presentando le seguenti opzioni:
+\begin{itemize}
+      \item Prefisso: stringa da aggiungere prima del valore del contatore;
+      \item Sufisso: stringa da aggiungere dopo il valore del contatore;
+      \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore del contatore;
+      \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
+      \item Separatore decimale: carattere da utilizzare come separatore decimale.
+\end{itemize}
+La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
+del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
+un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
