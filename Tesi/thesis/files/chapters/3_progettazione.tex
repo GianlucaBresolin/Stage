@@ -28,7 +28,8 @@ Il modello proposto prevede la seguente struttura, la quale si riflette nella de
       \item \textbf{hooks}: directory contenente i custom hooks utilizzati all'interno della libreria grafica;
       \item \textbf{utils}: directory contenente le funzioni di utilità utilizzate all'interno della libreria grafica;
       \item \textbf{models}: directory contenente le definizioni dei tipi e interfacce utilizzate all'interno della libreria grafica;
-      \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate.
+      \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate;
+      \item \textbf{style.css}: file contenente i fogli di stile globali utilizzati all'interno della libreria grafica.
 \end{itemize}
 L'entry point della libreria grafica è il file \textit{index.ts}, il quale si occupa di esportare il \textit{Renderer}, il componente principale
 della liberia che si occupa di renderizzare il corretto componente a seconda del tipo di visualizzazione richiesto: tali informazioni necessarie
@@ -46,12 +47,12 @@ Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Render
 \begin{listing}[H]
       \begin{minted}{typescript}
       export interface RendererProps {
-      type: string;
-      visualizationName: string;
-      data: {
-      [x: string]: any;
-      };
-      options: VisualizationOptions;
+            type: string;
+            visualizationName: string;
+            data: {
+                  [x: string]: any;
+            };
+            options: VisualizationOptions;
       }
       \end{minted}
       \caption{Definizione dell'interfaccia RendererProps}
@@ -64,27 +65,148 @@ Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Render
       \item \textbf{options}: oggetto che contiene le opzioni di visualizzazione della componente di tipo \textit{VisualizationOptions}.
 \end{itemize}
 
+\subsection{VisualizationType}
+Enumerazione che definisce i possibili valori dei tipi di visualizzazione supportati dalla libreria grafica.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      export enum VisualizationType {
+            Counter = 'COUNTER',
+            Chart = 'CHART',
+            Table = 'TABLE',
+            None = 'NONE',
+      }
+      \end{minted}
+      \caption{Definizione dell'enumerazione VisualizationType}
+      \label{listing:visualizationType}
+\end{listing}
+I possibili valori dell'enumerazione sono i seguenti:
+\begin{itemize}
+      \item \textbf{Counter}: componente che visualizza un contatore;
+      \item \textbf{Chart}: componente che visualizza un grafico;
+      \item \textbf{Table}: componente che visualizza una tabella;
+      \item \textbf{None}: valore di default, utilizzato per la gestione di errori o situazioni non previste.
+\end{itemize}
 
 \section{Progettazione delle componenti}
 Nella seguente sezione verranno presentate le componenti individuate durante l'attività di progettazione, con una descrizione dettagliata delle
 funzionalità offerte e delle possibili ottimizzazioni individuate. \newline
-Le componenti verranno presentate in ordine alfabetico.
+Le componenti verranno presentate in ordine alfabetico, presentando la seguente struttura:
+\begin{itemize}
+      \item \textbf{Nome della componente}: breve descrizione della componente;
+      \item \textbf{Descrizione}: descrizione dettagliata delle funzionalità offerte dalla componente;
+      \item \textbf{Props}: definizione delle props utilizzate dalla componente;
+      \item \textbf{Ottimizzazioni}: possibili ottimizzazioni individuate per la componente.
+\end{itemize}
 
 \subsection{Counter}
-La componente Counter prevede la visualizzazione di un contatore, il cui valore viene definito a partire dai dati passati come props tra le varie componenti e
-forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
-La componente permette inoltre di confrontare il valore attuale del contatore con un valore target (opzionale) da raggiungere, anch'esso ricavato
-dalla risposta in formato JSON ricevuta dal server. \newline
-I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking delle informazioni
-\textit{data, options} e \textit{visualizationName}. \newline
-Il valore del contatore può essere formattato in base alle preferenze definite lato backend, presentando le seguenti opzioni:
 \begin{itemize}
-      \item Prefisso: stringa da aggiungere prima del valore del contatore;
-      \item Sufisso: stringa da aggiungere dopo il valore del contatore;
-      \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore del contatore;
-      \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
-      \item Separatore decimale: carattere da utilizzare come separatore decimale.
+      \item \textbf{Nome della componente}: Counter;
+      \item \textbf{Descrizione}: La componente Counter prevede la visualizzazione di un contatore, il cui valore viene definito a partire dai dati passati
+            come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+            La componente permette inoltre di confrontare il valore attuale del contatore con un valore target (opzionale) da raggiungere, anch'esso ricavato
+            dalla risposta in formato JSON ricevuta dal server. \newline
+            Il valore del contatore può essere formattato in base alle preferenze definite lato backend, presentando le seguenti opzioni:
+            \begin{itemize}
+                  \item Prefisso: stringa da aggiungere prima del valore del contatore;
+                  \item Suffisso: stringa da aggiungere dopo il valore del contatore;
+                  \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore del contatore;
+                  \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
+                  \item Separatore decimale: carattere da utilizzare come separatore decimale.
+            \end{itemize}
+      \item \textbf{Props}: I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+            delle informazioni \textit{data, options} e \textit{visualizationName}.
+            \begin{listing}[H]
+                  \begin{minted}{typescript}
+                  export function Counter({
+                        data,
+                        options,
+                        visualizationName,
+                        }: Pick<RendererProps, 
+                              'data' 
+                              | 'options' 
+                              | 'visualizationName'>);
+                  \end{minted}
+                  \caption{Definizione delle props della componente Counter}
+                  \label{listing:counterProps}
+            \end{listing}
+      \item \textbf{Ottimizzazioni}: La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
+            del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
+            un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
 \end{itemize}
-La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
-del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
-un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
+
+\subsection{Chart}
+\begin{itemize}
+      \item \textbf{Nome della componente}: Chart;
+      \item \textbf{Descrizione}: La componente Chart prevede la visualizzazione di un grafico, il cui tipo e i dati da visualizzare vengono definiti a partire dai dati passati
+            come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+            I tipi di grafici che tale componente permette di renderizzare sono i seguenti:
+            \begin{itemize}
+                  \item Area Chart: grafico ad area;
+                  \item Bar Chart: grafico a barre;
+                  \item Box Plot Chart: grafico a scatola;
+                  \item Bubble Chart: grafico a bolle;
+                  \item HeatMap Chart: grafico a matrice;
+                  \item Line Chart: grafico a linee;
+                  \item Pie Chart: grafico a torta;
+                  \item Scatter Chart: grafico a dispersione.
+            \end{itemize}
+            La componente permette inoltre, a seconda del tipo di grafico renderizzato, di:
+            \begin{itemize}
+                  \item Effettuare il download dell'immagine del grafico in formato \textit{.png};
+                  \item Effettuare lo zoom sul grafico;
+                  \item Effettuare lo zoom-in sul grafico;
+                  \item Effettuare lo zoom-out sul grafico;
+                  \item Effettuare il pan sul grafico;
+                  \item Effettuare l'autoscale sul grafico;
+                  \item Resettare la dimensione degli assi del grafico.
+            \end{itemize}
+            A fronte di tali funzionalità, l'implementazione della componente prevede l'utilizzo della libreria \textit{Plotly.js}, la quale permette
+            di renderizzare grafici in modo reattivo. \newline
+            Le evenutali label applicate ai grafici possono essere formattate in base alle preferenze definite lato backend, presentando le seguenti opzioni. \newline
+            Label numeriche:
+            \begin{itemize}
+                  \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore della label;
+                  \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
+                  \item Separatore decimale: carattere da utilizzare come separatore decimale;
+                  \item suffessi: stringa da aggiungere dopo il valore della label, ad esempio \textit{\%}.
+            \end{itemize}
+            L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}. \newline
+            Label temporali:
+            \begin{itemize}
+                  \item Formato della data: formato da utilizzare per la visualizzazione della data;
+                  \item Formato dell'ora: formato da utilizzare per la visualizzazione dell'ora.
+            \end{itemize}
+            L'implementazione delle formattazioni temporali prevede l'utilizzo della liberia \textit{day.js}.
+      \item \textbf{Props}: I props della componente Chart sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+            delle informazioni \textit{data} e \textit{options}.
+            \begin{listing}[H]
+                  \begin{minted}{typescript}
+                  export function Chart({
+                        data,
+                        options,
+                        }: Pick<RendererProps, 
+                              'data' 
+                              | 'options'>);
+                  \end{minted}
+                  \caption{Definizione delle props della componente Chart}
+                  \label{listing:chartProps}
+            \end{listing}
+      \item \textbf{Ottimizzazioni}:
+            \begin{itemize}
+                  \item Utilizzo di un custom-boundle di \textit{Plotly.js} in modo da ridurre le dimensioni del boundle finale, evitando la registrazione
+                        di grafici non utilizzati all'interno delle dashboard Datasoil S.r.l. Tale ottimizzazione permette inoltre di evitare la registrazione
+                        manuale delle \textit{traces}, necessaria nelle versioni rese disponibili da \textit{Plotly.js} a causa di un bug noto non risolto della libreria.
+                  \item Utilizzo della libreria \textit{numbro.js} a favore della libreria \textit{numeral.js} precedentemente utilizzata, più pesante e non più mantenuta,
+                        per la formattazione delle label numeriche all'interno dei grafici;
+                  \item Utilizzo della libreria \textit{day.js} a favore della libreria \textit{moment.js} precedentemente utilizzata, in quanto questa libreria costituisce una
+                        peerdependency di \textit{dashboard}, riducendo così le dimensioni del boundle finale;
+                  \item Utilizzo di un custom hooks per la gestione dello stato interno della componente e per il calcolo delle dimensioni del grafico, necessarie per permettere
+                        la visualizzazione responsiva della componente. L'utilizzo dell'hooks è volto a garantire un'implementazione efficiente e performante della componente.
+            \end{itemize}
+\end{itemize}
+
+\subsection{Table}
+
+\subsection{Renderer}
+
+\subsection{VisualizationWidget}
