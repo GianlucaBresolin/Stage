@@ -113,6 +113,7 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                   \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
                   \item Separatore decimale: carattere da utilizzare come separatore decimale.
             \end{itemize}
+            L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}.
       \item \textbf{Props}: I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
             delle informazioni \textit{data, options} e \textit{visualizationName}.
             \begin{listing}[H]
@@ -129,9 +130,15 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                   \caption{Definizione delle props della componente Counter}
                   \label{listing:counterProps}
             \end{listing}
-      \item \textbf{Ottimizzazioni}: La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
-            del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
-            un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
+      \item \textbf{Ottimizzazioni}:
+            \begin{itemize}
+                  \item Utilizzo della libreria \textit{numbro.js} a favore della libreria \textit{numeral.js} precedentemente utilizzata, più pesante e non più mantenuta,
+                        per la formattazione delle label numeriche all'interno del counter;
+                  \item La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
+                        del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
+                        un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
+            \end{itemize}
+
 \end{itemize}
 
 \subsection{Chart}
