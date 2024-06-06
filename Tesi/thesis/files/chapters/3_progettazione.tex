@@ -41,6 +41,118 @@ componenti di librerie differenti, agevolando la manutenibilità e la scalabilit
 Nella seguente sezione verranno presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
 delle informazioni che rappresentano. \newline
 I tipi e le interfacce verranno presentati in ordine alfabetico.
+\subsection{ChartBaseVisualizationOptions}
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione comuni a tutti i \textit{Chart}.
+\begin{listing}[htdp]
+      \begin{minted}{typescript}
+      export interface ChartBaseVisualizationOptions {
+            globalSeriesType: string; 
+            sortX: boolean;
+            sortY?: boolean;
+            legend: {   enabled: boolean;
+                        placement: string;
+                        traceorder: 'grouped' | 'normal' | 'reversed';};
+            xAxis: {    labels: {enabled: boolean;};
+                        type: string;
+                        title?: {text: string;};};
+            yAxis: [{   type: string;
+                        rangeMax?: number;
+                        rangeMin?: number;
+                        title?: {text?: string;};
+                  }, {opposite: boolean; type: string;}];
+            alignYAxesAtZero: boolean;
+            error_y: {type: string; visible: boolean;};
+            series: {   error_y: {type: string; visible: boolean;};
+                        stacking: string;
+                        percentValues?: boolean;};
+            seriesOptions: {[x: string]: any; };
+            valuesOptions: {[x: string]: any;};
+            columnMapping: { [x: string]: string };
+            direction: {type: string;};
+            sizemode: string;
+            coefficient: number;
+            showDataLabels: boolean;
+            numberFormat: string;
+            dateTimeFormat: string;
+            percentFormat: string;
+            textFormat: string;
+            missingValuesAsZero: boolean;
+            onHover?: () => void;
+            onUnHover?: () => void;
+            reverseX?: boolean;
+            reverseY?: boolean;
+            showpoints?: boolean;
+            heatMinColor?: string;
+            heatMaxColor?: string;
+            colorScheme: string | (string | number)[][];
+      }
+      \end{minted}
+      \caption{Definizione dell'interfaccia ChartBaseVisualizationOptions}
+      \label{listing:chartBaseVisualizationOptions}
+\end{listing}
+\begin{itemize}
+      \item \textbf{globalSeriesType}: stringa che definisce il tipo di chart da renderizzare. I valori possibili sono i seguenti:
+            \textit{area, column, box, bubble, heatmap, line, pie} e \textit{scatter};
+      \item \textbf{sortX}: booleano che definisce se ordinare o meno le serie sull'asse delle ascisse;
+      \item \textbf{sortY}: booleano che definisce se ordinare o meno le serie sull'asse delle ordinate;
+      \item \textbf{legend}: oggetto che definisce le opzioni della legenda del grafico.
+            \begin{itemize}
+                  \item \textbf{enabled}: booleano che definisce se abilitare o meno la legenda;
+                  \item \textbf{placement}: stringa che definisce la posizione della legenda all'interno del grafico;
+                  \item \textbf{traceorder}: stringa che definisce l'ordine delle tracce all'interno del grafico.
+            \end{itemize}
+      \item \textbf{xAxis}: oggetto che definisce le opzioni dell'asse delle ascisse.
+            \begin{itemize}
+                  \item \textbf{labels}: oggetto che definisce le opzioni delle label dell'asse delle ascisse;
+                  \item \textbf{type}: stringa che definisce il tipo di dato visualizzato sull'asse delle ascisse;
+                  \item \textbf{title}: oggetto che definisce il titolo dell'asse delle ascisse.
+            \end{itemize}
+      \item \textbf{yAxis}: array che definisce le opzioni dell'asse delle ordinate. Ogni elemento dell'array è un oggetto che definisce le opzioni per una serie di dati. \newline
+            Il primo oggetto definisce i valori per la serie principale:
+            \begin{itemize}
+                  \item \textbf{type}: stringa che definisce il tipo di dato visualizzato sull'asse delle ordinate;
+                  \item \textbf{rangeMax}: numero che definisce il valore massimo dell'asse delle ordinate;
+                  \item \textbf{rangeMin}: numero che definisce il valore minimo dell'asse delle ordinate;
+                  \item \textbf{title}: oggetto che definisce il titolo dell'asse delle ordinate.
+            \end{itemize}
+            Il secondo oggetto definisce i valori per la serie secondaria:
+            \begin{itemize}
+                  \item \textbf{opposite}: booleano che definisce se la serie secondaria è opposta alla serie principale;
+                  \item \textbf{type}: stringa che definisce il tipo di dato visualizzato sull'asse delle ordinate.
+            \end{itemize}
+      \item \textbf{alignYAxesAtZero}: booleano che definisce se allineare le ordinate a zero;
+      \item \textbf{error\_y}: oggetto che definisce le opzioni degli errori sull'asse delle ordinate.
+            \begin{itemize}
+                  \item \textbf{type}: stringa che definisce il tipo di errore;
+                  \item \textbf{visible}: booleano che definisce se visualizzare o meno gli errori.
+            \end{itemize}
+      \item \textbf{series}: oggetto che definisce le opzioni delle serie.
+            \begin{itemize}
+                  \item \textbf{error\_y}: oggetto che definisce le opzioni degli errori sull'asse delle ordinate;
+                  \item \textbf{stacking}: stringa che definisce se le serie sono sovrapposte o impilate;
+                  \item \textbf{percentValues}: booleano che definisce se visualizzare i valori in percentuale.
+            \end{itemize}
+      \item \textbf{seriesOptions}: oggetto che definisce le opzioni delle serie;
+      \item \textbf{valuesOptions}: oggetto che definisce le opzioni dei valori;
+      \item \textbf{columnMapping}: oggetto che definisce il mapping delle colonne;
+      \item \textbf{direction}: oggetto che definisce tramite type la direzione del grafico;
+      \item \textbf{sizemode}: stringa che definisce la modalità di dimensionamento;
+      \item \textbf{coefficient}: numero che definisce il coefficiente di dimensionamento;
+      \item \textbf{showDataLabels}: booleano che definisce se visualizzare o meno le label dei dati;
+      \item \textbf{numberFormat}: stringa che definisce il formato dei numeri;
+      \item \textbf{dateTimeFormat}: stringa che definisce il formato della data;
+      \item \textbf{percentFormat}: stringa che definisce il formato percentuale;
+      \item \textbf{textFormat}: stringa che definisce il formato del testo;
+      \item \textbf{missingValuesAsZero}: booleano che definisce se i valori mancanti devono essere considerati come zero;
+      \item \textbf{onHover}: funzione che definisce l'azione da eseguire al passaggio del mouse;
+      \item \textbf{onUnHover}: funzione che definisce l'azione da eseguire al passaggio del mouse;
+      \item \textbf{reverseX}: booleano che definisce se invertire l'asse delle ascisse;
+      \item \textbf{reverseY}: booleano che definisce se invertire l'asse delle ordinate;
+      \item \textbf{showpoints}: booleano che definisce se visualizzare o meno i punti;
+      \item \textbf{heatMinColor}: stringa che definisce il colore minimo del grafico heatmap;
+      \item \textbf{heatMaxColor}: stringa che definisce il colore massimo del grafico heatmap;
+      \item \textbf{colorScheme}: stringa o array che definisce lo schema dei colori del grafico heatmap.
+\end{itemize}
 
 \subsection{RendererProps}
 Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Renderer, Counter, Chart} e \textit{Table}.
@@ -213,6 +325,42 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
 \end{itemize}
 
 \subsection{Table}
+\begin{itemize}
+      \item \textbf{Nome della componente}: Table;
+      \item \textbf{Descrizione}: La componente Table prevede la visualizzazione di una tabella, i cui dati e la cui struttura (intesa come colonne e tipo di dato visualizzato
+            all'interno di esse) vengono definiti a partire dai dati passati come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+            La componente permette inoltre di:
+            \begin{itemize}
+                  \item Ordinare le colonne della tabella;
+                  \item Filtrare le entry della tabella grazie ad un filtro globale;
+                  \item Effettuare il download della tabella in formato \textit{.csv};
+            \end{itemize}
+            A fronte di tali funzionalità, l'implementazione della componente prevede l'utilizzo della componente fornita dalla libreria \textit{PrimeReact}.
+      \item \textbf{Props}: I props della componente Table sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+            delle informazioni \textit{data, options} e \textit{visualizationName}.
+            \begin{listing}[H]
+                  \begin{minted}{typescript}
+                  export function Table({
+                        data,
+                        options,
+                        visualizationName,
+                        }: Pick<RendererProps, 
+                              'data' 
+                              | 'options' 
+                              | 'visualizationName'>);
+                  \end{minted}
+                  \caption{Definizione delle props della componente Table}
+                  \label{listing:tableProps}
+            \end{listing}
+      \item \textbf{Ottimizzazioni}:
+            \begin{itemize}
+                  \item Utilizzo della componente \textit{DataTable} fornita dalla libreria \textit{PrimeReact} a favore della componente \textit{Table} di \textit{AntD} precedentemente utilizzata,
+                        in quanto la libreria \textit{PrimeReact} offre una maggiore flessibilità e personalizzazione delle tabelle, oltre che a costituire una peerdependency all'interno dei
+                        prodotti Datasoil S.r.l., riducendo così le dimensioni del boundle finale;
+                  \item Utilizzo di hook per la gestione del filtro globale, in modo da garantire un'implementazione efficiente e performante della componente, a differenza dell'implementazione
+                        fornita da \textit{PrimeReact} che comporta un bug noto non risolto.
+            \end{itemize}
+\end{itemize}
 
 \subsection{Renderer}
 
