@@ -1,10 +1,86 @@
-\chapter{Realizzazione e Testing}
+\chapter{Realizzazione e testing}
 \label{chap:realizzazione-testing}
 
 \section{Realizzazione delle componenti}
+
+\subsection{Ambiente di sviluppo}
+Durante lo sviluppo della libreria, è stata utilizzata la versione 18.12.1 di \textit{Node.js}, configurata tramite l'utilizzo di \textit{NVM}
+(Node Version Manager), un gestore di versioni di \textit{Node.js} che permette di installare e gestire più versioni in modo semplice
+e veloce. \newline
+Per quanto riguarda la gestione delle dipendenze, è stato utilizzato \textit{Yarn}, un package manager per JavaScript che permette di gestire
+le dipendenze del progetto in modo efficiente e veloce. \newline
+Il versionamento del codice è stato gestito tramite \textit{Git}, un sistema di controllo di versione distribuito, configurando e
+mantenendo un repository remoto su \textit{Github} interno all'organizzazione dell'azienda. \newline
+Per il processo di building del codice è stato utilizzato \textit{Rollup}, un bundler di moduli JavaScript che permette:
+\begin{itemize}
+    \item di creare bundle di moduli in formato \textit{ESM} (ECMAScript Module) e \textit{CJS} (CommonJS);
+    \item di utilizzare TypeScript all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
+    \item la risoluzione delle dipendenze tra i moduli, escludendo le \textit{peerdependency} dal bundle;
+    \item la produzione di bundle di dimensioni ridotte grazie alla sua capacità di effettuare il tree-shaking;
+    \item il supporto al plugin \textit{terser}, utilizzato per la minimizzazione del codice prodotto attraverso la rimozione dei commenti e degli spazi vuoti,
+          effettuando il \textit{munging} dei nomi delle variabili e introducendo ottimizzazioni per ridurre la dimensione finale;
+    \item il supportare a \textit{sourcemaps} per facilitare il debug del codice, permettendo di mappare il codice minificato con il codice sorgente originale;
+    \item la generazione di file di dichiarazione TypeScript;
+    \item il supporto a plugin per il calcolo della dimensione del bundle, specificando la dimensione di ogni singola dipendenze
+          all'interno del progetto, generando un file di report \textit{html}.
+\end{itemize}
+All'interno del file \textit{package.json} è stata configurata la sezione \textit{scripts} per definire i comandi necessari per l'esecuzione:
+\begin{itemize}
+    \item \textit{start-watcher}: avvia il processo di building del codice di \textit{rollup} in modalità \textit{watch}, in modo da monitorare le modifiche effettuate
+          ai file sorgente e aggiornare automaticamente il bundle prodotto e utilizzato dall'example all'interno del progetto;
+    \item \textit{start-example}: avvia l'esecuzione dell'esempio all'interno del progetto nel server locale, permettendo di visualizzare il funzionamento della libreria
+          all'interno di un'applicazione di test;
+    \item \textit{build-package}: avvia il processo di building del codice di \textit{rollup}, generando i bundle finali configurati all'interno del file \textit{rollup.config.js};
+    \item \textit{publish-package}: avvia il processo di pubblicazione del pacchetto all'interno del registry privato configurato nel \textit{package.json} dei packages, permettendo
+          di distribuire la libreria all'interno dell'organizzazione;
+    \item \textit{test}: avvia il processo di testing del codice tramite \textit{Jest}, effettuando i test definiti all'interno della repository.
+\end{itemize}
+\begin{listing}[H]
+    \begin{minted}{json}
+    "scripts": {
+        "start-example": "cd packages/example && yarn start",
+        "start-watcher": "cd packages/dsdashboard2 && yarn rollup-watch",
+        "start": "yarn concurrently --kill-others \"yarn start-example\" \"yarn start-watcher\"",
+        "build-package": "cd packages/dsdashboard2 && yarn build",
+        "publish-package": "cd packages/dsdashboard2 && yarn publish"
+    }
+    \end{minted}
+    \caption{Scripts del file package.json di dsdashboard2}
+    \label{listing:scripts_package_json_dsdashboard2}
+\end{listing}
+
+\begin{listing}[H]
+    \begin{minted}{json}
+    "scripts": {
+        "rollup": "rollup -c --bundleConfigAsCjs",
+        "rollup-watch": "rollup -c --bundleConfigAsCjs --watch",
+        "clean": "rimraf dist",
+        "build": "yarn clean && yarn rollup",
+        "test": "jest"
+    }
+    \end{minted}
+    \caption{Scripts del file package.json dei packages}
+    \label{listing:scripts_package_json_packages}
+\end{listing}
+Tutti i precedenti comandi vengono eseguiti tramite il comando \textit{yarn} seguito dal nome dello script definito all'interno del file \textit{package.json}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di bundle visualizer report}, width=1 \columnwidth]{img/bundle-visualizer.png}
+    \caption{Esempio di bundle visualizer report}
+    \label{fig:bundle-visualizer}
+\end{figure}
+
 \subsection{Componenti}
 
-\subsection{Versionamento del codice}
+\subsubsection{Counter}
+
+\subsubsection{Chart}
+
+\subsubsection{Table}
+
+\subsubsection{Renderer}
+
 
 \subsection{Documentazione}
 L'implementazione della libreria prodotta è stata documentata tramite l'utilizzo di \textit{Confluence}, la piattaforma
@@ -26,3 +102,206 @@ del codice e la facilità di comprensione delle funzionalità offerte dalla libr
 apprendimento e di sviluppo necessari per gli utilizzi futuri del prodotto implementato.
 
 \section{Testing}
+Nella presente sezione verranno descritte le attività di testing effettuate durante lo sviluppo della libreria, con l'obiettivo
+di garantire la qualità del prodotto implementato e la corretta esecuzione delle funzionalità offerte.
+
+\subsection{Jest}
+Lo strumento utilizzato e configurato all'interno del progetto per l'esecuzione dei test è \textit{Jest}, un framework di testing
+per JavaScript sviluppato da \textit{Facebook}. \newline
+Jest permette di effettuare test su funzioni, classi e moduli, fornendo un'ampia gamma di funzionalità per la scrittura e l'esecuzione
+dei test. \newline
+In particolare, Jest offre le seguenti funzionalità:
+\begin{itemize}
+    \item \textbf{Mocking components}: permette di creare mock di componenti, in modo da simularne il suo comportamento:
+          \begin{listing}[H]
+              \begin{minted}{typescript}
+            jest.mock('percorso.componente', () => ({
+                Componente: () => mock_value,
+            }));
+            \end{minted}
+              \caption{Esempio di mock di una componente}
+              \label{listing:mock_component}
+          \end{listing}
+    \item \textbf{Mocking function}: permette di creare mock di funzioni, in modo da simularne il suo comportamento:
+          \begin{listing}[H]
+              \begin{minted}{typescript}
+                jest.spyOn(file_funzione, 'nomeFunzione')
+                    .mockReturnValue(mock_value);
+            \end{minted}
+              \caption{Esempio di mock di una funzione}
+              \label{listing:mock_function}
+          \end{listing}
+    \item \textbf{Suite di test}: permette di creare suite di test, organizzando i test in modo gerarchico:
+          \begin{listing}[H]
+              \begin{minted}{typescript}
+                describe('Nome suite di test', () => {
+                    it('Nome test', () => {
+                        // Codice del test
+                    });
+                });
+            \end{minted}
+              \caption{Esempio di suite di test}
+              \label{listing:test_suite}
+          \end{listing}
+    \item \textbf{Expect}: permette di effettuare asserzioni sui valori restituiti dalle funzioni, verificando la correttezza
+          del risultato ottenuto:
+          \begin{listing}[H]
+              \begin{minted}{typescript}
+                    expect(valore).toBe(valore_aspettato);
+                \end{minted}
+              \caption{Esempio di expect su valore}
+              \label{listing:expect}
+          \end{listing}
+          oppure di verificare la presenza di un elemento all'interno del DOM:
+          \begin{listing}[H]
+              \begin{minted}{typescript}
+                    expect(screen.getByText('Testo')).toBeInTheDocument();
+                \end{minted}
+              \caption{Esempio di expect su elemento del DOM}
+              \label{listing:expect_dom}
+          \end{listing}
+\end{itemize}
+La sua configurazione è stata effettuata all'interno del file \textit{packages.json}, in cui sono state definite le impostazioni di
+esecuzione dei test e le dipendenze necessarie per il loro corretto funzionamento, come il preset che consente di utilizzare \textit{Typescript},
+l'ambiente di test \textit{jsdom} che simula un ambiente browser e i vari formati di file che deve considerare o ignorare. \newline
+Di seguito viene riportata la configurazione utilizzata.
+\begin{listing}[H]
+    \begin{minted}{json}
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "jsdom",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ],
+        "transform": {
+            "^.+\\.(ts|tsx)$": "ts-jest",
+            "^.+\\.(js|jsx)$": "babel-jest"
+        },
+        "transformIgnorePatterns": [
+            "node_modules/(?!(d3-color)/)"
+        ]
+    }
+    \end{minted}
+    \caption{Configurazione Jest all'interno del file packages.json}
+    \label{listing:jest_config}
+\end{listing}
+
+\subsection{Unit testing}
+Per garantire la correttezza delle funzionalità offerte dalla libreria, è stato effettuato un processo di testing a livello di unità. \newline
+Nel presente progetto sono stati implementati test per le singole componenti, mockando le dipendenze esterne ed eventuali altre componenti
+della libreria utilizzate, verificando il corretto funzionamento all'interno della singola unità.
+
+\begin{listing}[H]
+    \begin{minted}[escapeinside=||]{typescript}
+    jest.mock('./charts/Counter', () => ({
+        Counter: () => <div>Counter Component|</|div>,
+    }));
+
+    jest.mock('./charts/Chart', () => ({
+        Chart: () => <div>Chart Component|</|div>,
+    }));
+
+    jest.mock('./charts/Table', () => ({
+        Table: () => <div>Table Component|</|div>,
+    }));
+
+    describe('Renderer test right components', () => {
+        it('renders Counter component when visualizationType is Counter', 
+            () => {
+            jest.spyOn(helper, 'getVisualizationType')
+                .mockReturnValue(VisualizationType.Counter);
+
+            const rendererProps: RendererProps = {
+                visualizationName: 'Counter',
+                type: 'Counter',
+                data: {},
+                options: {},
+            };
+
+            render(<Renderer {...rendererProps} />);
+
+            expect(screen.getByText('Counter Component')).toBeInTheDocument();
+            });
+    // ...
+    });
+    \end{minted}
+    \caption{Esempio di unit test: Renderer component}
+    \label{listing:test_Renderer}
+\end{listing}
+
+Come si può osservare nell'esempio di codice riportato in \ref{listing:test_Renderer}, è stato effettuato un test sulla componente \textit{Renderer},
+mockando le componenti \textit{Counter}, \textit{Chart} e \textit{Table} utilizzate all'interno della componente stessa, verficando che venga renderizzata
+la componente corretta in base al tipo di visualizzazione passato come parametro. \newline
+Il tipo di visualizzazione a sua volta viene ottenuto dal mock della funzione \textit{getVisualizationType}, la quale restituisce il tipo di visualizzazione
+corretto in base al parametro passato come props al Renderer: in questo modo viene garantita la corretta logica della singola componente, senza far affidamento
+su funzioni o componenti esterne. \newline
+La correttezza delle funzioni è stata verificata tramite appositi test di unità sulle singole funzioni, eventualmente mockando le dipendenze esterne utilizzate
+all'interno della funzione stessa, in modo da garantire la correttezza logica implementata. \newline
+Di seguito viene riportato un esempio di test di unità effettuato sulla funzione \textit{getVisualizationType}.
+
+\begin{listing}[H]
+    \begin{minted}{typescript}
+    it('should return VisualizationType.Table when type is TABLE', () => {
+        expect(
+            getVisualizationType('TABLE')
+        ).toBe(VisualizationType.Table);
+    });
+    \end{minted}
+    \caption{Esempio di unit test: getVisualizationType}
+    \label{listing:test_getVisualizationType}
+\end{listing}
+
+\subsection{Integration testing}
+Per garantire la corretta integrazione delle componenti all'interno della libreria, è stato effettuato un processo di testing a livello di integrazione,
+tramite l'utilizzo di \textit{Jest}. \newline
+I test di integrazione permettono di verificare il corretto funzionamento delle componenti all'interno del sistema, testando il comportamento
+dei singoli moduli all'interno del contesto in cui sono utilizzati. \newline
+Nel presente progetto sono stati implementati test di integrazione per verificare il corretto funzionamento delle componenti in relazione con dipendenze
+esterne.
+
+\begin{listing}[H]
+    \begin{minted}[escapeinside=||]{typescript}
+    jest.mock('./charts/Counter', () => ({
+        Counter: () => <div>Counter Component|</|div>,
+    }));
+
+    jest.mock('./charts/Chart', () => ({
+        Chart: () => <div>Chart Component|</|div>,
+    }));
+
+    jest.mock('./charts/Table', () => ({
+        Table: () => <div>Table Component|</|div>,
+    }));
+    
+    describe('Renderer test right components', () => {
+        it('renders Counter component when visualizationType is Counter', () => {
+
+            const rendererProps: RendererProps = {
+                visualizationName: 'Counter',
+                type: 'Counter',
+                data: {},
+                options: {},
+            };
+
+            render(<Renderer {...rendererProps} />);
+
+            expect(screen.getByText('Counter Component')).toBeInTheDocument();
+        });
+    // ...
+    });
+    \end{minted}
+    \caption{Esempio di integration test: Renderer component}
+    \label{listing:test_Renderer_integration}
+\end{listing}
+
+Come si può osservare nell'esempio di codice riportato in \ref{listing:test_Renderer_integration}, è stato effettuato un test di integrazione sulla componente \textit{Renderer},
+mockando le componenti \textit{Counter}, \textit{Chart} e \textit{Table} utilizzate all'interno della componente stessa, verficando che venga renderizzata
+la componente corretta in base al tipo di visualizzazione passato come parametro. \newline
+Il tipo di visualizzazione a sua volta viene ottenuto internamente alla componente grazie alla funzione \textit{getVisualizationType}, la quale restituisce il tipo di visualizzazione
+corretto in base al parametro passato come props al Renderer: in questo modo viene garantita la corretta integrazione delle componenti all'interno del sistema, testando il comportamento
+delle unità in relazione tra loro all'interno del contesto in cui sono utilizzate.

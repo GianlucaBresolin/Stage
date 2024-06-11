@@ -2,13 +2,13 @@
 \label{chap:progettazione}
 Nel presente capitolo viene presentata l'attività di progettazione relativa al progetto di stage focalizzato sul refactoring e
 sull'ottimizzazione dello SDK impiegato dall'azienda Datasoil S.r.l. per lo sviluppo di dashboard dinamiche.
-Verrà analizzato l'approcio adottato per individuare le soluzioni volte al soddisfacimento dei requisiti individuati durante
-la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica
-e gli strumenti utilizzati per la sua realizzazione, concludendo con la progettazione delle singole componenti individuate.
+Verrà analizzato l'approccio adottato per individuare le soluzioni volte al soddisfacimento dei requisiti individuati durante
+la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica \textit{viz-lib}
+appartenente al development kit, concludendo con la definizione dei tipi e delle interfacce e la progettazione delle singole componenti individuate.
 
 \section{Metodologia di Progettazione}
 La metodologia di progettazione adottata durante lo svolgimento del progetto di stage ha seguito inizialmente un approccio
-\textit{top-down}, che permettesse, attraverso uno studio generale della libreria preesistente e della sua architettura, di invididuare
+\textit{top-down}, che permettesse, attraverso uno studio generale della libreria preesistente e della sua architettura, di individuare
 il flusso di dati tra le varie componenti, fornendo una visione globale delle interazioni e delle dipendenze esistenti.
 Successivamente, è stato adottato un approccio \textit{bottom-up}, analizzando le singole componenti e le loro funzionalità,
 in modo da identificare le possibili ottimizzazioni e le modifiche necessarie per il miglioramento delle prestazioni, della leggibilità e
@@ -21,13 +21,13 @@ L'architettura progettata per la realizzazione della libreria grafica si basa su
 di componenti frontend per \textit{React}, ovvero il pattern \textit{Component Library Architecture}: questa architettura si fonda sulla creazione di una libreria di
 componenti riutilizzabili, modulari e indipendenti tra loro. \newline
 Tale pattern permette di creare l'architettura ideale per librerie che offrono collezioni di componenti riutilizzabili, permettendo e agevolando
-la condivisione e il riutilizzo di codice all'interno del progetto, garantendo una maggior manuntenibilità del codice. \newline
+la condivisione e il riutilizzo di codice all'interno del progetto, garantendo una maggior manutenibilità del codice. \newline
 Il modello proposto prevede la seguente struttura, la quale si riflette nella definizione delle macro-directory all'interno del progetto:
 \begin{itemize}
-      \item \textbf{components}: directory contenente i componenti della libreria grafica, suddivisi in sottodirectory per categoria;
+      \item \textbf{components}: directory contenente i componenti della libreria grafica;
       \item \textbf{hooks}: directory contenente i custom hooks utilizzati all'interno della libreria grafica;
       \item \textbf{utils}: directory contenente le funzioni di utilità utilizzate all'interno della libreria grafica;
-      \item \textbf{models}: directory contenente le definizioni dei tipi e interfacce utilizzate all'interno della libreria grafica;
+      \item \textbf{models}: directory contenente le definizioni dei tipi e delle interfacce utilizzate all'interno della libreria grafica;
       \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate;
       \item \textbf{style.css}: file contenente i fogli di stile globali utilizzati all'interno della libreria grafica.
 \end{itemize}
@@ -38,55 +38,86 @@ componenti di librerie differenti, agevolando la manutenibilità e la scalabilit
 
 
 \section{Progettazione dei Tipi e delle Interfacce}
-Nella seguente sezione verranno presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
+Nella seguente sezione vengono presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
 delle informazioni che rappresentano. \newline
 I tipi e le interfacce verranno presentati in ordine alfabetico.
 \subsection{ChartBaseVisualizationOptions}
 Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione comuni a tutti i \textit{Chart}.
-\begin{listing}[htdp]
-      \begin{minted}{typescript}
-      export interface ChartBaseVisualizationOptions {
-            globalSeriesType: string; 
-            sortX: boolean;
-            sortY?: boolean;
-            legend: {   enabled: boolean;
-                        placement: string;
-                        traceorder: 'grouped' | 'normal' | 'reversed';};
-            xAxis: {    labels: {enabled: boolean;};
-                        type: string;
-                        title?: {text: string;};};
-            yAxis: [{   type: string;
-                        rangeMax?: number;
-                        rangeMin?: number;
-                        title?: {text?: string;};
-                  }, {opposite: boolean; type: string;}];
-            alignYAxesAtZero: boolean;
-            error_y: {type: string; visible: boolean;};
-            series: {   error_y: {type: string; visible: boolean;};
-                        stacking: string;
-                        percentValues?: boolean;};
-            seriesOptions: {[x: string]: any; };
-            valuesOptions: {[x: string]: any;};
-            columnMapping: { [x: string]: string };
-            direction: {type: string;};
-            sizemode: string;
-            coefficient: number;
-            showDataLabels: boolean;
-            numberFormat: string;
-            dateTimeFormat: string;
-            percentFormat: string;
-            textFormat: string;
-            missingValuesAsZero: boolean;
-            onHover?: () => void;
-            onUnHover?: () => void;
-            reverseX?: boolean;
-            reverseY?: boolean;
-            showpoints?: boolean;
-            heatMinColor?: string;
-            heatMaxColor?: string;
-            colorScheme: string | (string | number)[][];
-      }
-      \end{minted}
+\begin{minted}{typescript}
+export interface ChartBaseVisualizationOptions {
+      globalSeriesType: string; 
+      sortX: boolean;
+      sortY?: boolean;
+      legend: {
+      enabled: boolean;
+      placement: string;
+      traceorder: 'grouped'|'normal'|'reversed'|'reversed+grouped';
+      };
+      xAxis: {
+      labels: {
+            enabled: boolean;
+      };
+      type: string;
+      title?: {
+            text: string;
+      };
+      };
+      yAxis: [
+      {
+            type: string;
+            rangeMax?: number;
+            rangeMin?: number;
+            title?: {
+            text?: string;
+            };
+      },
+      {
+            opposite: boolean;
+            type: string;
+      },
+      ];
+      alignYAxesAtZero: boolean;
+      error_y: {
+      type: string;
+      visible: boolean;
+      };
+      series: {
+      error_y: {
+            type: string;
+            visible: boolean;
+      };
+      stacking: string;
+      percentValues?: boolean;
+      };
+      seriesOptions: {
+      [x: string]: any;
+      };
+      valuesOptions: {
+      [x: string]: any;
+      };
+      columnMapping: { [x: string]: string };
+      direction: {
+      type: string;
+      };
+      sizemode: string;
+      coefficient: number;
+      showDataLabels: boolean;
+      numberFormat: string;
+      dateTimeFormat: string;
+      percentFormat: string;
+      textFormat: string;
+      missingValuesAsZero: boolean;
+      onHover?: () => void;
+      onUnHover?: () => void;
+      reverseX?: boolean;
+      reverseY?: boolean;
+      showpoints?: boolean;
+      heatMinColor?: string;
+      heatMaxColor?: string;
+      colorScheme: string | (string | number)[][];
+}
+\end{minted}
+\begin{listing}[H]
       \caption{Definizione dell'interfaccia ChartBaseVisualizationOptions}
       \label{listing:chartBaseVisualizationOptions}
 \end{listing}
@@ -154,6 +185,160 @@ Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazio
       \item \textbf{colorScheme}: stringa o array che definisce lo schema dei colori del grafico heatmap.
 \end{itemize}
 
+\subsection{Column}
+Interfaccia che definisce i tipi dei dati relativi alle colonne della tabella.
+
+\begin{minted}{typescript}
+export interface Column {
+      title: string;
+      name: string;
+      type: string;
+      visible: boolean;
+      displayAs: string;
+      header?: any;
+      alignContent?: string;
+      allowHTML?: boolean; 
+      allowSearch?: boolean;
+      booleanValues?: string[];
+      highlightLinks?: boolean;
+      imageTitleTemplate?: string;
+      imageUrlTemplate?: string;
+      imageWidth?: string;
+      imageHeight?: string;
+      linkOpenInNewTab?: boolean;
+      linkTextTemplate?: string;
+      linkTitleTemplate?: string;
+      linkUrlTemplate?: string;
+      numberFormat?: string;
+      dateTimeFormat?: string;
+      order?: number;
+}
+\end{minted}
+\begin{listing}[H]
+      \caption{Definizione dell'interfaccia Column}
+      \label{listing:column}
+\end{listing}
+\begin{itemize}
+      \item \textbf{title}: stringa che definisce il titolo della colonna;
+      \item \textbf{name}: stringa che definisce il nome della colonna;
+      \item \textbf{type}: stringa che definisce il tipo di dato della colonna;
+      \item \textbf{visible}: booleano che definisce se la colonna è visibile o meno;
+      \item \textbf{displayAs}: stringa che definisce il tipo di visualizzazione della colonna;
+      \item \textbf{header}: oggetto che definisce l'header della colonna;
+      \item \textbf{alignContent}: stringa che definisce l'allineamento del contenuto della colonna;
+      \item \textbf{allowHTML}: booleano che definisce se permettere o meno l'utilizzo di HTML;
+      \item \textbf{allowSearch}: booleano che definisce se permettere o meno la ricerca;
+      \item \textbf{booleanValues}: array di stringhe che definisce i valori booleani;
+      \item \textbf{highlightLinks}: booleano che definisce se evidenziare i link;
+      \item \textbf{imageTitleTemplate}: stringa che definisce il template del titolo dell'immagine;
+      \item \textbf{imageUrlTemplate}: stringa che definisce il template dell'URL dell'immagine;
+      \item \textbf{imageWidth}: stringa che definisce la larghezza dell'immagine;
+      \item \textbf{imageHeight}: stringa che definisce l'altezza dell'immagine;
+      \item \textbf{linkOpenInNewTab}: booleano che definisce se aprire il link in una nuova scheda;
+      \item \textbf{linkTextTemplate}: stringa che definisce il template del testo del link;
+      \item \textbf{linkTitleTemplate}: stringa che definisce il template del titolo del link;
+      \item \textbf{linkUrlTemplate}: stringa che definisce il template dell'URL del link;
+      \item \textbf{numberFormat}: stringa che definisce il formato numerico;
+      \item \textbf{dateTimeFormat}: stringa che definisce il formato della data;
+      \item \textbf{order}: numero che definisce l'ordine della colonna.
+\end{itemize}
+
+
+\subsection{CounterVisualizationOptions}
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Counter}.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      export interface CounterBaseVisualizationOptions {
+            counterLabel: string;
+            counterColName: string;
+            targetColName?: string;
+            rowNumber: number;
+            targetRowNumber: number;
+            countRows?: any;
+            stringDecimal: number;
+            stringDecChar: string;
+            stringThouSep: string;
+            tooltipFormat: string;
+            stringPrefix?: string;
+            stringSuffix?: string;
+            formatTargetValue?: boolean;
+      }
+      \end{minted}
+      \caption{Definizione dell'interfaccia CounterVisualizationOptions}
+      \label{listing:counterVisualizationOptions}
+\end{listing}
+\begin{itemize}
+      \item \textbf{counterLabel}: stringa che definisce l'etichetta del contatore;
+      \item \textbf{counterColName}: stringa che definisce il nome della colonna contenente i valori del contatore;
+      \item \textbf{targetColName}: stringa che definisce il nome della colonna contenente il valore target del contatore;
+      \item \textbf{rowNumber}: numero che definisce il numero di righe da considerare per il calcolo del contatore;
+      \item \textbf{targetRowNumber}: numero che definisce il numero di righe da considerare per il calcolo del valore target;
+      \item \textbf{countRows}: oggetto che definisce le righe da considerare per il calcolo del contatore;
+      \item \textbf{stringDecimal}: numero che definisce il numero di cifre decimali da visualizzare;
+      \item \textbf{stringDecChar}: stringa che definisce il separatore decimale;
+      \item \textbf{stringThouSep}: stringa che definisce il separatore delle migliaia;
+      \item \textbf{tooltipFormat}: stringa che definisce il formato del tooltip;
+      \item \textbf{stringPrefix}: stringa che definisce il prefisso del contatore;
+      \item \textbf{stringSuffix}: stringa che definisce il suffisso del contatore;
+      \item \textbf{formatTargetValue}: booleano che definisce se formattare o meno il valore target.
+\end{itemize}
+
+\subsection{DataLabels}
+Interfaccia che definisce i tipi dei dati relativi alle label dei dati utilizzati negli \textit{heatmaps}.
+
+\begin{minted}{typescript}
+export interface DataLabels {
+  x: any[];
+  y: any[];
+  mode: string;
+  hoverinfo: string;
+  showlegend: boolean;
+  text: string[];
+  textfont: {
+    color: string[];
+  };
+}
+\end{minted}
+\begin{listing}[H]
+      \caption{Definizione dell'interfaccia DataLabels}
+      \label{listing:dataLabels}
+\end{listing}
+\begin{itemize}
+      \item \textbf{x}: array che definisce i valori sull'asse delle ascisse;
+      \item \textbf{y}: array che definisce i valori sull'asse delle ordinate;
+      \item \textbf{mode}: stringa che definisce la modalità;
+      \item \textbf{hoverinfo}: stringa che definisce le informazioni del tooltip;
+      \item \textbf{showlegend}: booleano che definisce se visualizzare o meno la legenda;
+      \item \textbf{text}: array di stringhe che definisce il testo;
+      \item \textbf{textfont}: oggetto che definisce le opzioni del font del testo:
+            \begin{itemize}
+                  \item \textbf{color}: array di stringhe che definisce i colori del font.
+            \end{itemize}
+\end{itemize}
+
+\subsection{PlotlyOptions}
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione di Plotly.
+\begin{minted}{typescript}
+export interface PlotlyOptions {
+  showLink: boolean;
+  displaylogo: boolean;
+  displayModeBar?: boolean;
+  responsive?: boolean;
+  autosize?: boolean;
+}
+\end{minted}
+\begin{listing}[H]
+      \caption{Definizione dell'interfaccia PlotlyOptions}
+      \label{listing:plotlyOptions}
+\end{listing}
+\begin{itemize}
+      \item \textbf{showLink}: booleano che definisce se visualizzare o meno il link;
+      \item \textbf{displaylogo}: booleano che definisce se visualizzare o meno il logo;
+      \item \textbf{displayModeBar}: booleano che definisce se visualizzare o meno la barra di Plotly;
+      \item \textbf{responsive}: booleano che definisce se rendere o meno il grafico responsivo;
+      \item \textbf{autosize}: booleano che definisce se adattare o meno la grandezza del grafico.
+\end{itemize}
+
 \subsection{RendererProps}
 Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Renderer, Counter, Chart} e \textit{Table}.
 \begin{listing}[H]
@@ -175,6 +360,190 @@ Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Render
       \item \textbf{visualizationName}: stringa che definisce il titolo di visualizzazione della componente;
       \item \textbf{data}: oggetto che contiene i dati da visualizzare all'interno della componente;
       \item \textbf{options}: oggetto che contiene le opzioni di visualizzazione della componente di tipo \textit{VisualizationOptions}.
+\end{itemize}
+
+\subsection{Series}
+Interfaccia che definisce i tipi dei dati relativi alle serie rappresentata nel grafico.
+\begin{minted}{typescript}
+export interface Series {
+  name: string;
+  type: string;
+  data?: any[];
+  visible?: boolean;
+  values?: number[];
+  labels?: string[];
+  hole?: number;
+  marker?: {
+    colors?: string[];
+    color?: string; 
+    line?: {
+      color?: string;
+      width?: number;
+    };
+    size?: number;
+    sizemode?: string;
+  };
+  hoverinfo?: string | boolean;
+  text?: any[];
+  textinfo?: string;
+  textposition?: string;
+  textangle?: number;
+  textfont?: {
+    size?: number;
+    color?: string[];
+  };
+  direction?: string;
+  domain?: {
+    x: number[];
+    y: number[];
+  };
+  sourceData?: Map<string, any>;
+  hoverlabel?: {
+    font?: {
+      color?: string[];
+    };
+    bordercolor?: string;
+    bgcolor?: string;
+  };
+  hover?: any[];
+  x?: any;
+  y?: any;
+  z?: any;
+  yaxis?: any;
+  orientation?: number;
+  insidetextfont?: {
+    size?: number;
+    color?: string;
+  };
+  error_y?: any;
+  offsetgroup?: string;
+  mode?: string;
+  fill?: string;
+  boxpoints?: string;
+  jitter?: number;
+  pointpos?: number;
+  colorscale?: string | (string | number)[][];
+  xgap?: number;
+  ygap?: number;
+}
+\end{minted}
+\begin{listing}[H]
+      \caption{Definizione dell'interfaccia Series}
+      \label{listing:series}
+\end{listing}
+\begin{itemize}
+      \item \textbf{name}: stringa che definisce il nome della serie;
+      \item \textbf{type}: stringa che definisce il tipo di serie;
+      \item \textbf{data}: array che definisce i dati della serie;
+      \item \textbf{visible}: booleano che definisce se la serie è visibile o meno;
+      \item \textbf{values}: array di numeri che definisce i valori della serie;
+      \item \textbf{labels}: array di stringhe che definisce le label della serie;
+      \item \textbf{hole}: numero che definisce, nel caso di grafico a torta, il raggio del buco centrale;
+      \item \textbf{marker}: oggetto che definisce le opzioni del marker;
+      \item \textbf{hoverinfo}: stringa o booleano che definisce le informazioni del tooltip;
+      \item \textbf{text}: array che definisce il testo della serie;
+      \item \textbf{textinfo}: stringa che definisce le informazioni del testo;
+      \item \textbf{textposition}: stringa che definisce la posizione del testo;
+      \item \textbf{textangle}: numero che definisce l'angolo del testo;
+      \item \textbf{textfont}: oggetto che definisce le opzioni del font del testo;
+      \item \textbf{direction}: stringa che definisce la direzione della serie;
+      \item \textbf{domain}: oggetto che definisce il dominio della serie;
+      \item \textbf{sourceData}: mappa che definisce i dati sorgente;
+      \item \textbf{hoverlabel}: oggetto che definisce le opzioni del tooltip;
+      \item \textbf{hover}: array che definisce le opzioni del tooltip;
+      \item \textbf{x}: array che definisce i valori sull'asse delle ascisse;
+      \item \textbf{y}: array che definisce i valori sull'asse delle ordinate;
+      \item \textbf{z}: array che definisce i valori sull'asse z;
+      \item \textbf{yaxis}: array che definisce i valori sull'asse delle ordinate;
+      \item \textbf{orientation}: numero che definisce l'orientamento;
+      \item \textbf{insidetextfont}: oggetto che definisce le opzioni del font interno;
+      \item \textbf{error\_y}: oggetto che definisce le opzioni degli errori sull'asse delle ordinate;
+      \item \textbf{offsetgroup}: stringa che definisce il gruppo di offset;
+      \item \textbf{mode}: stringa che definisce la modalità;
+      \item \textbf{fill}: stringa che definisce il riempimento;
+      \item \textbf{boxpoints}: stringa che definisce i punti del box;
+      \item \textbf{jitter}: numero che definisce il jitter;
+      \item \textbf{pointpos}: numero che definisce la posizione del punto;
+      \item \textbf{colorscale}: stringa o array che definisce lo schema dei colori;
+      \item \textbf{xgap}: numero che definisce il gap sull'asse delle ascisse;
+      \item \textbf{ygap}: numero che definisce il gap sull'asse delle ordinate.
+      \item \textbf{colors}: array di stringhe che definisce i colori del marker;
+      \item \textbf{color}: stringa che definisce il colore del marker;
+      \item \textbf{line}: oggetto che definisce le opzioni della linea del marker;
+      \item \textbf{size}: numero che definisce la grandezza del marker;
+      \item \textbf{sizemode}: stringa che definisce la modalità di dimensionamento del marker.
+      \item \textbf{font}: oggetto che definisce le opzioni del font del marker;
+      \item \textbf{bordercolor}: stringa che definisce il colore del bordo del marker;
+      \item \textbf{bgcolor}: stringa che definisce il colore di sfondo del marker.
+      \item \textbf{colors}: array di stringhe che definisce i colori delle rappresentazioni (multiple);
+      \item \textbf{size}: numero che definisce la grandezza del font.
+      \item \textbf{color}: stringa che definisce il colore della rappresentazione (singola).
+\end{itemize}
+
+
+\subsection{TableBaseVisualizationOptions}
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Table}.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      export interface TableBaseVisualizationOptions {
+            columns?: Column[];
+            itemsPerPage?: number;
+            paginationSize?: string;
+      }
+      \end{minted}
+      \caption{Definizione dell'interfaccia TableBaseVisualizationOptions}
+      \label{listing:tableBaseVisualizationOptions}
+\end{listing}
+\begin{itemize}
+      \item \textbf{columns}: array di oggetti che definiscono le colonne della tabella;
+      \item \textbf{itemsPerPage}: numero che definisce il numero di elementi per pagina;
+      \item \textbf{paginationSize}: stringa che definisce la grandezza della paginazione.
+\end{itemize}
+
+\subsection{VisualizationOptions}
+Tipo che definisce le opzioni di visualizzazione delle componenti.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      export type VisualizationOptions = 
+            | CounterBaseVisualizationOptions 
+            | ChartBaseVisualizationOptions 
+            | TableBaseVisualizationOptions;
+      \end{minted}
+      \caption{Definizione del tipo VisualizationOptions}
+      \label{listing:visualizationOptions}
+\end{listing}
+Questa definizione permette di definire le opzioni di visualizzazione specifiche per ciascun tipo di componente, garantendo una maggiore flessibilità
+nella definizione di \textit{RendererProps}.
+
+\subsection{VisualizationSettings}
+Interfaccia che definisce i tipi dei dati relativi alle impostazioni di visualizzazione delle componenti.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+      interface VisualizationSettings {
+            dateFormat: string;
+            dateTimeFormat: string;
+            integerFormat: string;
+            floatFormat: string;
+            booleanValues: string[];
+            tableCellMaxJSONSize: number;
+            allowCustomJSVisualizations: boolean;
+            hidePlotlyModeBar: boolean;
+            choroplethAvailableMaps: any;
+      }
+      \end{minted}
+      \caption{Definizione dell'interfaccia VisualizationSettings}
+      \label{listing:visualizationSettings}
+\end{listing}
+\begin{itemize}
+      \item \textbf{dateFormat}: stringa che definisce il formato della data;
+      \item \textbf{dateTimeFormat}: stringa che definisce il formato della data e dell'ora;
+      \item \textbf{integerFormat}: stringa che definisce il formato degli interi;
+      \item \textbf{floatFormat}: stringa che definisce il formato dei numeri decimali;
+      \item \textbf{booleanValues}: array di stringhe che definisce i valori booleani;
+      \item \textbf{tableCellMaxJSONSize}: numero che definisce la grandezza massima delle celle della tabella;
+      \item \textbf{allowCustomJSVisualizations}: booleano che definisce se permettere o meno le visualizzazioni personalizzate;
+      \item \textbf{hidePlotlyModeBar}: booleano che definisce se nascondere o meno la barra di Plotly;
+      \item \textbf{choroplethAvailableMaps}: oggetto che definisce le mappe disponibili per il choropleth.
 \end{itemize}
 
 \subsection{VisualizationType}
@@ -312,13 +681,13 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
             \end{listing}
       \item \textbf{Ottimizzazioni}:
             \begin{itemize}
-                  \item Utilizzo di un custom-boundle di \textit{Plotly.js} in modo da ridurre le dimensioni del boundle finale, evitando la registrazione
+                  \item Utilizzo di un custom-bundle di \textit{Plotly.js} in modo da ridurre le dimensioni del bundle finale, evitando la registrazione
                         di grafici non utilizzati all'interno delle dashboard Datasoil S.r.l. Tale ottimizzazione permette inoltre di evitare la registrazione
                         manuale delle \textit{traces}, necessaria nelle versioni rese disponibili da \textit{Plotly.js} a causa di un bug noto non risolto della libreria.
                   \item Utilizzo della libreria \textit{numbro.js} a favore della libreria \textit{numeral.js} precedentemente utilizzata, più pesante e non più mantenuta,
                         per la formattazione delle label numeriche all'interno dei grafici;
                   \item Utilizzo della libreria \textit{day.js} a favore della libreria \textit{moment.js} precedentemente utilizzata, in quanto questa libreria costituisce una
-                        peerdependency di \textit{dashboard}, riducendo così le dimensioni del boundle finale;
+                        peerdependency di \textit{dashboard}, riducendo così le dimensioni del bundle finale;
                   \item Utilizzo di un custom hooks per la gestione dello stato interno della componente e per il calcolo delle dimensioni del grafico, necessarie per permettere
                         la visualizzazione responsiva della componente. L'utilizzo dell'hooks è volto a garantire un'implementazione efficiente e performante della componente.
             \end{itemize}
@@ -356,12 +725,64 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
             \begin{itemize}
                   \item Utilizzo della componente \textit{DataTable} fornita dalla libreria \textit{PrimeReact} a favore della componente \textit{Table} di \textit{AntD} precedentemente utilizzata,
                         in quanto la libreria \textit{PrimeReact} offre una maggiore flessibilità e personalizzazione delle tabelle, oltre che a costituire una peerdependency all'interno dei
-                        prodotti Datasoil S.r.l., riducendo così le dimensioni del boundle finale;
+                        prodotti Datasoil S.r.l., riducendo così le dimensioni del bundle finale;
                   \item Utilizzo di hook per la gestione del filtro globale, in modo da garantire un'implementazione efficiente e performante della componente, a differenza dell'implementazione
                         fornita da \textit{PrimeReact} che comporta un bug noto non risolto.
             \end{itemize}
 \end{itemize}
 
 \subsection{Renderer}
+\begin{itemize}
+\item \textbf{Nome della componente}: Renderer;
+\item \textbf{Descrizione}: La componente Renderer seleziona dinamicamente un sottocomponente tra quelli resi disponibili dalla libreria \textit{viz-lib}
+in base al tipo di visualizzazione definito nei dati passati come props, costituendo l'entry point della libreria. \newline
+\item \textbf{Props}: I props della componente Renderer sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+delle informazioni \textit{data, options} e \textit{visualizationName}.
+\begin{listing}[H]
+      \begin{minted}{typescript}
+                  export function Renderer({
+                        data,
+                        options,
+                        visualizationName,
+                        }: Pick<RendererProps, 
+                              'data' 
+                              | 'options' 
+                              | 'visualizationName'>);
+                  \end{minted}
+      \caption{Definizione delle props della componente Renderer}
+      \label{listing:rendererPropsInComponent}
+\end{listing}
+\item \textbf{Ottimizzazioni}:
+\begin{itemize}
+      \item La componente prevede l'utilizzo di \textit{hooks} per ottimizzare le prestazioni, rendendo il componente memoizzato, prevenendo i rendering
+            non necessari, garantendo così un'implementazione efficiente e performante.
+\end{itemize}
 
-\subsection{VisualizationWidget}
+\subsection{VisualizationWidgetHeader}
+\begin{itemize}
+      \item \textbf{Nome della componente}: VisualizationWidgetHeader;
+      \item \textbf{Descrizione}: La componente VisualizationWidgetHeader appartiene alla libreria \textit{dashboard}, appartenente sempre al SDK prodotto. Questa componente costituisce l'header
+            del container per la visualizzazione delle componenti da renderizzare all'interno della dashboard. \newline
+      \item \textbf{Props}: I props della componente VisualizationWidgetHeader sono definiti delle informazioni \textit{name, visualization} e \textit{dataDialog}.
+            \begin{listing}[H]
+                  \begin{minted}{typescript}
+                  function VisualizationWidgetHeader({
+                        name,
+                        visualization,
+                        dataDialog,
+                        }: {
+                        name: string;
+                        visualization: Visualization;
+                        dataDialog: WidgetData | undefined;
+                        });
+                  \end{minted}
+                  \caption{Definizione delle props della componente VisualizationWidgetHeader}
+                  \label{listing:visualizationWidgetHeaderProps}
+            \end{listing}
+      \item \textbf{Ottimizzazioni}:
+            \begin{itemize}
+                  \item Ridefinizione dei props della componente in modo da permettere la visualizzazione di un dialog contenente la componente visualizzata all'interno del container;
+                  \item Ridefinizione della componente in modo da permettere la visualizzazione di un dialog contenente la componente visualizzata all'interno del container, attraverso
+                        l'utilizzo di componenti fornite dalla libreria \textit{PrimeReact}.
+            \end{itemize}
+\end{itemize}

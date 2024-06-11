@@ -1,18 +1,9 @@
 \chapter{Introduzione}
 \label{chap:introduzione}
 
-% * INTRODUZIONE
-
-% - Breve descrizione del progetto
-% - Principali problematiche
-% - Soluzione scelta
-% - Strumenti utilizzati
-% - Descrizione del prodotto ottenuto
-% - Struttura del resto della relazione
-
 \section{L'azienda}
 Lo stage è stato svolto presso l'azienda Datasoil S.r.l. situata nei dintorni della stazione ferroviaria di Padova.
-Fondata nel XXXX, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
+Fondata nel 2016, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
 smart building e smart city.
 L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare insight proattivi
 in tempo reale, garantendo che le informazioni corrette raggiungano le persone giuste al momento più opportuno.
@@ -53,9 +44,10 @@ tra cui \textit{SYN}. La libreria è stata implementata a partire da un modulo o
 una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
 L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
 correnti delle dipendenze utilizzate, raggiungendo una maggior performance e una maggiore manutenibilità del codice rispetto alla versione
-preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali.
-La libreria sviluppata costituisce, insieme alla già esistente libreria \textit{dashboard}, il nuovo SDK utilizzato all'interno dei prodotti
-Datasoil S.r.l. per la realizzazione di dashboard dinamiche.
+preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali. \newline
+La libreria sviluppata costituisce, insieme alla già esistente libreria \textit{dashboard} (la quale ha subito anch'essa in parte un processo di refactoring
+per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo SDK utilizzato all'interno dei prodotti Datasoil S.r.l.
+per la realizzazione di dashboard dinamiche.
 
 \section{Principali problematiche}
 Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse alcune problematiche
@@ -63,18 +55,19 @@ legate alla manutenibilità e alla performance del tool grafico a seguito di una
 Di seguito vengono presentate le principali problematiche riscontrate.
 
 \subsection{Dipendenze obsolete}
-La libreria preesistente utilizzava versioni obsolete delle dipendenze esterne, con conseguente rallentamento delle prestazioni in termini
+La libreria preesistente utilizzava versioni obsolete delle dipendenze esterne, con conseguente degradazione delle prestazioni in termini
 di utilizzo di spazio e di tempo di caricamente delle risorse, data l'assenza di ottimizzazioni e di aggiornamenti del codice sorgente. \newline
 Essendo inoltre la libreria preesistente basata su una versione del modulo di visualizzazioni utilizzato nella piattaforma \textit{Redash},
-le tecnologie utilizzate il più delle volte rappresentavono alternative a quelle già utilizzate nei prodotti Datasoil S.r.l., creando dipendenze
+le tecnologie utilizzate il più delle volte rappresentavano alternative a quelle già utilizzate nei prodotti Datasoil S.r.l., creando dipendenze
 non necessarie, con conseguente aumento delle dimensioni del SDK utilizzato per la generazione delle dashboard.
 
 \subsection{Manutenibilità del codice}
-Il codice sorgente della libreria preesistente, essendo stato sviluppato in tempistiche rapide a fronte di una esigenza specifica dell'azienda Datasoil S.r.l.,
+Il codice sorgente della libreria preesistente, sviluppato in tempistiche rapide a fronte di una esigenza specifica dell'azienda Datasoil S.r.l.,
 risultava essere poco manutenibile e assente di documentazione. \newline
 Inoltre, la libreria di visualizzazioni utilizzata da \textit{Redash} su cui si basa l'SDK utilizzato dall'azienda, inizialmente implementata in JavaScript,
 ha subito solo successivamente un refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta
-di tipi \textit{any} per le variabili e i parametri delle funzioni, rendendo il codice poco leggibile e difficile da mantenere.
+di tipi \textit{any} per le variabili e i parametri delle funzioni, introducendo numerosi \textit{@ts-ignore} per ignorare gli errori di compilazione, rendendo il codice
+poco leggibile e difficile da mantenere.
 
 \subsection{Componenti inutilizzate}
 In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti
@@ -91,7 +84,7 @@ del codice sorgente, individuando le soluzioni presentate di seguito.
 
 \subsection{Aggiornamento delle dipendenze}
 Per risolvere il problema delle dipendenze obsolete, è stata effettuata un'analisi delle versioni correnti delle dipendenze utilizzate all'interno della libreria,
-verificando che le funzionalità utilizzate non fossero deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile, che inoltre tenesse conto
+verificando che le funzionalità utilizzate non fossero deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile che tenesse inoltre conto
 delle nuove funzionalità introdotte nelle versioni più recenti. \newline
 Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.r.l., è stato possibile sostituire con librerie equivalenti dipendenze preesistenti,
 riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali.
@@ -123,14 +116,14 @@ finali dell'SDK prodotto.
 La seguente sezione fornisce gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
 Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
 \begin{itemize}
-      \item \textbf{Nome strumento}: breve descrizione dello strumento e del suo utilizzo;
-      \item \textbf{Versione}: versione utilizzata durante lo stage;
+      \item \textbf{Nome strumento}: nome dello strumento utilizzato;
+      \item \textbf{Versione}: versione utilizzata nel progetto durante lo stage;
       \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
       \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
       \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
       \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
       \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
-            su di esse e la motivazione per cui non sono state selezionate. \textit{(Opzionale)}
+            su di esse e la motivazione per la quale non sono state selezionate. \textit{(Opzionale)}
 \end{itemize}
 
 \subsection{Tecnologie Frontend}
@@ -151,6 +144,124 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \begin{itemize}
                   \item \textit{Moment.js}: Moment.js è una libreria JavaScript open-source utilizzata per la manipolazione delle date e degli orari, ma risulta essere più pesante
                         di Day.js. Moment.js è inoltre considerato \textit{deprecated} a favore di Day.js, che offre una maggiore leggerezza e una maggiore efficienza.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{Lodash}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Lodash
+      \item \textbf{Versione}: 4.14.0
+      \item \textbf{Link}: \href{https://lodash.com/}{lodash.com}
+      \item \textbf{Descrizione}: Lodash è una libreria JavaScript open-source utilizzata per la manipolazione di oggetti e array.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Lodash offre un'ampia serie di funzionalità implementate con efficienza per la manipolazione di oggetti e array,
+                        quali la ricerca, la modifica e la rimozione di elementi;
+                  \item Lodash è supportato da una vasta e attiva community.
+            \end{itemize}
+      \item \textbf{Svantaggi}
+            \begin{itemize}
+                  \item Lodash è una libreria molto pesante, con un'ampia serie di funzionalità che possono non essere utilizzate all'interno del progetto:
+                        per questo motivo in questo progetto sono eseguiti degli import sui moduli specifici, riducendo così le dimensioni del package finale.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{React}
+\begin{itemize}
+      \item \textbf{Nome strumento}: React
+      \item \textbf{Versione}: 18.0.0
+      \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
+      \item \textbf{Descrizione}: React è una libreria JavaScript open-source per la creazione di interfacce utente, sviluppata da Facebook.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item React offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
+                  \item React è supportato da una vasta e attiva community;
+                  \item React è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{Plotly.js}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Plotly.js
+      \item \textbf{Versione}: custom-bundle: 2.33.0
+      \item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
+      \item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
+            Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
+                  \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
+                        all'interno della libreria grafica;
+                  \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
+                        online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
+                  \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
+                        così le dimensioni del pacchetto finale;
+                  \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
+                        utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
+                  \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
+                        e migliorando le prestazioni complessive della libreria.
+            \end{itemize}
+      \item \textbf{Svantaggi}:
+            \begin{itemize}
+                  \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
+                        impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
+                  \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
+                  \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
+                        \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-bundle di Plotly.js.
+            \end{itemize}
+      \item \textbf{Alternative Esaminate}:
+            \begin{itemize}
+                  \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
+                        essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
+                  \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
+                        ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{TypeScript}
+\begin{itemize}
+      \item \textbf{Nome strumento}: TypeScript
+      \item \textbf{Versione}: 5.1.6
+      \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
+      \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item TypeScript permette di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice;
+                  \item TypeScript permette di effettuare controlli statici sul codice sorgente, riducendo il numero di errori a runtime.
+            \end{itemize}
+\end{itemize}
+
+\subsection{Strumenti per lo Sviluppo}
+
+\subsubsection{NVM}
+\begin{itemize}
+      \item \textbf{Nome strumento}: NVM
+      \item \textbf{Versione}: 1.1.12
+      \item \textbf{Link}: \href{https://github.com/nvm-sh/nvm}{github.com/nvm-sh/nvm}
+      \item \textbf{Descrizione}: NVM (Node Version Manager) è uno strumento open-source utilizzato per la gestione delle versioni di Node.js.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item NVM permette di installare e gestire più versioni di Node.js all'interno del sistema, permettendo di selezionare la versione corretta
+                        per il progetto in corso;
+                  \item NVM permette di gestire le versioni di Node.js in modo semplice e veloce, permettendo di passare da una versione all'altra con un solo comando.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{Rollup}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Rollup
+      \item \textbf{Versione}: 4.18.0
+      \item \textbf{Link}: \href{https://rollupjs.org/}{rollupjs.org}
+      \item \textbf{Descrizione}: Rollup è un bundler di moduli JavaScript che permette di risolvere le dipendenze tra i moduli, generando un unico file di output.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Rollup effettua il tree-shaking, rimuovendo le dipendenze non utilizzate all'interno del codice sorgente;
+                  \item Permette di generare bundle in diversi formati, quali \textit{CommonJS} e \textit{ESM};
+                  \item Rollup è noto per la sua velocità ed efficienza nelle build, specialmente per progetti più piccoli o librerie.
+                        Questo può risultare in tempi di build più rapidi e in una migliore esperienza di sviluppo;
+                  \item Rollup ha un sistema di plug-in molto potente e flessibile che permette di estendere le sue funzionalità;
+                  \item Rollup permette di utilizzare TypeScript all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
+                  \item Rollup permette di generare file di dichiarazione TypeScript.
             \end{itemize}
 \end{itemize}
 
@@ -175,68 +286,6 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \end{itemize}
 \end{itemize}
 
-\subsubsection{React}
-\begin{itemize}
-      \item \textbf{Nome strumento}: React
-      \item \textbf{Versione}: 18.0.0
-      \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
-      \item \textbf{Descrizione}: React è una libreria JavaScript open-source per la creazione di interfacce utente, sviluppata da Facebook.
-      \item \textbf{Vantaggi}:
-            \begin{itemize}
-                  \item React offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e i \textit{Hooks};
-                  \item React è supportato da una vasta e attiva community;
-                  \item React è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
-            \end{itemize}
-\end{itemize}
-
-\subsubsection{Plotly.js}
-\begin{itemize}
-\item \textbf{Nome strumento}: Plotly.js
-\item \textbf{Versione}: custom-boundle: 2.33.0
-\item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
-\item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
-Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
-\item \textbf{Vantaggi}:
-\begin{itemize}
-      \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
-      \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
-            all'interno della libreria grafica;
-      \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
-            online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
-      \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
-            così le dimensioni del pacchetto finale;
-      \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
-            utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
-      \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
-            e migliorando le prestazioni complessive della libreria.
-\end{itemize}
-\item \textbf{Svantaggi}:
-\begin{itemize}
-      \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
-            che impedisce l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
-      \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
-      \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
-            \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-boundle di Plotly.js.
-\end{itemize}
-\item \textbf{Alternative Esaminate}:
-\begin{itemize}
-      \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
-            essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
-      \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
-            ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
-\end{itemize}
-
-\subsubsection{TypeScript}
-\begin{itemize}
-      \item \textbf{Nome strumento}: TypeScript
-      \item \textbf{Versione}: 5.1.6
-      \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
-      \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript,
-            permettendo di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice.
-\end{itemize}
-
-\subsection{Strumenti per lo Sviluppo}
-
 \subsection{Strumenti per la Collaborazione e la Gestione del Progetto}
 Nella seguente sezione vengono presentati gli strumenti utilizzati per la collaborazione e la gestione del progetto durante lo svolgimento dello stage.
 
@@ -259,30 +308,48 @@ Nella seguente sezione vengono presentati gli strumenti utilizzati per la collab
 \end{itemize}
 
 \section{Descrizione del prodotto ottenuto}
+Il prodotto conseguito al termine dello stage consiste in una libreria TypeScript di componenti utilizzati nel processo di creazione di dashboard dinamiche,
+ottenuto a partire dal refactor e l'ottimizzazione della libreria open-source utilizzata all'interno della piattaforma \textit{Redash}.
+La libreria implementata, sotto il nome di \textit{viz-lib}, è stata infatti integrata assieme alla già esistente libreria \textit{dashboard} all'interno del SDK
+\textit{dsdashboard2}, utilizzato all'interno dei prodotti Datasoil S.r.l. per la generazione di dashboard dinamiche.
+La libreria \textit{viz-lib} offre una vasta gamma di grafici, quali:
+\begin{itemize}
+      \item Contatori;
+      \item Grafici ad area;
+      \item Grafici a barre;
+      \item Grafici a bolle;
+      \item Grafici a dispersione;
+      \item Grafici a istogrammi;
+      \item Grafici a linee;
+      \item Grafici a torta;
+      \item Tabelle.
+\end{itemize}
+Grazie al refactor e all'ottimizzazione della libreria preesistente, l'SDK prodotto risulta essere più performante, più manutenibile e soprattutto più leggero rispetto
+alla versione preesistente, con un bundle di dimensioni 1.26 MB → 418.03 kB (gzip) rispetto ai 4.11 MB → 1.203 MB (gzip) iniziali.
 
 \section{Organizzazione del testo}
 Nel presente capitolo viene presentata l'introduzione della tesi, fornendo una panoramica sull'azienda, sul contesto applicativo,
-sul progetto e sul prodotto portato a termine durante lo svolgimento dello stage. \newline
+sul progetto, sugli strumenti utilizzati e sul prodotto portato a termine durante lo svolgimento dello stage. \newline
 In seguito il documento presenterà la seguente organizzazione:
 
 \begin{description}
-\item[{\hyperref[chap:analisi-requisiti]{Analisi dei requisiti}}] descrive la fase di analisi dei requisiti che è stata
-svolta dall'azienda antecedentemente all'inizio dell'attività di stage, in modo da permettere una comprensione più profonda
-di quelle che sono le necessità da soddisfare e gli obiettivi da raggiungere all'interno di questo progetto;
+      \item[{\hyperref[chap:analisi-requisiti]{Analisi dei requisiti}}] descrive la fase di analisi dei requisiti che è stata
+            svolta dall'azienda in fase antecedente all'inizio dell'attività di stage, in modo da permettere una comprensione più profonda
+            di quelle che sono le necessità da soddisfare e gli obiettivi da raggiungere all'interno di questo progetto;
 
-\item[{\hyperref[chap:progettazione]{Progettazione}}] illustra l'attività di progettazione che è stata svolta in vista dell'implementazione
-dei grafici prodotti, definendo le tecnologie e le soluzioni implementative che sono state attuate durante la successiva attività di codifica;
+      \item[{\hyperref[chap:progettazione]{Progettazione}}] illustra l'attività di progettazione che è stata svolta in vista dell'implementazione
+            dei grafici prodotti, definendo e individuando le soluzioni implementative che sono state attuate durante la successiva attività di codifica;
 
-\item[{\hyperref[chap:realizzazione-testing]{Realizzazione e Testing}}] approfondisce l'attività di codifica delle componenti grafiche presentate
-all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
+      \item[{\hyperref[chap:realizzazione-testing]{Realizzazione e Testing}}] approfondisce l'attività di codifica delle componenti grafiche presentate
+            all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
 
-\item[{\hyperref[chap:rilascio]{Rilascio}}] descrive l'attività di rilascio dell'SDK realizzato, presentando le modalità di integrazione
-all'interno di un prodotto Datasoil S.r.l.;
+      \item[{\hyperref[chap:rilascio]{Rilascio}}] descrive l'attività di rilascio dell'SDK realizzato, presentando le modalità di integrazione
+            all'interno di un prodotto Datasoil S.r.l.;
 
-\item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
-degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
-La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
-
+      \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
+            degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
+            La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
+\end{description}
 In merito alla stesura del testo, all'interno del presente documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
       \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;

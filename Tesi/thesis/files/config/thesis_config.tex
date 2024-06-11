@@ -86,14 +86,14 @@
 \fancyfoot[C]{\thepage} % Page number in the center of the footer
 
 % Adds a blank page while increasing the page number
-\newcommand\blankpage{ 
-\clearpage
+\newcommand\blankpage{
+    \clearpage
     \begingroup
     \null
     \thispagestyle{empty}
     \hypersetup{pageanchor=false}
     \clearpage
-\endgroup
+    \endgroup
 }
 
 % Increase page numbering
@@ -114,14 +114,14 @@
 % Code blocks handling w/ table of codes
 \makeatletter
 \ifdefined\NR@chapter
-  \expandafter\@firstoftwo
+    \expandafter\@firstoftwo
 \else
-  \expandafter\@secondoftwo
+    \expandafter\@secondoftwo
 \fi{\patchcmd\NR@chapter}{\patchcmd\@chapter}
-  {\addtocontents{lot}{\protect\addvspace{10\p@}}}
-  {\addtocontents{lot}{\protect\addvspace{10\p@}}%
-   \addtocontents{lol}{\protect\addvspace{10\p@}}}
-  {}{}
+{\addtocontents{lot}{\protect\addvspace{10\p@}}}
+{\addtocontents{lot}{\protect\addvspace{10\p@}}%
+\addtocontents{lol}{\protect\addvspace{10\p@}}}
+{}{}
 \makeatother
 
 \renewcommand\listingscaption{Codice}
