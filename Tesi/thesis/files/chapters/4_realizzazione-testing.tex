@@ -72,6 +72,8 @@ Tutti i precedenti comandi vengono eseguiti tramite il comando \textit{yarn} seg
 \end{figure}
 
 \subsection{Componenti}
+Nella presente sezione viene descritta l'implementazione delle componenti e delle loro ottimizzazioni all'interno della libreria,
+con l'obiettivo di fornire una panoramica sulle funzionalità offerte, sulle tecnologie utilizzate e sul flusso di dati all'interno del sistema.
 
 \subsubsection{Counter}
 
@@ -80,7 +82,26 @@ Tutti i precedenti comandi vengono eseguiti tramite il comando \textit{yarn} seg
 \subsubsection{Table}
 
 \subsubsection{Renderer}
-
+La componente \textit{Renderer} costituisce l'entry point della libreria, permettendo di renderizzare tutte le componenti presenti all'interno di
+\textit{viz-lib}: per questo motivo tale componente costituisce l'unico \textit{export} della libreria accessibile all'\textit{index.ts} del SDK. \newline
+Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}, ottenuto tramite l'utilizzo dalla funzione \textit{React.memo}.
+\begin{adjustwidth}{4em}{0pt}
+    \textit{React.memo} è una funzione offerta da \textit{React} per effettuare la \textit{memoization} di una componente funzionale, permettendo di evitare
+    nuove renderizzazioni nel caso in cui il componente padre lo richiedesse, a meno che le sue props non abbiano subito modifiche. \newline
+    Tale funzione accetta due parametri:
+    \begin{itemize}
+        \item la componente da memoizzare;
+        \item una funzione che accetta due argomenti: le props correnti e le props precedenti della componente, restituendo un valore booleano che indica
+              se la componente debba essere renderizzata o meno.
+    \end{itemize}
+    La presenza del secondo parametro permette di effettuare un controllo specifico, andando a definire i criteri su cui basare i cambiamenti delle props
+    rilevanti ai fini della renderizzazione della componente. \newline
+\end{adjustwidth}
+Nel nostro caso, la funzione \textit{React.memo} utilizza come criterio di controllo tra le props la funzione \textit{isEqual} resa disponibile da \textit{lodash},
+la quale permette di effettuare un confronto profondo tra due valori per determinare se sono equivalenti. \newline
+Per quanto riguarda la componente \textit{RendereR} in questione, essa ricava dai suoi props, tramite l'utilizzo della funzione \textit{getVisualizationType}, il valore
+dell'enumerazione \textit{VisualizationType}, assegnandolo alla costante \textit{visualizationType}, in modo da renderizzare la componente corretta in base al tipo di
+visualizzazione passato come parametro.
 
 \subsection{Documentazione}
 L'implementazione della libreria prodotta è stata documentata tramite l'utilizzo di \textit{Confluence}, la piattaforma
