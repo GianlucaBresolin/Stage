@@ -40,7 +40,6 @@ All'interno del file \textit{package.json} è stata configurata la sezione \text
     "scripts": {
         "start-example": "cd packages/example && yarn start",
         "start-watcher": "cd packages/dsdashboard2 && yarn rollup-watch",
-        "start": "yarn concurrently --kill-others \"yarn start-example\" \"yarn start-watcher\"",
         "build-package": "cd packages/dsdashboard2 && yarn build",
         "publish-package": "cd packages/dsdashboard2 && yarn publish"
     }
@@ -80,11 +79,72 @@ con l'obiettivo di fornire una panoramica sulle funzionalità offerte, sulle tec
 \subsubsection{Chart}
 
 \subsubsection{Table}
+La componente \textit{Table} costituisce una tabella che permette di visualizzare i dati in forma tabellare. \newline
+Tale componente utilizza \textit{DataTable}, una componente resa disponibile dalla libreria \textit{PrimeReact} che offre, attraverso
+la definizione di determinate props, di:
+\begin{itemize}
+    \item alternare i colori delle righe della tabella, al fine di aumentare la leggibilità dei dati visualizzati;
+    \item selezionare più righe della tabella, permettendo di effettuare operazioni di \textit{multi-selection} (attraverso
+          l'utilizzo di uno \textit{useState});
+    \item impostare un filtro globale per la tabella, permettendo di definire su quali colonne effettuare la ricerca dei dati;
+    \item impostare un \textit{empty message} personalizzato, visualizzato nel caso in cui la tabella non contenga dati;
+    \item ordinare i dati all'interno delle singole colonne, permettendo di visualizzare i dati in ordine crescente o decrescente.
+\end{itemize}
+Come introdotto nella sezione \ref{item:hookTable}{ \textit{proprietà della componenti: Table}}, la gestione del filtro globale tramite
+la funzione \textit{onChangeGlobalFilterValue} presenta l'utilizzo di due valori tramite \textit{useState}:
+\begin{itemize}
+    \item \textit{globalFilterValueTmp}: stringa utilizzata per memorizzare il valore del filtro impostato all'interno di una
+          componente \textit{InputText} di \textit{PrimeReact}, aggiornata in tempo reale all'input fornito dell'utente;
+    \item \textit{globalFilterValue}: stringa utilizzata per impostare il valore del filtro globale della tabella, aggiornata
+          tramite una chiamata \textit{debounced} di 200 ms alla funzione per settate il valore sullo stato. \newline
+          (La funzione \textit{debounced} fa uso dell'hook \textit{useDebounceCallback} fornito dalla libreria \textit{usehook-ts}).
+\end{itemize}
+Tramite questa implementazione, il recupero dei dati visualizzati all'interno della tabella viene eseguito correttamente, permettendo di risolvere
+il bug presente all'interno della componente \textit{DataTable}, il quale comportava la perdita di entry nel caso in cui il filtro globale subisse
+più modifiche in rapida successione. \newline
+La tabella è resa \textit{scrollable}, impostando una altezza che viene calcolata in modo responsivo a seconda dello spazio disponibile
+all'interno del widget in cui è contenuta. \newline
+Attraverso la definizione di un \textit{ref} alla componente \textit{DataTable}, è possibile effettuare il download della tabella in formato
+\textit{CSV}, tramite l'utilizzo della funzione \textit{exportCSV} resa disponibile dalla libreria \textit{PrimeReact}: tale funzione viene
+invocata tramite un \textit{Button} posizionato a fianco della componente \textit{InputText} utilizzata per l'input del filtro globale. \newline
+\textbf{Elaborazione dati}\newline
+I dati renderizzati all'interno della tabella vengono estratti dal props \textit{data}, passando a sua volta alla componente \textit{DataTable}
+tramite la prop \textit{value} l'array \textit{rows} contenente i dati da visualizzare. \newline
+Le colonne della tabella sono definite a partire dalle \textit{options} e dai \textit{data} passati come props alla componente \textit{Table}.
+Inizialmente sono ridefinite mediante la funzione \textit{getOptions}, la quale imposta delle opzioni di default, ordina la visualizzazione delle colonne
+in base all'ordine definito nelle \textit{options}, impostando le proprietà di filtro delle colonne in base alle opzioni indicate e verificando la presenza
+di dati all'interno dei \textit{data} (nel caso di assenza di riscontri vengono definite le colonne a partire dai \textit{data}).
+Successivamente dalle \textit{options} elaborate vengono definite le vere e proprie colonne della tabella (\textit{tableColumns}), attraverso la funzione \textit{prepareColumns},
+la quale attua il filtraggio delle colonne e costruisce l'header delle colonne in base alle opzioni elaborate. \newline
+Le \textit{tableColumns} vengono in seguito mappate per creare le componenti \textit{Column} presentate all'interno della tabelle, impostando:
+\begin{itemize}
+    \item l'header a partire dalle opzioni elaborate;
+    \item il \textit{field} a cui fanno riferimento a partire dalle opzioni elaborate;
+    \item il props \textit{sortable} per permettere l'ordinamento sulla colonna;
+    \item il props \textit{body}, utilizzato per permettere il corretto formattamento e rendering dei dati visualizzati all'interno della singola colonna,
+          invocando la funzione \textit{formatRowValue}.
+\end{itemize}
+Le formattazioni dei dati avvengono mediante i formatter resi disponibili:
+\begin{itemize}
+    \item \textit{string}: formatta il testo in base indicazioni presenti nell'item, eventualmente restituendo del contenuto HTML;
+    \item \textit{datetime}: formatta le date in base alle opzioni elaborate mediante l'uso di \textit{day.js};
+    \item \textit{number}: formatta i numeri in base alle opzioni elaborate mediante l'uso di \textit{numbro};
+    \item \textit{boolean}: formatta i booleani in base alle opzioni fornite, elaborando anche array;
+    \item \textit{json}: formatta i dati JSON in base alle opzioni fornite, permettendo di visualizzare i dati in modo strutturato;
+    \item \textit{image}: formatta le immagini in base alle opzioni fornite, permettendo di visualizzare le immagini all'interno della tabella.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di Table viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_table.png}
+    \caption{Esempio di Table \textit{viz-lib}}
+    \label{fig:table-example}
+\end{figure}
 
 \subsubsection{Renderer}
 La componente \textit{Renderer} costituisce l'entry point della libreria, permettendo di renderizzare tutte le componenti presenti all'interno di
 \textit{viz-lib}: per questo motivo tale componente costituisce l'unico \textit{export} della libreria accessibile all'\textit{index.ts} del SDK. \newline
-Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}, ottenuto tramite l'utilizzo dalla funzione \textit{React.memo}.
+Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}, ottenuto tramite l'utilizzo della funzione \textit{React.memo}.
 \begin{adjustwidth}{4em}{0pt}
     \textit{React.memo} è una funzione offerta da \textit{React} per effettuare la \textit{memoization} di una componente funzionale, permettendo di evitare
     nuove renderizzazioni nel caso in cui il componente padre lo richiedesse, a meno che le sue props non abbiano subito modifiche. \newline
@@ -99,6 +159,15 @@ Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}
 \end{adjustwidth}
 Nel nostro caso, la funzione \textit{React.memo} utilizza come criterio di controllo tra le props la funzione \textit{isEqual} resa disponibile da \textit{lodash},
 la quale permette di effettuare un confronto profondo tra due valori per determinare se sono equivalenti. \newline
+\begin{listing}[H]
+    \begin{minted}{typescript}
+        const Renderer = React.memo(RendererR, (prev, next) =>
+            isEqual(prev.data, next.data)
+        );
+  \end{minted}
+    \caption{React.memo della componente Renderer}
+    \label{listing:react_memo}
+\end{listing}
 Per quanto riguarda la componente \textit{RendereR} in questione, essa ricava dai suoi props, tramite l'utilizzo della funzione \textit{getVisualizationType}, il valore
 dell'enumerazione \textit{VisualizationType}, assegnandolo alla costante \textit{visualizationType}, in modo da renderizzare la componente corretta in base al tipo di
 visualizzazione passato come parametro.
