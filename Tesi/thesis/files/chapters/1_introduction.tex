@@ -198,26 +198,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \end{itemize}
 \end{itemize}
 
-\subsubsection{React}
-\begin{itemize}
-      \item \textbf{Nome strumento}: React
-      \item \textbf{Versione}: 18.0.0
-      \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
-      \item \textbf{Descrizione}: React è una libreria JavaScript open-source per la creazione di interfacce utente, sviluppata da Facebook.
-      \item \textbf{Vantaggi}:
-            \begin{itemize}
-                  \item React offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
-                  \item React è supportato da una vasta e attiva community;
-                  \item React è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
-            \end{itemize}
-\end{itemize}
-
 \subsubsection{Plotly.js}
 \begin{itemize}
       \item \textbf{Nome strumento}: Plotly.js
       \item \textbf{Versione}: custom-bundle: 2.33.0
       \item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
-      \item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizazione di dati mediante grafici interattivi.
+      \item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizzazione di dati mediante grafici interattivi.
             Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
       \item \textbf{Vantaggi}:
             \begin{itemize}
@@ -238,7 +224,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                   \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
                         impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
                   \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
-                  \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazine delle \textit{traces}, impedendo di importare correttamente
+                  \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente
                         \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-bundle di Plotly.js.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
@@ -247,6 +233,59 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                         essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
                   \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
                         ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeFlex}
+\begin{itemize}
+      \item \textbf{Nome strumento}: PrimeFlex
+      \item \textbf{Versione}: 3.3.0
+      \item \textbf{Link}: \href{https://primereact.org/}{primefaces.org/primeflex}
+      \item \textbf{Descrizione}: PrimeFlex è una libreria CSS open-source utilizzata per la creazione di layout flessibili e responsivi.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item PrimeFlex offre un'ampia serie di classi CSS per la creazione di layout flessibili e responsivi, permettendo di adattare il layout
+                        in base alla grandezza dello schermo;
+                  \item PrimeFlex è una libreria molto leggera;
+                  \item PrimeFlex è fortemente integrata con le componenti di \textit{PrimeReact};
+                  \item PrimeFlex può essere integrato a \textit{tailwind};
+                  \item PrimeFlex è supportato da una vasta e attiva community.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeReact}
+\begin{itemize}
+      \item \textbf{Nome strumento}: PrimeReact
+      \item \textbf{Versione}: 10.0.0
+      \item \textbf{Link}: \href{https://primefaces.org/primereact}{primefaces.org/primereact}
+      \item \textbf{Descrizione}: PrimeReact è una libreria di componenti React open-source utilizzata per la creazione di interfacce utente.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item PrimeReact offre un'ampia serie di componenti React per la creazione di interfacce utente, le quali a loro volta sono altamente personalizzabili, con numerose feature integrate;
+                  \item PrimeReact è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+                  \item PrimeReact costituisce una peerdependency all'interno dei prodotti Datasoil S.r.l., permettendo di utilizzare le componenti PrimeReact all'interno
+                        della libreria grafica senza comportare l'aggiunta di dipendenze esterne, riducendo così le dimensioni del bundle finale;
+                  \item PrimeReact è supportato da una vasta e attiva community.
+            \end{itemize}
+      \item \textbf{Alternative Esaminate}:
+            \begin{itemize}
+                  \item \textit{Ant Design}: Ant Design è una libreria di componenti React open-source utilizzata per la creazione di interfacce utente, la quale non risulta però
+                        essere integrata all'interno dei prodotti Datasoil S.r.l.
+            \end{itemize}
+\end{itemize}
+
+
+\subsubsection{React}
+\begin{itemize}
+      \item \textbf{Nome strumento}: React
+      \item \textbf{Versione}: 18.0.0
+      \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
+      \item \textbf{Descrizione}: React è una libreria JavaScript open-source per la creazione di interfacce utente, sviluppata da Facebook.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item React offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
+                  \item React è supportato da una vasta e attiva community;
+                  \item React è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
             \end{itemize}
 \end{itemize}
 
