@@ -4,11 +4,11 @@
 \section{L'azienda}
 Lo stage è stato svolto presso l'azienda Datasoil S.r.l. situata nei dintorni della stazione ferroviaria di Padova.
 Fondata nel 2016, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
-smart building e smart city.
-L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare insight proattivi
+\textit{smart building} e \textit{smart city}.
+L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare \textit{insight} proattivi
 in tempo reale, garantendo che le informazioni corrette raggiungano le persone giuste al momento più opportuno.
 Il punto di partenza è la spazialità aziendale e tutti gli asset che risiedono all'interno di essa, da cui
-provengono tutti i dati che vengono analizzati trasversalmente grazie a sempre più persone e dispositivi connessi.
+provengono tutti i dati raccolti, i quali vengono analizzati trasversalmente grazie a sempre più persone e dispositivi connessi.
 Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fertile di dati da cui siamo circondati.
 
 \begin{figure}[H]
@@ -21,7 +21,7 @@ Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fert
 \section{L'idea}
 \subsection{Il contesto applicativo}
 L'azienda Datasoil S.r.l., essendo un'azienda di prodotto, nasce con l'idea di proporre servizi di monitoraggio e controllo
-di impianti industriali, smart building e smart city, offrendo come principale prodotto la piattaforma SYN.
+di impianti industriali, \textit{smart building} e \textit{smart city}, offrendo come principale prodotto la piattaforma SYN.
 
 \begin{figure}[H]
       \centering
@@ -45,9 +45,9 @@ una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni s
 L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
 correnti delle dipendenze utilizzate, raggiungendo una maggior performance e una maggiore manutenibilità del codice rispetto alla versione
 preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali. \newline
-La libreria sviluppata costituisce, insieme alla già esistente libreria \textit{dashboard} (la quale ha subito anch'essa in parte un processo di refactoring
-per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo SDK utilizzato all'interno dei prodotti Datasoil S.r.l.
-per la realizzazione di dashboard dinamiche.
+La libreria sviluppata sotto il nome '\textit{viz-lib}', costituisce, insieme alla già esistente libreria '\textit{dashboard}' (la quale ha subito anch'essa in parte un processo di refactoring
+per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo \gls{SDK}\glox '\textit{dsdashbord2}'
+utilizzato all'interno dei prodotti Datasoil S.r.l. per la realizzazione di dashboard dinamiche.
 
 \section{Principali problematiche}
 Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse alcune problematiche
@@ -112,7 +112,7 @@ In questo processo, si è cercato di utilizzare dipendenze esterne preferibilmen
 fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di un'analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni
 finali dell'SDK prodotto.
 
-\section{Strumenti Utilizzati}
+\section{Strumenti utilizzati}
 La seguente sezione fornisce gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
 Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
 \begin{itemize}
@@ -126,7 +126,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             su di esse e la motivazione per la quale non sono state selezionate. \textit{(Opzionale)}
 \end{itemize}
 
-\subsection{Tecnologie Frontend}
+\subsection{Tecnologie frontend}
 
 \subsubsection{D3-color}
 \begin{itemize}
@@ -198,6 +198,25 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \end{itemize}
 \end{itemize}
 
+\subsubsection{Numbro}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Numbro
+      \item \textbf{Versione}: 2.5.0
+      \item \textbf{Link}: \href{http://numbrojs.com/}{numbrojs.com}
+      \item \textbf{Descrizione}: Numbro è una libreria JavaScript open-source utilizzata per la formattazione dei numeri.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Numbro offre un'ampia serie di funzionalità per la formattazione dei numeri, quali la formattazione delle cifre decimali, la formattazione delle valute
+                        e la formattazione dei numeri in notazione scientifica;
+                  \item Numbro è supportato da una vasta e attiva community.
+            \end{itemize}
+      \item \textbf{Alternative Esaminate}:
+            \begin{itemize}
+                  \item \textit{Numeral.js}: libreria JavaScript open-source utilizzata per la formattazione dei numeri, ma risulta non essere più mantenuta attivamente dalla community, oltre
+                        che ad essere più pesante di Numbro.
+            \end{itemize}
+\end{itemize}
+
 \subsubsection{Plotly.js}
 \begin{itemize}
       \item \textbf{Nome strumento}: Plotly.js
@@ -225,7 +244,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                         impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
                   \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
                   \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente
-                        \tetxit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-bundle di Plotly.js.
+                        \textit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-bundle di Plotly.js.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
@@ -250,6 +269,21 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                   \item PrimeFlex è fortemente integrata con le componenti di \textit{PrimeReact};
                   \item PrimeFlex può essere integrato a \textit{tailwind};
                   \item PrimeFlex è supportato da una vasta e attiva community.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeIcons}
+\begin{itemize}
+      \item \textbf{Nome strumento}: PrimeIcons
+      \item \textbf{Versione}: 6.0.1
+      \item \textbf{Link}: \href{https://primefaces.org/primeicons}{primefaces.org/primeicons}
+      \item \textbf{Descrizione}: PrimeIcons è una libreria di icone open-source utilizzata per la creazione di interfacce utente.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item PrimeIcons offre un'ampia serie di icone per la creazione di interfacce utente, le quali sono altamente personalizzabili e facilmente integrabili;
+                  \item PrimeIcons è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+                  \item PrimeIcons è fortemente integrata con le componenti di \textit{PrimeReact};
+                  \item PrimeIcons è supportato da una vasta e attiva community.
             \end{itemize}
 \end{itemize}
 
@@ -302,7 +336,49 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \end{itemize}
 \end{itemize}
 
-\subsection{Strumenti per lo Sviluppo}
+\subsubsection{usehook-ts}
+\begin{itemize}
+      \item \textbf{Nome strumento}: usehook-ts
+      \item \textbf{Versione}: 3.1.0
+      \item \textbf{Link}: \href{https://usehooks-ts.com/}{usehooks-ts.com}
+      \item \textbf{Descrizione}: usehook-ts è una libreria open-source di custom hook React.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item usehook-ts offre un'ampia serie di hook personalizzati per la creazione di interfacce utente;
+                  \item usehook-ts è supportato da una vasta e attiva community.
+            \end{itemize}
+\end{itemize}
+
+\subsection{Strumenti per lo sviluppo}
+
+\subsubsection{ESLint}
+\begin{itemize}
+      \item \textbf{Nome strumento}: ESLint
+      \item \textbf{Versione}: 8.3.0
+      \item \textbf{Link}: \href{https://eslint.org/}{eslint.org}
+      \item \textbf{Descrizione}: ESLint è uno strumento open-source utilizzato per l'analisi statica del codice sorgente, per identificare pattern problematici o codice che non rispetta
+            le linee guida definite all'interno del progetto.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item ESLint permette di definire regole personalizzate per l'analisi del codice sorgente, garantendo la coerenza e la qualità del codice;
+                  \item ESLint permette di integrarsi con gli strumenti di build, permettendo di eseguire l'analisi statica del codice sorgente durante il processo di build.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{Jest}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Jest
+      \item \textbf{Versione}: 29.0.7
+      \item \textbf{Link}: \href{https://jestjs.io/}{jestjs.io}
+      \item \textbf{Descrizione}: Jest è un framework di testing open-source utilizzato per il testing di codice JavaScript e TypeScript.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Jest permette di effettuare test unitari, test di integrazione e test end-to-end, garantendo la qualità e la stabilità del codice;
+                  \item Jest permette di effettuare test in parallelo, riducendo i tempi di esecuzione dei test;
+                  \item Jest permette di generare report dettagliati sui test effettuati, permettendo di identificare e correggere eventuali errori.
+            \end{itemize}
+\end{itemize}
+
 
 \subsubsection{NVM}
 \begin{itemize}
@@ -315,6 +391,18 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                   \item NVM permette di installare e gestire più versioni di Node.js all'interno del sistema, permettendo di selezionare la versione corretta
                         per il progetto in corso;
                   \item NVM permette di gestire le versioni di Node.js in modo semplice e veloce, permettendo di passare da una versione all'altra con un solo comando.
+            \end{itemize}
+\end{itemize}
+
+\subsubsection{Prettier}
+\begin{itemize}
+      \item \textbf{Nome strumento}: Prettier
+      \item \textbf{Versione}: 3.2.5
+      \item \textbf{Link}: \href{https://prettier.io/}{prettier.io}
+      \item \textbf{Descrizione}: Prettier è uno strumento open-source utilizzato per la formattazione del codice sorgente.
+      \item \textbf{Vantaggi}:
+            \begin{itemize}
+                  \item Prettier permette di formattare il codice sorgente in modo automatico, garantendo uno stile uniforme all'interno del progetto.
             \end{itemize}
 \end{itemize}
 
@@ -427,6 +515,3 @@ In merito alla stesura del testo, all'interno del presente documento sono state 
       \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
       \item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
 \end{itemize}
-
-
-\newpage

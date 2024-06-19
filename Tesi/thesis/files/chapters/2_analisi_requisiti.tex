@@ -48,58 +48,65 @@ Nella seguente sezione viene presentata la lista dei requisiti funzionali.
     \begin{longtable}{|p{2.5cm}|p{10cm}|}
         \hline
         \rowcolor{gray!30}
-        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                 \\
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                    \\
         \hline
         \endfirsthead
         \hline
-        \multicolumn{2}{|c|}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                                            \\
+        \multicolumn{2}{|c|}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                                               \\
         \hline
         \rowcolor{gray!30}
-        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                 \\
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                    \\
         \endhead
         \hline
-        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                                      \\
+        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                                         \\
         \hline
         \endfoot
         \hline
         \endlastfoot
-        R.F.O.1            & La libreria deve permettere la renderizzazione di grafici.                                                \\
+        R.F.O.1            & La libreria deve permettere la renderizzazione di grafici.                                                   \\
         \hline
-        R.F.O.1.1          & La libreria deve permettere la renderizzazione di grafici a barre (\textit{bar or columns}).              \\
+        R.F.O.1.1          & La libreria deve permettere la renderizzazione di grafici a barre (\textit{bar or columns}).                 \\
         \hline
-        R.F.O.1.2          & La libreria deve permettere la renderizzazione di grafici a torta (\textit{pie}).                         \\
+        R.F.O.1.2          & La libreria deve permettere la renderizzazione di grafici a torta (\textit{pie}).                            \\
         \hline
-        R.F.O.1.3          & La libreria deve permettere la renderizzazione di grafici a scatola (\textit{box-plot}).                  \\
+        R.F.O.1.3          & La libreria deve permettere la renderizzazione di grafici a scatola (\textit{box-plot}).                     \\
         \hline
-        R.F.O.1.4          & La libreria deve permettere la renderizzazione di grafici a bolle (\textit{bubbles}).                     \\
+        R.F.O.1.4          & La libreria deve permettere la renderizzazione di grafici a bolle (\textit{bubbles}).                        \\
         \hline
-        R.F.O.1.5          & La libreria deve permettere la renderizzazione di grafici a dispersione (\textit{scatter}).               \\
+        R.F.O.1.5          & La libreria deve permettere la renderizzazione di grafici a dispersione (\textit{scatter}).                  \\
         \hline
-        R.F.O.1.6          & La libreria deve permettere la renderizzazione di grafici a mappe di calore (\textit{heatmap}).           \\
+        R.F.O.1.6          & La libreria deve permettere la renderizzazione di grafici a mappe di calore (\textit{heatmap}).              \\
         \hline
-        R.F.O.2            & La libreria deve permettere la renderizzazione di contatori.                                              \\
+        R.F.O.2            & La libreria deve permettere la renderizzazione di contatori.                                                 \\
         \hline
-        R.F.O.2.1          & La libreria deve permettere la renderizzazione di contatori con target.                                   \\
+        R.F.O.2.1          & La libreria deve permettere la renderizzazione di contatori con target.                                      \\
         \hline
         R.F.OP.2.1.1       & La libreria deve permettere la renderizzazione di contatori con target, definendo una grafica
-        differente a seconda del raggiungimento o meno del target.                                                                     \\
+        differente a seconda del raggiungimento o meno del target.                                                                        \\
         \hline
-        R.F.O.2.2          & La libreria deve permettere la renderizzazione di contatori con formattazione personalizzata.             \\
+        R.F.O.2.2          & La libreria deve permettere la renderizzazione di contatori con formattazione personalizzata.                \\
         \hline
-        R.F.O.2.3          & La libreria deve permettere la renderizzazione di contatori con tooltip con formattazione personalizzata. \\
+        R.F.O.2.3          & La libreria deve permettere la renderizzazione di contatori con tooltip con formattazione personalizzata.    \\
         \hline
-        R.F.O.3            & La libreria deve permettere la renderizzazione di tabelle.                                                \\
+        R.F.O.3            & La libreria deve permettere la renderizzazione di tabelle.                                                   \\
         \hline
-        R.F.O.4            & La libreria deve permettere lo zoom nei i vari grafici.                                                   \\
+        R.F.O.3.1          & La libreria deve permettere la renderizzazione di tabelle con ordinamento lungo le varie colonne.            \\
         \hline
-        R.F.O.5            & La libreria deve permettere di effettuare il download in \textit{.png} dei grafici renderizzati.          \\
+        R.F.O.3.2          & La libreria deve permettere la renderizzazione di tabelle con filtro globale che agisce lungo tutti i dati.  \\
         \hline
-        R.F.O.6            & La libreria deve permettere di effettuare il download in \textit{.csv} delle tabelle visualizzate.        \\
+        R.F.O.3.3          & La libreria deve permettere la renderizzazione di tabelle con le colonne ordinate secondo l'evenutale ordine
+        fornito dal backend.                                                                                                              \\
         \hline
-        R.F.O.7            & I widget renderizzati devono adattarsi alla dimensione del contenitore in modo responsivo.                \\
+        R.F.O.4            & La libreria deve permettere lo zoom nei i vari grafici.                                                      \\
+        \hline
+        R.F.O.5            & La libreria deve permettere di effettuare il download in \textit{.png} dei grafici renderizzati.             \\
+        \hline
+        R.F.O.6            & La libreria deve permettere di effettuare il download in \textit{.csv} delle tabelle visualizzate.           \\
+        \hline
+        R.F.O.7            & I widget renderizzati devono adattarsi alla dimensione del contenitore in modo responsivo.                   \\
         \hline
         R.F.O.8            & La libreria deve permettere di visualizzare i widget in modalità \textit{fullscreen} attraverso
-        l'utilizzo di \textit{Dialog}.                                                                                                 \\
+        l'utilizzo di \textit{Dialog}.                                                                                                    \\
     \end{longtable}
     \captionof{table}{Tabella del tracciamento dei requisiti funzionali.}
     \label{tab:requisiti_funzionali}

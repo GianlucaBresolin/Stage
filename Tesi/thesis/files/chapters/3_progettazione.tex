@@ -6,7 +6,7 @@ Verrà analizzato l'approccio adottato per individuare le soluzioni volte al sod
 la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica \textit{viz-lib}
 appartenente al development kit, concludendo con la definizione dei tipi e delle interfacce e la progettazione delle singole componenti individuate.
 
-\section{Metodologia di Progettazione}
+\section{Metodologia di progettazione}
 La metodologia di progettazione adottata durante lo svolgimento del progetto di stage ha seguito inizialmente un approccio
 \textit{top-down}, che permettesse, attraverso uno studio generale della libreria preesistente e della sua architettura, di individuare
 il flusso di dati tra le varie componenti, fornendo una visione globale delle interazioni e delle dipendenze esistenti.
@@ -16,7 +16,7 @@ della manutenibilità del codice.\newline
 L'attività di progettazione è stata condotta in collaborazione stretta con il tutor aziendale, il quale ha fornito supporto e orientamento
 riguardo alle decisioni progettuali individuate.
 
-\section{Design dell'Architettura}
+\section{Design dell'architettura}
 L'architettura progettata per la realizzazione della libreria grafica si basa su un pattern comunemente utilizzato nello sviluppo di packages
 di componenti frontend per \textit{React}, ovvero il pattern \textit{Component Library Architecture}: questa architettura si fonda sulla creazione di una libreria di
 componenti riutilizzabili, modulari e indipendenti tra loro. \newline
@@ -37,10 +37,13 @@ vengono passate come props dalle componenti del modulo \textit{dashboard} che ut
 componenti di librerie differenti, agevolando la manutenibilità e la scalabilità del codice.
 
 
-\section{Progettazione dei Tipi e delle Interfacce}
+\section{Progettazione dei tipi e delle interfacce}
 Nella seguente sezione vengono presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
-delle informazioni che rappresentano. \newline
+delle informazioni che rappresentano. \\
+La definizione dei tipi e delle interfacce ha costituito un ruolo fondamentale durante l'attività di progettazione, permettendo di raggiungere una maggior
+leggibilità e manutenibilità del codice, permettendo di usufruire a pieno dei vantaggi offerti da \textit{TypeScript}. \\
 I tipi e le interfacce verranno presentati in ordine alfabetico.
+
 \subsection{ChartBaseVisualizationOptions}
 Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione comuni a tutti i \textit{Chart}.
 \begin{minted}{typescript}
@@ -588,12 +591,14 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
             dalla risposta in formato JSON ricevuta dal server. \newline
             Il valore del contatore può essere formattato in base alle preferenze definite lato backend, presentando le seguenti opzioni:
             \begin{itemize}
+                  \label{counter-format}
                   \item Prefisso: stringa da aggiungere prima del valore del contatore;
                   \item Suffisso: stringa da aggiungere dopo il valore del contatore;
                   \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore del contatore;
                   \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
                   \item Separatore decimale: carattere da utilizzare come separatore decimale.
             \end{itemize}
+            (Queste formattazioni sono applicabili anche al valore target e ai tooltip visualizzati al passaggio del mouse sul contatore).\\
             L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}.
       \item \textbf{Props}: I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
             delle informazioni \textit{data, options} e \textit{visualizationName}.

@@ -1,5 +1,7 @@
 \chapter{Realizzazione e testing}
 \label{chap:realizzazione-testing}
+Nella seguente sezione verranno presentate le attività di realizzazione e testing effettuate durante lo sviluppo della libreria, con l'obiettivo di fornire una panoramica
+sulle tecnologie utilizzate, sulle funzionalità implementate e sui test effettuati per garantire la qualità del prodotto sviluppato.
 
 \section{Realizzazione delle componenti}
 
@@ -76,11 +78,40 @@ con l'obiettivo di fornire una panoramica sulle funzionalità offerte, sulle tec
 
 \subsubsection{Counter}
 La componente \textit{Counter} costituisce un contatore che permette di visualizzare un valore numerico all'interno di un widget, associato a un'etichetta
-rappresentativa dell'informazione visualizzata. \newline
+rappresentativa dell'informazione visualizzata. \\
 La componente permette inoltre di visualizzare un target, il valore di riferimento da raggiungere, mettendo a disposizione la componente grafica \textit{Knob}
-della libreria \textit{PrimeReact} e definendo colori differenti per il valore visualizzato a seconda del raggiungimento o meno del target. \newline
+della libreria \textit{PrimeReact} e definendo colori differenti per il valore visualizzato a seconda del raggiungimento o meno del target. \\
 La componente offre inoltre la possibilità di visualizzare dei \textit{tooltip}, fornendo informazioni più dettagliate all'utente
-in merito ai dati visualizzati. \newline
+in merito ai dati visualizzati, attraverso l'utilizzo dell'attributo \textit{title} associati ai \textit{div} contenenti i valori visualizzati. \\
+Le informazioni utilizzare dalla componente vengono elaborata dalla funzione \textit{getCounterData}, chiamata all'interno dell'hook \textit{useMemo}, in modo da
+effettuare il ricalcolo dei dati solo in caso di variazione delle props passate alla componente. Questa funzione infatti, a partire dai \textit{data}, dalle \textit{optionsCounter}
+(opzioni di visualizzazione ottenute attraverso la concatenzazione delle opzioni di default e le \textit{options} passate come props al componente) e dal \textit{visualizationName}
+permette di definite i seguenti valori:
+\begin{itemize}
+    \item CounterValue: valore numerico del contatore;
+    \item TargetValue: valore di riferimento da raggiungere;
+    \item CounterLabel: etichetta associata al valore numerico;
+    \item CounterValueTooltip: testo del tooltip associato al valore del contatore;
+    \item TargetValueTooltip: testo del tooltip associato al valore di riferimento;
+    \item TrendPositive: valore booleano che indica se il valore del contatore ha raggiunto o superato il valore target;
+    \item ShowTrend: valore booleano che indica se visualizzare o meno il trend del contatore.
+\end{itemize}
+Le \textit{optionsCounter} definiscono le formattazioni da applicare ai valori calcolati (\ref{counter-format} \textit{Counter: descrizione}), attraverso l'utilizzo della libreria \textit{numbro}. \\
+La visualizzazione del trend, determinata dalla variabile \textit{ShowTrend}, viene attivata nel caso vi fosse un target da raggiungere e i valori elaborati
+fossero finiti, modificando il colore del valore del contatore e aggiungendo un'icona in base al raggiungimento o meno del valore di riferimento. \\
+In merito al rendere la componente responsiva, è stato utilizzato l'hook \textit{useResizeObserver}, fornito dalla libreria \textit{usehook-ts}, per permettere di
+aggiornare il fattore di scala per ridimensionare il contenuto in modo che si adatti alle nuove dimensioni del contenitore attraverso la chiamata alla funzione \textit{onScale},
+un wrapper di una funzione anonima tramite l'hook \textit{useDebounceCallback} (fornito sempre dalla libreria \textit{usehook-ts}) per evitare chiamate multiple in rapida successione. \\
+Tale scala, gestita come stato interno della componente mediante l'hook \textit{useState}, viene passato come parametro alla funzione \textit{getCounterStyles} invocata nella definizione
+dello \textit{style} del contenitore dei vari elementi che compongono la componente, la quale ritorna un oggetto di proprietà CSS necessarie per applicare la trasformazione della scala nei
+vari browser.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di Counter viz-lib con target}, width=0.5 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_counter.png}
+    \caption{Esempio di Counter \textit{viz-lib} con target}
+    \label{fig:counter-example}
+\end{figure}
 
 \subsubsection{Chart}
 
