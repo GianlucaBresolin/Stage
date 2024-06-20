@@ -13,19 +13,6 @@ Per quanto riguarda la gestione delle dipendenze, è stato utilizzato \textit{Ya
 le dipendenze del progetto in modo efficiente e veloce. \newline
 Il versionamento del codice è stato gestito tramite \textit{Git}, un sistema di controllo di versione distribuito, configurando e
 mantenendo un repository remoto su \textit{Github} interno all'organizzazione dell'azienda. \newline
-Per il processo di building del codice è stato utilizzato \textit{Rollup}, un bundler di moduli JavaScript che permette:
-\begin{itemize}
-    \item di creare bundle di moduli in formato \textit{ESM} (ECMAScript Module) e \textit{CJS} (CommonJS);
-    \item di utilizzare TypeScript all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
-    \item la risoluzione delle dipendenze tra i moduli, escludendo le \textit{peerdependency} dal bundle;
-    \item la produzione di bundle di dimensioni ridotte grazie alla sua capacità di effettuare il tree-shaking;
-    \item il supporto al plugin \textit{terser}, utilizzato per la minimizzazione del codice prodotto attraverso la rimozione dei commenti e degli spazi vuoti,
-          effettuando il \textit{munging} dei nomi delle variabili e introducendo ottimizzazioni per ridurre la dimensione finale;
-    \item il supportare a \textit{sourcemaps} per facilitare il debug del codice, permettendo di mappare il codice minificato con il codice sorgente originale;
-    \item la generazione di file di dichiarazione TypeScript;
-    \item il supporto a plugin per il calcolo della dimensione del bundle, specificando la dimensione di ogni singola dipendenze
-          all'interno del progetto, generando un file di report \textit{html}.
-\end{itemize}
 All'interno del file \textit{package.json} è stata configurata la sezione \textit{scripts} per definire i comandi necessari per l'esecuzione:
 \begin{itemize}
     \item \textit{start-watcher}: avvia il processo di building del codice di \textit{rollup} in modalità \textit{watch}, in modo da monitorare le modifiche effettuate
