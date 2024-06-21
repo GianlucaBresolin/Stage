@@ -43,7 +43,7 @@ Questo è stato realizzato tramite il refactoring e l'ottimizzazione di un tool 
 tra cui \textit{SYN}. La libreria è stata implementata a partire da un modulo open-source utilizzato in \textit{Redash},
 una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
 L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
-correnti delle dipendenze utilizzate, raggiungendo una maggior performance e una maggiore manutenibilità del codice rispetto alla versione
+correnti delle dipendenze utilizzate, migliorando l'FCP e il TTI,raggiungendo una maggiore manutenibilità del codice rispetto alla versione
 preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali. \newline
 La libreria sviluppata sotto il nome '\textit{viz-lib}', costituisce, insieme alla già esistente libreria '\textit{dashboard}' (la quale ha subito anch'essa in parte un processo di refactoring
 per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo \gls{SDK}\glox '\textit{dsdashbord2}'
@@ -240,7 +240,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \end{itemize}
       \item \textbf{Svantaggi}:
             \begin{itemize}
-                  \item Plotly.js è una libreria molto pesante, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
+                  \item Plotly.js è una libreria molto pesante in termini sia di spazio che di rallentamenti runtime, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
                         impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
                   \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
                   \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente

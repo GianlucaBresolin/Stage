@@ -163,36 +163,45 @@ Nella seguente sezione viene presentata la lista dei requisiti di vincolo.
     \begin{longtable}{|p{2.5cm}|p{10cm}|}
         \hline
         \rowcolor{gray!30}
-        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                 \\
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                   \\
         \hline
         \endfirsthead
         \hline
-        \multicolumn{2}{|c|}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                            \\
+        \multicolumn{2}{|c|}{{\tablename\ \thetable{} -- continua dalla pagina precedente}}                                              \\
         \hline
         \rowcolor{gray!30}
-        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                 \\
+        \textbf{Requisito} & \multicolumn{1}{c|}{\textbf{Descrizione}}                                                                   \\
         \endhead
         \hline
-        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                      \\
+        \multicolumn{2}{|r|}{{Continua nella prossima pagina...}}                                                                        \\
         \hline
         \endfoot
         \hline
         \endlastfoot
         \hline
-        R.V.O.1            & La libreria deve essere sviluppata in \textit{TypeScript}.                                \\
+        R.V.O.1            & La libreria deve essere sviluppata in \textit{TypeScript}.                                                  \\
         \hline
-        R.V.O.2            & La libreria deve essere sviluppata con \textit{React}.                                    \\
+        R.V.O.2            & La libreria deve essere sviluppata con \textit{React}.                                                      \\
         \hline
-        R.V.O.3            & La libreria deve essere sviluppata con l'utilizzo di componenti di \textit{PrimeReact}.   \\
+        R.V.O.3            & La libreria deve essere sviluppata con l'utilizzo di componenti di \textit{PrimeReact}.                     \\
         \hline
-        R.V.O.4            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeFlex}.                  \\
+        R.V.O.4            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeFlex}.                                    \\
         \hline
-        R.V.O.5            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeIcons}.                 \\
+        R.V.O.5            & La libreria deve essere sviluppata con l'utilizzo di \textit{PrimeIcons}.                                   \\
         \hline
-        R.V.O.6            & Il codice della libreria deve essere formattato mediante l'utilizzo di \textit{Prettier}. \\
+        R.V.O.6            & Il codice della libreria deve essere formattato mediante l'utilizzo di \textit{Prettier}.                   \\
         \hline
-        R.V.OP.7           & Il processo di rialscio deve avvenire all'interno del registro \textit{Github Packages}
-        di Datasoil S.r.l.                                                                                             \\
+        R.V.OP.7           & Il processo di rialscio deve avvenire all'interno del registro privato \textit{Github Packages}
+        di Datasoil S.r.l.                                                                                                               \\
+        \hline
+        R.V.O.8            & La libreria deve mantenere la compatibilità con i dati in formato \textit{JSON} forniti dal backend,
+        precedentemente utilizzati nel preesistente SDK \textit{dsdashboard}.                                                            \\
+        \hline
+        R.V.O.9            & La libreria deve mantenere la compatibilità con le API REST del backend esistenti, garantendo che tutte le
+        richieste e le risposte continuino a funzionare correttamente.                                                                   \\
+        \hline
+        R.V.O.10           & Le modifiche effettuate ai tipi di dato all'interno della nuova libreria devono essere retrocompatibili con
+        il preesistente SDK \textit{dsdashboard}.                                                                                        \\
     \end{longtable}
     \captionof{table}{Tabella del tracciamento dei requisiti di vincolo.}
     \label{tab:requisiti_vincolo}
