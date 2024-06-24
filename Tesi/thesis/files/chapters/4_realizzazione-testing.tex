@@ -101,10 +101,161 @@ vari browser.
 \end{figure}
 
 \subsubsection{Chart}
+La componente \texttt{Chart} permette di visualizzare tramite differenti tipologie di grafici i dati passati come props alla componente. \\
+All'interno del widget i props \texttt{options} vengono elaborati tramite la funzione \texttt{getOptions}, la quale si occupa di definire le opzioni di
+default concatenandole con le opzioni fornite. \\
+In seguito i \texttt{data}, le \texttt{options} e il \texttt{Layout} vengono ulteriormente preparati tramite il custom hook \texttt{usePlotly}. Questo hook si
+occupa di:
+\begin{itemize}
+    \item preparare a partire dalle props \texttt{data} e \texttt{options} i dati nel formato richiesto da \textit{Plotly.js}, ovvero sotto forma di array di oggetti
+          \texttt{Series} tramite la funzione \texttt{getChartData}, comune a tutte le tipologie di grafici;
+    \item definire i dati nel formato richiesto a seconda del tipo di grafico configurato all'interno delle opzioni attraverso la funzione \texttt{prepareData}:
+          questa funzione si occupa di invocare la corretta funzione di preparazione dei dati, wrappata a sua volta all'interno di una funzione specifica per l'aggiornamento
+          dei dati;
+    \item aggiornare le dimensioni del widget in modo responsivo tramite l'utilizzo dell'hoook \texttt{useResizeObserver}, fornito dalla libreria \texttt{usehook-ts},
+          invocando \texttt{useDebounceCallback} della medesima libreria per evitare chiamate multiple in rapida successione al controllo di variazione e aggiornamento
+          delle dimensioni del container del grafico;
+    \item preparare, a partire dalle props \texttt{options} e dai dati elaborati (comprese le dimensioni del punto precedente), il layout del grafico tramite la funzione
+          \texttt{prepareLayout}, la quale definisce un oggetto parziale del \texttt{Layout} fornito dalla libreria \textit{Plotly.js}. Questa funzione definisce delle opzioni
+          di default ed in seguito si occupa di invocare la funzione opportuna a seconda del grafico configurato;
+    \item aggiornare il \textttt{Layout} del grafico in base alle dimensioni del container, invocando la funzione \texttt{updateChartSize}, la quale si occupa inoltre di stabilire
+          il posizionamento più opportuno per la legenda del grafico a seconda dello spazio disponibile.
+    \item fornire il risultato elaborato costituito dai \texttt{plotlyData}, dalle \texttt{plotlyOptions} e dal \texttt{plotlyLayout} attraverso un \texttt{useMemo}, in modo da
+          gestire in modo efficente il ricalcolo dei dati.
+\end{itemize}
+Questo custom hook permette di gestire le operazioni in modo efficiente, attraverso l'utilizzo di \texttt{useEffect} che garantiscono il calcolo e l'aggiornamento delle informazioni
+solamente nel caso di variazione di dati significativi. \\
+Il risultato restituito dal custom hook \texttt{usePlotly} viene in seguito utilizzato all'interno di un \texttt{useEffect} che lo osserva per effettuare il rendering del grafico
+tramite una chiamata asincrona alla funzione \texttt{plot}, contentente a sua volta la chiamata alla funzione \texttt{Plotly.react}, la quale si occupa di renderizzare il grafico all'interno del
+\texttt{div} utilizzato come contenitore e riferito mediante l'utilizzo di un \textit{ref} castato al tipo {PlotlyHTMLElement}, fornito sempre dalla libreria \textit{Plotly.js}. \\
+In seguito vengono configurati i \textit{listeners} dichiarati all'interno delle \texttt{options} fornite, permettendo di gestire le interazioni dell'utente di tipo \textit{hover} e \textit{unhover}
+sul grafico. Tali \textit{listeners} vengono in seguito smontati correttamente all'interno del \texttt{return} del \texttt{useEffect} per evitare \textit{memory leak} e garantire una corretta gestione
+della componente.
+
+\paragraph{Area}
+Il grafico ad area (\textit{Area}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{AREA}. \\
+La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareAreaSeries}, la quale si occupa di definirele informazioni inerenti alla visualizzazione o meno del testo
+e la modalità di riempimento dell'area (fino all'asse delle X o fino alla successiva area) a seconda della configurazione della proprietà \texttt{fill} definita nelle serie visualizzata. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali, aggiornando eventualmente i valori lungo l'asse delle X e ricalcolando i valori comulativi per ogni tick. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico ad area viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_area.png}
+    \caption{Esempio di grafico ad area (Area) \textit{viz-lib}}
+    \label{fig:area-example}
+\end{figure}
+
+\paragraph{Bar}
+Il grafico a barre (\textit{Bar}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{COLUMNS}. \\
+La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBarSeries}, la quale si occupa di definire il tipo (\textit{'bar'}) necessario per \textit{Plotly} per comprendere
+come interpretare i dati forniti e le informazioni inerenti alla posizione e alla dimensione del testo. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico a colonne viz-lib}, width=0.8 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_bar.png}
+    \caption{Esempio di grafico a colonne (Bar) \textit{viz-lib}}
+    \label{fig:bar-example}
+\end{figure}
+
+\paragraph{Box}
+Il grafico a scatole (\textit{Box}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{BOX}. \\
+La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBoxSeries}, la quale si occupa di definire il tipo (\textit{'box'}) necessario per \textit{Plotly} per comprendere
+come interpretare i dati forniti e le informazioni inerenti alla visualizzazione dei dati. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\paragraph{Bubble}
+Il grafico a bolle (\textit{Bubble}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{BUBBLE}. \\
+La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBubbleSeries}, la quale si occupa di definire le informazioni inerenti alle bolle, quali le
+dimensioni di ciscun dato, il coefficiente di ingrandimento e il riferimento sul come interpretare il valore di dimensionamento fornito. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\paragraph{Heatmap}
+Il grafico a matrice di calore (\textit{Heatmap}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{HEATMAP}. \\
+La preparazione dei dati avviene invocando la funzione \texttt{prepareHeatmapData}, la quale si occupa di definire la scala di colori da utilizzare all'interno del grafico, preparando in seguito le \texttt{Series}
+di dati da visualizzare e le relative \texttt{DataLabel} associate, utilizzate per la visualizzazione delle informazioni durante l'\textit{hover}. \\
+Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \texttt{preparePieLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
+come posizione, font, colore e dimensione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico a matrice di calore viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_heatmap.png}
+    \caption{Esempio di grafico a matrice di calore (Heatmap) \textit{viz-lib}}
+    \label{fig:heatmap-example}
+\end{figure}
+
+\paragraph{Line}
+Il grafico a linee (\textit{Line}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{LINE}. \\
+La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareLineSeries}, la quale si occupa di definire il tipo (\textit{'line'}) necessario per \textit{Plotly}
+per comprendere come interpretare i dati forniti e le informazioni inerenti alla posizione e alla dimensione del testo. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali, aggiornando eventualmente i valori lungo l'asse delle X e ricalcolando i valori comulativi per ogni tick. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico a linea viz-lib}, width=0.8 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_line.png}
+    \caption{Esempio di grafico a linea (Line) \textit{viz-lib}}
+    \label{fig:line-example}
+\end{figure}
+
+\paragraph{Pie}
+Il grafico a torta (\textit{Pie}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{PIE}. \\
+La preparazione dei dati avviene invocando la funzione \texttt{preparePieData}, la quale si occupa di definire i colori delle label di testo visualizzate all'interno degli spicchi del grafico: mentre
+i colori del grafico vengono ricavati dalle opzioni fornite dal backend, i colori delle label vengono determinati a seconda del contrasto maggiore rispetto al colore di sfondo, in modo da aumentare
+la leggibilità e di conseguenze migliorare l'esperienza utente. \\
+In seguito all'interno della funzione vengono calcolate le percentuali occupate da ciascuna rappresentazione, configurando inoltre i font utilizzati, le dimensioni dei caratteri, le informazioni da visualizzare
+mediante l'\textit{hover} e la dimensione del raggio dell'\textit{hole} del grafico. \\
+L'aggiornamento dei dati viene gestito mediante la funzione \texttt{updatePieData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}. \\
+Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \texttt{preparePieLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
+come posizione, font, colore e dimensione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico a torta viz-lib}, width=0.8 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_pie.png}
+    \caption{Esempio di grafico a torta (Pie) \textit{viz-lib}}
+    \label{fig:pie-example}
+\end{figure}
+
+\paragraph{Scatter}
+Il grafico a dispersione (\textit{Scatter}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{SCATTER}. \\
+La preparazione dei dati avviene invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareScatterSeries}, la quale si occupa di definire il tipo (\textit{'scatter'}) necessario per \textit{Plotly}
+per comprendere come interpretare i dati forniti e le informazioni inerenti alle dimensioni dei punti e alla posizione e dimensione dell'eventuale testo associato. \\
+L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[alt={Esempio di grafico con a dispersione (Scatter) e colonne viz-lib}, width=0.8 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_scatter_bar.png}
+    \caption{Esempio di grafico a dispersione (Scatter) e a colonne (Bar) \textit{viz-lib}}
+    \label{fig:scatter-example}
+\end{figure}
 
 \subsubsection{Table}
 La componente \textit{Table} costituisce una tabella che permette di visualizzare i dati in forma tabellare. \newline
-Tale componente utilizza \textit{DataTable}, una componente resa disponibile dalla libreria \textit{PrimeReact} che offre, attraverso
+Tale widget utilizza \textit{DataTable}, una componente resa disponibile dalla libreria \textit{PrimeReact} che offre, attraverso
 la definizione di determinate props, di:
 \begin{itemize}
     \item alternare i colori delle righe della tabella, al fine di aumentare la leggibilità dei dati visualizzati;
