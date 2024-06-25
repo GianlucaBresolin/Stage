@@ -1,5 +1,33 @@
 % Load variables
 \input{config/variables}
+
+% Make glossaries and bibliography
+\makeglossaries%
+\bibliography{references/bibliography}
+\defbibheading{bibliography} {
+    \cleardoublepage%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{\bibname}
+    \chapter*{\bibname\markboth{\bibname}{\bibname}}
+}
+
+\newcommand{\newglossaryentrywithacronym}[4]{
+    %%% The glossary entry the acronym links to   
+    \newglossaryentry{#1_gls}{
+        name={#2},
+        long={#3},
+        description={#4}
+    }
+
+    % Acronym pointing to glossary
+    \newglossaryentry{#1}{
+        type=\acronymtype,
+        name={#2},
+        description={#3},
+        first={#3 (#2)\glsadd{#1_gls}},
+        see=[Glossary:]{#1_gls}
+    }
+}
 \input{references/glossary_acronyms}
 
 % Define custom colors
@@ -99,16 +127,6 @@
 % Increase page numbering
 \newcommand\increasepagenumbering{
     \addtocounter{page}{+1}
-}
-
-% Make glossaries and bibliography
-\makeglossaries
-\bibliography{references/bibliography}
-\defbibheading{bibliography} {
-    \cleardoublepage
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\bibname}
-    \chapter*{\bibname\markboth{\bibname}{\bibname}}
 }
 
 % Code blocks handling w/ table of codes

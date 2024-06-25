@@ -1,10 +1,10 @@
 \chapter{Progettazione}
 \label{chap:progettazione}
-Nel presente capitolo viene presentata l'attività di progettazione relativa al progetto di stage focalizzato sul refactoring e
+Nel presente capitolo verrà presentata l'attività di progettazione relativa al progetto di stage focalizzato sul refactoring e
 sull'ottimizzazione dello SDK impiegato dall'azienda Datasoil S.r.l. per lo sviluppo di dashboard dinamiche.
 Verrà analizzato l'approccio adottato per individuare le soluzioni volte al soddisfacimento dei requisiti individuati durante
 la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica \textit{viz-lib}
-appartenente al development kit, concludendo con la definizione dei tipi e delle interfacce e la progettazione delle singole componenti individuate.
+appartenente al \textit{development kit}, concludendo con la definizione dei tipi e delle interfacce e la progettazione delle singole componenti individuate.
 
 \section{Metodologia di progettazione}
 La metodologia di progettazione adottata durante lo svolgimento del progetto di stage ha seguito inizialmente un approccio
@@ -17,30 +17,30 @@ L'attività di progettazione è stata condotta in collaborazione stretta con il 
 riguardo alle decisioni progettuali individuate.
 
 \section{Design dell'architettura}
-L'architettura progettata per la realizzazione della libreria grafica si basa su un pattern comunemente utilizzato nello sviluppo di packages
-di componenti frontend per \textit{React}, ovvero il pattern \textit{Component Library Architecture}: questa architettura si fonda sulla creazione di una libreria di
+L'architettura progettata per la realizzazione della libreria grafica si basa su un pattern comunemente utilizzato nello sviluppo di \textit{packages}
+di componenti \textit{frontend} per \textit{React}, ovvero il pattern \textit{Component Library Architecture}: questa architettura si basa sulla creazione di una libreria di
 componenti riutilizzabili, modulari e indipendenti tra loro. \newline
 Tale pattern permette di creare l'architettura ideale per librerie che offrono collezioni di componenti riutilizzabili, permettendo e agevolando
 la condivisione e il riutilizzo di codice all'interno del progetto, garantendo una maggior manutenibilità del codice. \newline
-Il modello proposto prevede la seguente struttura, la quale si riflette nella definizione delle macro-directory all'interno del progetto:
+Il modello proposto prevede la seguente struttura, la quale si riflette nella definizione delle \textit{macro-directory} all'interno del progetto:
 \begin{itemize}
-      \item \textbf{components}: directory contenente i componenti della libreria grafica;
-      \item \textbf{hooks}: directory contenente i custom hooks utilizzati all'interno della libreria grafica;
-      \item \textbf{utils}: directory contenente le funzioni di utilità utilizzate all'interno della libreria grafica;
-      \item \textbf{models}: directory contenente le definizioni dei tipi e delle interfacce utilizzate all'interno della libreria grafica;
+      \item \textbf{components}: \textit{directory} contenente i componenti della libreria grafica;
+      \item \textbf{hooks}: \textit{directory} contenente i \textit{custom hooks} utilizzati all'interno della libreria grafica;
+      \item \textbf{utils}: \textit{directory} contenente le funzioni di utilità utilizzate all'interno della libreria grafica;
+      \item \textbf{models}: \textit{directory} contenente le definizioni dei tipi e delle interfacce utilizzate all'interno della libreria grafica;
       \item \textbf{index.ts}: file principale della libreria grafica, contenente l'esportazione di tutti i componenti e le funzioni utilizzate;
       \item \textbf{style.css}: file contenente i fogli di stile globali utilizzati all'interno della libreria grafica.
 \end{itemize}
-L'entry point della libreria grafica è il file \textit{index.ts}, il quale si occupa di esportare il \textit{Renderer}, il componente principale
+L'\textit{entry point} della libreria grafica è il file \textit{index.ts}, il quale si occupa di esportare il \texttt{Renderer}, il componente principale
 della liberia che si occupa di renderizzare il corretto componente a seconda del tipo di visualizzazione richiesto: tali informazioni necessarie
-vengono passate come props dalle componenti del modulo \textit{dashboard} che utilizzano il \textit{Renderer}, riducendo così la dipendenza tra le
+vengono passate come \textit{props} dalle componenti del modulo \textit{dashboard} che utilizzano il \texttt{Renderer}, riducendo così la dipendenza tra le
 componenti di librerie differenti, agevolando la manutenibilità e la scalabilità del codice.
 
 
 \section{Progettazione dei tipi e delle interfacce}
 Nella seguente sezione vengono presentati i tipi e le interfacce definiti durante l'attività di progettazione, associati ad una descrizione dettagliata
 delle informazioni che rappresentano. \\
-La definizione dei tipi e delle interfacce ha costituito un ruolo fondamentale durante l'attività di progettazione, permettendo di raggiungere una maggior
+La definizione dei tipi e delle interfacce ha costituito un ruolo fondamentale durante l'attività di progettazione, consentendo di raggiungere una maggior
 leggibilità e manutenibilità del codice, permettendo di usufruire a pieno dei vantaggi offerti da \textit{TypeScript}. \\
 I tipi e le interfacce verranno presentati in ordine alfabetico.
 
@@ -125,11 +125,11 @@ export interface ChartBaseVisualizationOptions {
       \label{listing:chartBaseVisualizationOptions}
 \end{listing}
 \begin{itemize}
-      \item \textbf{globalSeriesType}: stringa che definisce il tipo di chart da renderizzare. I valori possibili sono i seguenti:
+      \item \textbf{globalSeriesType}: stringa che definisce il tipo di \textit{chart} da renderizzare. I valori possibili sono i seguenti:
             \textit{area, column, box, bubble, heatmap, line, pie} e \textit{scatter};
       \item \textbf{sortX}: booleano che definisce se ordinare o meno le serie sull'asse delle ascisse;
       \item \textbf{sortY}: booleano che definisce se ordinare o meno le serie sull'asse delle ordinate;
-      \item \textbf{legend}: oggetto che definisce le opzioni della legenda del grafico.
+      \item \textbf{legend}: oggetto che definisce le opzioni della legenda del grafico:
             \begin{itemize}
                   \item \textbf{enabled}: booleano che definisce se abilitare o meno la legenda;
                   \item \textbf{placement}: stringa che definisce la posizione della legenda all'interno del grafico;
@@ -168,8 +168,8 @@ export interface ChartBaseVisualizationOptions {
             \end{itemize}
       \item \textbf{seriesOptions}: oggetto che definisce le opzioni delle serie;
       \item \textbf{valuesOptions}: oggetto che definisce le opzioni dei valori;
-      \item \textbf{columnMapping}: oggetto che definisce il mapping delle colonne;
-      \item \textbf{direction}: oggetto che definisce tramite type la direzione del grafico;
+      \item \textbf{columnMapping}: oggetto che definisce il \textit{mapping} delle colonne;
+      \item \textbf{direction}: oggetto che definisce tramite \textit{type} la direzione del grafico;
       \item \textbf{sizemode}: stringa che definisce la modalità di dimensionamento;
       \item \textbf{coefficient}: numero che definisce il coefficiente di dimensionamento;
       \item \textbf{showDataLabels}: booleano che definisce se visualizzare o meno le label dei dati;
@@ -183,9 +183,9 @@ export interface ChartBaseVisualizationOptions {
       \item \textbf{reverseX}: booleano che definisce se invertire l'asse delle ascisse;
       \item \textbf{reverseY}: booleano che definisce se invertire l'asse delle ordinate;
       \item \textbf{showpoints}: booleano che definisce se visualizzare o meno i punti;
-      \item \textbf{heatMinColor}: stringa che definisce il colore minimo del grafico heatmap;
-      \item \textbf{heatMaxColor}: stringa che definisce il colore massimo del grafico heatmap;
-      \item \textbf{colorScheme}: stringa o array che definisce lo schema dei colori del grafico heatmap.
+      \item \textbf{heatMinColor}: stringa che definisce il colore minimo del grafico \textit{heatmap};
+      \item \textbf{heatMaxColor}: stringa che definisce il colore massimo del grafico \textit{heatmap};
+      \item \textbf{colorScheme}: stringa o array che definisce lo schema dei colori del grafico \textit{heatmap}.
 \end{itemize}
 
 \subsection{Column}
@@ -246,7 +246,6 @@ export interface Column {
       \item \textbf{order}: numero che definisce l'ordine della colonna.
 \end{itemize}
 
-
 \subsection{CounterVisualizationOptions}
 Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Counter}.
 \begin{listing}[H]
@@ -280,7 +279,7 @@ Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazio
       \item \textbf{stringDecimal}: numero che definisce il numero di cifre decimali da visualizzare;
       \item \textbf{stringDecChar}: stringa che definisce il separatore decimale;
       \item \textbf{stringThouSep}: stringa che definisce il separatore delle migliaia;
-      \item \textbf{tooltipFormat}: stringa che definisce il formato del tooltip;
+      \item \textbf{tooltipFormat}: stringa che definisce il formato del \textit{tooltip};
       \item \textbf{stringPrefix}: stringa che definisce il prefisso del contatore;
       \item \textbf{stringSuffix}: stringa che definisce il suffisso del contatore;
       \item \textbf{formatTargetValue}: booleano che definisce se formattare o meno il valore target.
@@ -310,7 +309,7 @@ export interface DataLabels {
       \item \textbf{x}: array che definisce i valori sull'asse delle ascisse;
       \item \textbf{y}: array che definisce i valori sull'asse delle ordinate;
       \item \textbf{mode}: stringa che definisce la modalità;
-      \item \textbf{hoverinfo}: stringa che definisce le informazioni del tooltip;
+      \item \textbf{hoverinfo}: stringa che definisce le informazioni del \textit{tooltip};
       \item \textbf{showlegend}: booleano che definisce se visualizzare o meno la legenda;
       \item \textbf{text}: array di stringhe che definisce il testo;
       \item \textbf{textfont}: oggetto che definisce le opzioni del font del testo:
@@ -320,7 +319,7 @@ export interface DataLabels {
 \end{itemize}
 
 \subsection{PlotlyOptions}
-Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione di Plotly.
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione di \textit{Plotly.js}.
 \begin{minted}{typescript}
 export interface PlotlyOptions {
   showLink: boolean;
@@ -337,7 +336,7 @@ export interface PlotlyOptions {
 \begin{itemize}
       \item \textbf{showLink}: booleano che definisce se visualizzare o meno il link;
       \item \textbf{displaylogo}: booleano che definisce se visualizzare o meno il logo;
-      \item \textbf{displayModeBar}: booleano che definisce se visualizzare o meno la barra di Plotly;
+      \item \textbf{displayModeBar}: booleano che definisce se visualizzare o meno la barra di \textit{Plotly};
       \item \textbf{responsive}: booleano che definisce se rendere o meno il grafico responsivo;
       \item \textbf{autosize}: booleano che definisce se adattare o meno la grandezza del grafico.
 \end{itemize}
@@ -442,8 +441,8 @@ export interface Series {
       \item \textbf{values}: array di numeri che definisce i valori della serie;
       \item \textbf{labels}: array di stringhe che definisce le label della serie;
       \item \textbf{hole}: numero che definisce, nel caso di grafico a torta, il raggio del buco centrale;
-      \item \textbf{marker}: oggetto che definisce le opzioni del marker;
-      \item \textbf{hoverinfo}: stringa o booleano che definisce le informazioni del tooltip;
+      \item \textbf{marker}: oggetto che definisce le opzioni del \textit{marker};
+      \item \textbf{hoverinfo}: stringa o booleano che definisce le informazioni del \textit{tooltip};
       \item \textbf{text}: array che definisce il testo della serie;
       \item \textbf{textinfo}: stringa che definisce le informazioni del testo;
       \item \textbf{textposition}: stringa che definisce la posizione del testo;
@@ -452,8 +451,8 @@ export interface Series {
       \item \textbf{direction}: stringa che definisce la direzione della serie;
       \item \textbf{domain}: oggetto che definisce il dominio della serie;
       \item \textbf{sourceData}: mappa che definisce i dati sorgente;
-      \item \textbf{hoverlabel}: oggetto che definisce le opzioni del tooltip;
-      \item \textbf{hover}: array che definisce le opzioni del tooltip;
+      \item \textbf{hoverlabel}: oggetto che definisce le opzioni del \textit{tooltip};
+      \item \textbf{hover}: array che definisce le opzioni del \textit{tooltip};
       \item \textbf{x}: array che definisce i valori sull'asse delle ascisse;
       \item \textbf{y}: array che definisce i valori sull'asse delle ordinate;
       \item \textbf{z}: array che definisce i valori sull'asse z;
@@ -461,28 +460,27 @@ export interface Series {
       \item \textbf{orientation}: numero che definisce l'orientamento;
       \item \textbf{insidetextfont}: oggetto che definisce le opzioni del font interno;
       \item \textbf{error\_y}: oggetto che definisce le opzioni degli errori sull'asse delle ordinate;
-      \item \textbf{offsetgroup}: stringa che definisce il gruppo di offset;
+      \item \textbf{offsetgroup}: stringa che definisce il gruppo di \textit{offset};
       \item \textbf{mode}: stringa che definisce la modalità;
       \item \textbf{fill}: stringa che definisce il riempimento;
-      \item \textbf{boxpoints}: stringa che definisce i punti del box;
-      \item \textbf{jitter}: numero che definisce il jitter;
+      \item \textbf{boxpoints}: stringa che definisce i punti del \textit{box};
+      \item \textbf{jitter}: numero che definisce il \textit{jitter} (variazione);
       \item \textbf{pointpos}: numero che definisce la posizione del punto;
       \item \textbf{colorscale}: stringa o array che definisce lo schema dei colori;
       \item \textbf{xgap}: numero che definisce il gap sull'asse delle ascisse;
-      \item \textbf{ygap}: numero che definisce il gap sull'asse delle ordinate.
-      \item \textbf{colors}: array di stringhe che definisce i colori del marker;
-      \item \textbf{color}: stringa che definisce il colore del marker;
-      \item \textbf{line}: oggetto che definisce le opzioni della linea del marker;
-      \item \textbf{size}: numero che definisce la grandezza del marker;
-      \item \textbf{sizemode}: stringa che definisce la modalità di dimensionamento del marker.
-      \item \textbf{font}: oggetto che definisce le opzioni del font del marker;
-      \item \textbf{bordercolor}: stringa che definisce il colore del bordo del marker;
-      \item \textbf{bgcolor}: stringa che definisce il colore di sfondo del marker.
+      \item \textbf{ygap}: numero che definisce il gap sull'asse delle ordinate;
+      \item \textbf{colors}: array di stringhe che definisce i colori del \textit{marker};
+      \item \textbf{color}: stringa che definisce il colore del \textit{marker};
+      \item \textbf{line}: oggetto che definisce le opzioni della linea del \textit{marker};
+      \item \textbf{size}: numero che definisce la grandezza del \textit{marker};
+      \item \textbf{sizemode}: stringa che definisce la modalità di dimensionamento del \textit{marker}.
+      \item \textbf{font}: oggetto che definisce le opzioni del font del \textit{marker};
+      \item \textbf{bordercolor}: stringa che definisce il colore del bordo del \textit{marker};
+      \item \textbf{bgcolor}: stringa che definisce il colore di sfondo del \textit{marker};
       \item \textbf{colors}: array di stringhe che definisce i colori delle rappresentazioni (multiple);
-      \item \textbf{size}: numero che definisce la grandezza del font.
+      \item \textbf{size}: numero che definisce la grandezza del font;
       \item \textbf{color}: stringa che definisce il colore della rappresentazione (singola).
 \end{itemize}
-
 
 \subsection{TableBaseVisualizationOptions}
 Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Table}.
@@ -601,7 +599,7 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                   \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
                   \item Separatore decimale: carattere da utilizzare come separatore decimale.
             \end{itemize}
-            (Queste formattazioni sono applicabili anche al valore target e ai tooltip visualizzati al passaggio del mouse sul contatore).\\
+            (Queste formattazioni sono applicabili anche al valore target e ai \textit{tooltip} visualizzati al passaggio del mouse sul contatore).\\
             L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}.
       \item \textbf{Props}: I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
             delle informazioni \textit{data, options} e \textit{visualizationName}.

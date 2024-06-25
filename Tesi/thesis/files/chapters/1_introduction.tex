@@ -7,9 +7,9 @@ Fondata nel 2016, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo s
 \textit{smart building} e \textit{smart city}.
 L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare \textit{insight} proattivi
 in tempo reale, garantendo che le informazioni corrette raggiungano le persone giuste al momento più opportuno.
-Il punto di partenza è la spazialità aziendale e tutti gli asset che risiedono all'interno di essa, da cui
+Il punto di partenza è la spazialità aziendale e tutti gli \textit{asset} che risiedono all'interno di essa, da cui
 provengono tutti i dati raccolti, i quali vengono analizzati trasversalmente grazie a sempre più persone e dispositivi connessi.
-Da qui il nome dell'azienda, Datasoil: fare le informazioni da questo suolo fertile di dati da cui siamo circondati.
+Da qui il nome dell'azienda, Datasoil: fare emergere le informazioni da questo suolo fertile di dati da cui siamo circondati.
 
 \begin{figure}[H]
       \centering
@@ -32,18 +32,18 @@ di impianti industriali, \textit{smart building} e \textit{smart city}, offrendo
 
 SYN è una piattaforma di monitoraggio e controllo di impianti industriali che raccoglie dati da sensori e dispositivi
 distribuiti all'interno di un impianto o su più stabilimenti, permettendo di visualizzare in tempo reale lo stato di
-funzionamento dei vari asset, di analizzare i dati raccolti e di attuare azioni di controllo o segnalazione tramite
-ticketing. All'interno della piattaforma, a seconda dei piani attivi del cliente, è possibile visualizzare dashboard dinamiche
-in merito ad informazioni filtrate e aggiornate live, permettendo di raggiungere una panoramica completa dello stato dei vari
-asset monitorati in modo rapido, intuitivo ed efficace, grazie all'utilizzo di molteplici grafici e widget.
+funzionamento dei vari \textit{asset}, di analizzare i dati raccolti e di attuare azioni di controllo o segnalazione tramite
+\textit{ticketing}. All'interno della piattaforma, a seconda dei piani attivi del cliente, è possibile visualizzare dashboard dinamiche
+in merito ad informazioni filtrate e aggiornate \textit{live}, permettendo di raggiungere una panoramica completa dello stato dei vari
+\textit{asset} monitorati in modo rapido, intuitivo ed efficace, grazie all'utilizzo di molteplici grafici e \textit{widget}.
 
 \subsection{Il progetto}
-Il progetto svolto durante lo stage consiste nello sviluppo di una libreria TypeScript di componenti per la creazione di dashboard dinamiche.
-Questo è stato realizzato tramite il refactoring e l'ottimizzazione di un tool grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l.,
-tra cui \textit{SYN}. La libreria è stata implementata a partire da un modulo open-source utilizzato in \textit{Redash},
+Il progetto svolto durante lo stage consiste nello sviluppo di una libreria \textit{TypeScript} di componenti per la creazione di dashboard dinamiche.
+Questo è stato realizzato tramite il \gls{refactoring}\glox e l'ottimizzazione di un \textit{tool} grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l.,
+tra cui \textit{SYN}. La libreria è stata implementata a partire da un modulo \textit{\gls{open-source}}\glox utilizzato in \textit{Redash} (\href{https://redash.io}{redash.io}),
 una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
 L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
-correnti delle dipendenze utilizzate, migliorando l'FCP e il TTI,raggiungendo una maggiore manutenibilità del codice rispetto alla versione
+correnti delle dipendenze utilizzate, migliorando l'\gls{FCP}\glox e il \gls{TTI}\glox, raggiungendo una maggiore manutenibilità del codice rispetto alla versione
 preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali. \newline
 La libreria sviluppata sotto il nome '\textit{viz-lib}', costituisce, insieme alla già esistente libreria '\textit{dashboard}' (la quale ha subito anch'essa in parte un processo di refactoring
 per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo \gls{SDK}\glox '\textit{dsdashbord2}'
@@ -51,7 +51,7 @@ utilizzato all'interno dei prodotti Datasoil S.r.l. per la realizzazione di dash
 
 \section{Principali problematiche}
 Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse alcune problematiche
-legate alla manutenibilità e alla performance del tool grafico a seguito di una attenta revisione del codice sorgente. \newline
+legate alla manutenibilità e alla performance del \textit{tool} grafico a seguito di una attenta revisione del codice sorgente. \newline
 Di seguito vengono presentate le principali problematiche riscontrate.
 
 \subsection{Dipendenze obsolete}
@@ -66,17 +66,17 @@ Il codice sorgente della libreria preesistente, sviluppato in tempistiche rapide
 risultava essere poco manutenibile e assente di documentazione. \newline
 Inoltre, la libreria di visualizzazioni utilizzata da \textit{Redash} su cui si basa l'SDK utilizzato dall'azienda, inizialmente implementata in JavaScript,
 ha subito solo successivamente un refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta
-di tipi \textit{any} per le variabili e i parametri delle funzioni, introducendo numerosi \textit{@ts-ignore} per ignorare gli errori di compilazione, rendendo il codice
+di tipi \textit{any} per le variabili e per i parametri delle funzioni, introducendo numerosi \textit{@ts-ignore} per ignorare gli errori di compilazione, rendendo il codice
 poco leggibile e difficile da mantenere.
 
 \subsection{Componenti inutilizzate}
 In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti
-in essa trovavano utilizzo all'interno dei prodotti realizzati da Datasoil S.r.l.: questo in gran parte era dovuto da un'offerta di grafici inopportuni
-per quello che è il contesto applicativo dell'azienda.
+in essa trovavano utilizzo all'interno dei prodotti realizzati da Datasoil S.r.l.: questo in gran parte era dovuto ad un'offerta di grafici non adeguati
+a quello che è il contesto applicativo dell'azienda.
 
 \subsection{Assenza di funzionalità}
 La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di Datasoil S.r.l., mancando di alcune funzionalità fondamentali,
-quali la possibilità di effettuare il download dei dati tabellari o la visualizzazione a pagina piena dei vari widget.
+quali la possibilità di effettuare il \textit{download} dei dati tabellari o la visualizzazione a pagina piena dei vari \textit{widget}.
 Queste limitazioni hanno reso necessario un intervento di refactoring per colmare le lacune e migliorare le prestazioni complessive.
 
 \section{Soluzione scelte}
@@ -91,7 +91,7 @@ Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.
 riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali.
 
 \subsection{Introduzione di interfacce e tipi}
-Al fine di migliorare la manutenibilità e la comprensione del codice sorgente, è stato svolto un lavoro di introduzione di interfacce e tipi per le variabili e i parametri
+Al fine di migliorare la manutenibilità e la comprensione del codice sorgente, è stato svolto un lavoro di introduzione di interfacce e tipi per le variabili e per i parametri
 delle funzioni, in modo da rendere il codice più leggibile e permettere controlli statici sul codice sorgente. \newline
 Questo lavoro ha permesso di ridurre la presenza di tipi \textit{any} all'interno del codice sorgente, garantendo una maggiore sicurezza e affidabilità del prodotto finale.
 
@@ -109,7 +109,7 @@ esterne richiesto per il corretto funzionamento dell'SDK prodotto.
 \subsection{Implementazione di nuove funzionalità}
 Per colmare le lacune riscontrate nella libreria preesistente in merito all'assenza di alcune funzionalità richieste dai clienti di Datasoil S.r.l. all'interno dei prodotti forniti,
 è stato condotto un lavoro di implementazione di nuove funzionalità. \newline
-In questo processo, si è cercato di utilizzare dipendenze esterne preferibilmente già esistenti o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non
+In questo processo, si è cercato di utilizzare dipendenze esterne preferibilmente già in dotazione o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non
 fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di un'analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni
 finali dell'SDK prodotto.
 
@@ -119,10 +119,10 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
 \begin{itemize}
       \item \textbf{Nome strumento}: nome dello strumento utilizzato;
       \item \textbf{Versione}: versione utilizzata nel progetto durante lo stage;
-      \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento.
-      \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità.
-      \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
-      \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento. \textit{(Opzionale)}
+      \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento;
+      \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità;
+      \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento; \textit{(Opzionale)}
+      \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento; \textit{(Opzionale)}
       \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
             su di esse e la motivazione per la quale non sono state selezionate. \textit{(Opzionale)}
 \end{itemize}
@@ -137,13 +137,13 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Descrizione}: D3-color è una libreria JavaScript open-source utilizzata per la manipolazione dei colori.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item D3-color offre un'ampia serie di funzionalità per la manipolazione dei colori, quali la conversione tra spazi di colori, la manipolazione dei colori
+                  \item \textit{D3-color} offre un'ampia serie di funzionalità per la manipolazione dei colori, quali la conversione tra spazi di colori, la manipolazione dei colori
                         e la generazione di scale di colori;
-                  \item D3-color è supportato da una vasta e attiva community.
+                  \item \textit{D3-color} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textit{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{Chroma-js}: Chroma-js è una libreria JavaScript open-source utilizzata per la manipolazione dei colori, ma risulta essere più pesante di D3-color.
+                  \item \textit{Chroma-js}: \textit{Chroma-js} è una libreria \textit{JavaScript} \textit{open-source} utilizzata per la manipolazione dei colori, ma risulta essere più pesante di \textit{D3-color}.
             \end{itemize}
 \end{itemize}
 
@@ -152,12 +152,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: D3-scale
       \item \textbf{Versione}: 4.0.2
       \item \textbf{Link}: \href{https://d3js.org/d3-scale}{d3js.org/d3-scale}
-      \item \textbf{Descrizione}: D3-scale è una libreria JavaScript open-source utilizzata per la generazione di scale di colori, di posizioni e di dimensioni.
+      \item \textbf{Descrizione}: \textit{D3-scale} è una libreria \textit{JavaScript} open-source utilizzata per la generazione di scale di colori, di posizioni e di dimensioni.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item D3-scale offre un'ampia serie di funzionalità per la generazione di scale di colori, di posizioni e di dimensioni, quali la generazione di scale lineari,
+                  \item \textit{D3-scale} offre un'ampia serie di funzionalità per la generazione di scale di colori, di posizioni e di dimensioni, quali la generazione di scale lineari,
                         logaritmiche e ordinali;
-                  \item D3-scale è supportato da una vasta e attiva community.
+                  \item \textit{D3-scale} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
 \end{itemize}
 
@@ -166,17 +166,17 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Dayjs
       \item \textbf{Versione}: 1.11.7
       \item \textbf{Link}: \href{https://day.js.org/}{day.js.org}
-      \item \textbf{Descrizione}: Day.js è una libreria JavaScript open-source utilizzata per la manipolazione delle date e degli orari.
+      \item \textbf{Descrizione}: \textit{Day.js} è una libreria \textit{JavaScript} open-source utilizzata per la manipolazione delle date e degli orari.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Day.js è una libreria molto leggera, con un'ampia serie di funzionalità per la manipolazione delle date e degli orari;
-                  \item Day.js viene fornito con dichiarazioni ufficiali di tipo per TypeScript
-                  \item Day.js è tutt'ora supportato da una vasta e attiva community.
+                  \item \textit{Day.js} è una libreria molto leggera, con un'ampia serie di funzionalità per la manipolazione delle date e degli orari;
+                  \item \textit{Day.js} viene fornito con dichiarazioni ufficiali di tipo per \textit{TypeScript};
+                  \item \textit{Day.js} è tutt'ora supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{Moment.js}: Moment.js è una libreria JavaScript open-source utilizzata per la manipolazione delle date e degli orari, ma risulta essere più pesante
-                        di Day.js. Moment.js è inoltre considerato \textit{deprecated} a favore di Day.js, che offre una maggiore leggerezza e una maggiore efficienza.
+                  \item \textit{Moment.js}: \textit{Moment.js} è una libreria \textit{JavaScript} open-source utilizzata per la manipolazione delle date e degli orari, ma risulta essere più pesante
+                        di \textit{Day.js}. \textit{Moment.js} è inoltre considerato \textit{deprecated} a favore di Day.js, che offre una maggiore leggerezza e una maggiore efficienza.
             \end{itemize}
 \end{itemize}
 
@@ -185,17 +185,17 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Lodash
       \item \textbf{Versione}: 4.14.0
       \item \textbf{Link}: \href{https://lodash.com/}{lodash.com}
-      \item \textbf{Descrizione}: Lodash è una libreria JavaScript open-source utilizzata per la manipolazione di oggetti e array.
+      \item \textbf{Descrizione}: \textit{Lodash} è una libreria \textit{JavaScript} \textit{open-source} utilizzata per la manipolazione di oggetti e array.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Lodash offre un'ampia serie di funzionalità implementate con efficienza per la manipolazione di oggetti e array,
+                  \item \textit{Lodash} offre un'ampia serie di funzionalità implementate con efficienza per la manipolazione di oggetti e array,
                         quali la ricerca, la modifica e la rimozione di elementi;
-                  \item Lodash è supportato da una vasta e attiva community.
+                  \item \textit{Lodash} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textbf{Svantaggi}
             \begin{itemize}
-                  \item Lodash è una libreria molto pesante, con un'ampia serie di funzionalità che possono non essere utilizzate all'interno del progetto:
-                        per questo motivo in questo progetto sono eseguiti degli import sui moduli specifici, riducendo così le dimensioni del package finale.
+                  \item \textit{Lodash} è una libreria molto pesante, con un'ampia serie di funzionalità che possono non essere utilizzate all'interno del progetto:
+                        per questo motivo in questo progetto sono eseguiti degli \texttt{import} sui moduli specifici, riducendo così le dimensioni del \textit{\gls{package}\glox} finale.
             \end{itemize}
 \end{itemize}
 
@@ -204,17 +204,17 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Numbro
       \item \textbf{Versione}: 2.5.0
       \item \textbf{Link}: \href{http://numbrojs.com/}{numbrojs.com}
-      \item \textbf{Descrizione}: Numbro è una libreria JavaScript open-source utilizzata per la formattazione dei numeri.
+      \item \textbf{Descrizione}: \textit{Numbro} è una libreria \textit{JavaScript} open-source utilizzata per la formattazione dei numeri.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Numbro offre un'ampia serie di funzionalità per la formattazione dei numeri, quali la formattazione delle cifre decimali, la formattazione delle valute
+                  \item \textit{Numbro} offre un'ampia serie di funzionalità per la formattazione dei numeri, quali la formattazione delle cifre decimali, la formattazione delle valute
                         e la formattazione dei numeri in notazione scientifica;
-                  \item Numbro è supportato da una vasta e attiva community.
+                  \item \textit{Numbro} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{Numeral.js}: libreria JavaScript open-source utilizzata per la formattazione dei numeri, ma risulta non essere più mantenuta attivamente dalla community, oltre
-                        che ad essere più pesante di Numbro.
+                  \item \textit{Numeral.js}: libreria \textit{JavaScript} open-source utilizzata per la formattazione dei numeri, ma risulta non essere più mantenuta attivamente dalla \textit{community}, oltre
+                        che ad essere più pesante di \textit{Numbro}.
             \end{itemize}
 \end{itemize}
 
@@ -223,36 +223,36 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Plotly.js
       \item \textbf{Versione}: custom-bundle: 2.33.0
       \item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
-      \item \textbf{Descrizione}: Plotly.js è una libreria JavaScript open-source, con supporto per TypeScript, utilizzata per la visualizzazione di dati mediante grafici interattivi.
-            Costruito sopra \textit{D3.js}, Plotly.js offre un vasto panorama di grafici dinamici in formato SVG, altamente personalizzabili.
+      \item \textbf{Descrizione}: \textit{Plotly.js} è una libreria \textit{JavaScript open-source}, con supporto per \textit{TypeScript}, utilizzata per la visualizzazione di dati mediante grafici interattivi.
+            Costruito sopra \textit{D3.js}, \textit{Plotly.js} offre un vasto panorama di grafici dinamici in formato \textit{\gls{SVG}\glox}, altamente personalizzabili.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Plotly.js offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
-                  \item Le disponibilità di grafici offerte da Plotly.js sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
+                  \item \textit{Plotly.js} offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
+                  \item Le disponibilità di grafici offerte da \textit{Plotly.js} sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
                         all'interno della libreria grafica;
-                  \item Plotly.js è supportato da una vasta e attiva community, con ampie serie di esempi disponibili su \textit{CodePen} (una piattaforma di condivisione di codice
-                        online che permette di visualizzare e modificare codice HTML, CSS e JavaScript);
-                  \item Plotly.js offre la possibilità di generare custom-bundle personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
+                  \item \textit{Plotly.js} è supportato da una vasta e attiva \textit{community}, con ampie serie di esempi disponibili su \textit{CodePen} (\href{https://codepen.io/}{codepen.io}, una piattaforma di condivisione di codice
+                        \textit{online} che permette di visualizzare e modificare codice \textit{HTML, CSS e JavaScript});
+                  \item \textit{Plotly.js} offre la possibilità di generare \textit{custom \gls{bundle}\glox} personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
                         così le dimensioni del pacchetto finale;
-                  \item Plotly.js era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato backend negli editor
-                        utilizzati per la generazione delle risposte JSON da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
-                  \item Plotly.js offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
+                  \item \textit{Plotly.js} era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato \textit{\gls{backend}\glox} negli editor
+                        utilizzati per la generazione delle risposte \textit{JSON} da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
+                  \item \textit{Plotly.js} offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
                         e migliorando le prestazioni complessive della libreria.
             \end{itemize}
       \item \textbf{Svantaggi}:
             \begin{itemize}
-                  \item Plotly.js è una libreria molto pesante in termini sia di spazio che di rallentamenti runtime, dovuto anche dal fatto che è implementata sopra un wrapper proprietario di \textit{D3.js},
+                  \item \textit{Plotly.js} è una libreria molto pesante in termini sia di spazio che di rallentamenti \textit{\gls{runtime}\glox}, dovuto anche dal fatto che è implementata sopra un \textit{wrapper} proprietario di \textit{D3.js},
                         impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
-                  \item La documentazione ufficiale di Plotly.js è vaga e poco esaustiva;
-                  \item La versione ufficiale di Plotly.js presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente
-                        \textit{Plotly} all'interno dei moduli TypeScript, motivo per il quale è stata utilizzata una versione custom-bundle di Plotly.js.
+                  \item La documentazione ufficiale di \textit{Plotly.js} è vaga e poco esaustiva;
+                  \item La versione ufficiale di \textit{Plotly.js} presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente
+                        \textit{Plotly} all'interno dei moduli \textit{TypeScript}, motivo per il quale è stata utilizzata una versione \textit{custom bundle} di \textit{Plotly.js}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{D3.js}: D3.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
-                        essere più complessa rispetto a Plotly.js, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
-                  \item \textit{Chart.js}: Chart.js è una libreria JavaScript open-source utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di Plotly.js,
-                        ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato backend.
+                  \item \textit{D3.js}: \textit{D3.js} è una libreria \textit{JavaScript open-source} utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
+                        essere più complessa rispetto a \textit{Plotly.js}, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
+                  \item \textit{Chart.js}: \textit{Chart.js} è una libreria \textit{JavaScript open-source} utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di \textit{Plotly.js},
+                        ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato \textit{backend}.
             \end{itemize}
 \end{itemize}
 
@@ -261,15 +261,15 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: PrimeFlex
       \item \textbf{Versione}: 3.3.0
       \item \textbf{Link}: \href{https://primereact.org/}{primefaces.org/primeflex}
-      \item \textbf{Descrizione}: PrimeFlex è una libreria CSS open-source utilizzata per la creazione di layout flessibili e responsivi.
+      \item \textbf{Descrizione}: \textit{PrimeFlex} è una libreria \textit{CSS open-source} utilizzata per la creazione di \textit{layout} flessibili e \textit{\gls{responsive}\glox}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item PrimeFlex offre un'ampia serie di classi CSS per la creazione di layout flessibili e responsivi, permettendo di adattare il layout
+                  \item \textit{PrimeFlex} offre un'ampia serie di classi \textit{CSS} per la creazione di \textit{layout} flessibili e responsivi, permettendo di adattare il \textit{layout}
                         in base alla grandezza dello schermo;
-                  \item PrimeFlex è una libreria molto leggera;
-                  \item PrimeFlex è fortemente integrata con le componenti di \textit{PrimeReact};
-                  \item PrimeFlex può essere integrato a \textit{tailwind};
-                  \item PrimeFlex è supportato da una vasta e attiva community.
+                  \item \textit{PrimeFlex} è una libreria molto leggera;
+                  \item \textit{PrimeFlex} è fortemente integrata con le componenti di \textit{PrimeReact};
+                  \item \textit{PrimeFlex} può essere integrato a \textit{tailwind};
+                  \item \textit{PrimeFlex} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
 \end{itemize}
 
@@ -278,13 +278,13 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: PrimeIcons
       \item \textbf{Versione}: 6.0.1
       \item \textbf{Link}: \href{https://primefaces.org/primeicons}{primefaces.org/primeicons}
-      \item \textbf{Descrizione}: PrimeIcons è una libreria di icone open-source utilizzata per la creazione di interfacce utente.
+      \item \textbf{Descrizione}: \textit{PrimeIcons} è una libreria di icone \textit{open-source} utilizzata per la creazione di interfacce utente.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item PrimeIcons offre un'ampia serie di icone per la creazione di interfacce utente, le quali sono altamente personalizzabili e facilmente integrabili;
-                  \item PrimeIcons è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
-                  \item PrimeIcons è fortemente integrata con le componenti di \textit{PrimeReact};
-                  \item PrimeIcons è supportato da una vasta e attiva community.
+                  \item \textit{PrimeIcons} offre un'ampia serie di icone per la creazione di interfacce utente, le quali sono altamente personalizzabili e facilmente integrabili;
+                  \item \textit{PrimeIcons} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+                  \item \textit{PrimeIcons} è fortemente integrata con le componenti di \textit{PrimeReact};
+                  \item \textit{PrimeIcons} è supportato da una vasta e attiva community.
             \end{itemize}
 \end{itemize}
 
@@ -293,18 +293,18 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: PrimeReact
       \item \textbf{Versione}: 10.0.0
       \item \textbf{Link}: \href{https://primefaces.org/primereact}{primefaces.org/primereact}
-      \item \textbf{Descrizione}: PrimeReact è una libreria di componenti React open-source utilizzata per la creazione di interfacce utente.
+      \item \textbf{Descrizione}: \textit{PrimeReact} è una libreria di componenti \textit{React open-source} utilizzata per la creazione di interfacce utente.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item PrimeReact offre un'ampia serie di componenti React per la creazione di interfacce utente, le quali a loro volta sono altamente personalizzabili, con numerose feature integrate;
-                  \item PrimeReact è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
-                  \item PrimeReact costituisce una peerdependency all'interno dei prodotti Datasoil S.r.l., permettendo di utilizzare le componenti PrimeReact all'interno
-                        della libreria grafica senza comportare l'aggiunta di dipendenze esterne, riducendo così le dimensioni del bundle finale;
-                  \item PrimeReact è supportato da una vasta e attiva community.
+                  \item \textit{PrimeReact} offre un'ampia serie di componenti \textit{React} per la creazione di interfacce utente, le quali a loro volta sono altamente personalizzabili, con numerose \textit{feature} integrate;
+                  \item \textit{PrimeReact} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+                  \item \textit{PrimeReact} costituisce una \textit{\gls{peerdependency}\glox} all'interno dei prodotti Datasoil S.r.l., permettendo di utilizzare le componenti \textit{PrimeReact} all'interno
+                        della libreria grafica senza comportare l'aggiunta di dipendenze esterne, riducendo così le dimensioni del \textit{bundle} finale;
+                  \item \textit{PrimeReact} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{Ant Design}: Ant Design è una libreria di componenti React open-source utilizzata per la creazione di interfacce utente, la quale non risulta però
+                  \item \textit{Ant Design}: \textit{Ant Design} è una libreria di componenti \textit{React open-source} utilizzata per la creazione di interfacce utente, la quale non risulta però
                         essere integrata all'interno dei prodotti Datasoil S.r.l.
             \end{itemize}
 \end{itemize}
@@ -315,12 +315,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: React
       \item \textbf{Versione}: 18.0.0
       \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
-      \item \textbf{Descrizione}: React è una libreria JavaScript open-source per la creazione di interfacce utente, sviluppata da Facebook.
+      \item \textbf{Descrizione}: \textit{React} è una libreria \textit{React open-source} per la creazione di interfacce utente, sviluppata da Facebook.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item React offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
-                  \item React è supportato da una vasta e attiva community;
-                  \item React è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
+                  \item \textit{React} offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
+                  \item \textit{React} è supportato da una vasta e attiva \textit{community};
+                  \item \textit{React} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
             \end{itemize}
 \end{itemize}
 
@@ -329,11 +329,11 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: TypeScript
       \item \textbf{Versione}: 5.1.6
       \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
-      \item \textbf{Descrizione}: TypeScript è un linguaggio di programmazione open-source sviluppato da Microsoft, che fa da super-set a JavaScript.
+      \item \textbf{Descrizione}: \textit{TypeScript} è un linguaggio di programmazione open-source sviluppato da \textit{Microsoft}, che fa da \textit{\gls{super-set}\glox} a \textit{JavaScript}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item TypeScript permette di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice;
-                  \item TypeScript permette di effettuare controlli statici sul codice sorgente, riducendo il numero di errori a runtime.
+                  \item \textit{TypeScript} permette di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice;
+                  \item \textit{TypeScript} permette di effettuare controlli statici sul codice sorgente, riducendo il numero di errori a \textit{runtime}.
             \end{itemize}
 \end{itemize}
 
@@ -342,11 +342,11 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: usehook-ts
       \item \textbf{Versione}: 3.1.0
       \item \textbf{Link}: \href{https://usehooks-ts.com/}{usehooks-ts.com}
-      \item \textbf{Descrizione}: usehook-ts è una libreria open-source di custom hook React.
+      \item \textbf{Descrizione}: \textit{usehook-ts} è una libreria \textit{open-source} di \textit{custom hook React}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item usehook-ts offre un'ampia serie di hook personalizzati per la creazione di interfacce utente;
-                  \item usehook-ts è supportato da una vasta e attiva community.
+                  \item \textit{usehook-ts} offre un'ampia serie di \textit{hook} personalizzati per la creazione di interfacce utente;
+                  \item \textit{usehook-ts} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
 \end{itemize}
 
@@ -357,12 +357,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: ESLint
       \item \textbf{Versione}: 8.3.0
       \item \textbf{Link}: \href{https://eslint.org/}{eslint.org}
-      \item \textbf{Descrizione}: ESLint è uno strumento open-source utilizzato per l'analisi statica del codice sorgente, per identificare pattern problematici o codice che non rispetta
+      \item \textbf{Descrizione}: \textit{ESLint} è uno strumento \textit{open-source} utilizzato per l'analisi statica del codice sorgente, per identificare pattern problematici o codice che non rispetta
             le linee guida definite all'interno del progetto.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item ESLint permette di definire regole personalizzate per l'analisi del codice sorgente, garantendo la coerenza e la qualità del codice;
-                  \item ESLint permette di integrarsi con gli strumenti di build, permettendo di eseguire l'analisi statica del codice sorgente durante il processo di build.
+                  \item \textit{ESLint} permette di definire regole personalizzate per l'analisi del codice sorgente, garantendo la coerenza e la qualità del codice;
+                  \item \textit{ESLint} permette di integrarsi con gli strumenti di \textit{build}, permettendo di eseguire l'analisi statica del codice sorgente durante il processo di \textit{build}.
             \end{itemize}
 \end{itemize}
 
@@ -371,12 +371,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Jest
       \item \textbf{Versione}: 29.0.7
       \item \textbf{Link}: \href{https://jestjs.io/}{jestjs.io}
-      \item \textbf{Descrizione}: Jest è un framework di testing open-source utilizzato per il testing di codice JavaScript e TypeScript.
+      \item \textbf{Descrizione}: \textit{Jest} è un \textit{framework} di testing \textit{open-source} utilizzato per il testing di codice \textit{JavaScript} e \textit{TypeScript}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Jest permette di effettuare test unitari, test di integrazione e test end-to-end, garantendo la qualità e la stabilità del codice;
-                  \item Jest permette di effettuare test in parallelo, riducendo i tempi di esecuzione dei test;
-                  \item Jest permette di generare report dettagliati sui test effettuati, permettendo di identificare e correggere eventuali errori.
+                  \item \textit{Jest} permette di effettuare test unitari, test di integrazione e test \textit{end-to-end}, garantendo la qualità e la stabilità del codice;
+                  \item \textit{Jest} permette di effettuare test in parallelo, riducendo i tempi di esecuzione dei test;
+                  \item \textit{Jest} permette di generare report dettagliati sui test effettuati, permettendo di identificare e correggere eventuali errori.
             \end{itemize}
 \end{itemize}
 
@@ -386,12 +386,12 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: NVM
       \item \textbf{Versione}: 1.1.12
       \item \textbf{Link}: \href{https://github.com/nvm-sh/nvm}{github.com/nvm-sh/nvm}
-      \item \textbf{Descrizione}: NVM (Node Version Manager) è uno strumento open-source utilizzato per la gestione delle versioni di Node.js.
+      \item \textbf{Descrizione}: \textit{NVM (Node Version Manager)} è uno strumento \textit{open-source} utilizzato per la gestione delle versioni di \textit{Node.js}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item NVM permette di installare e gestire più versioni di Node.js all'interno del sistema, permettendo di selezionare la versione corretta
+                  \item \textit{NVM} permette di installare e gestire più versioni di \textit{Node.js} all'interno del sistema, permettendo di selezionare la versione corretta
                         per il progetto in corso;
-                  \item NVM permette di gestire le versioni di Node.js in modo semplice e veloce, permettendo di passare da una versione all'altra con un solo comando.
+                  \item \textit{NVM} permette di gestire le versioni di \textit{Node.js} in modo semplice e veloce, permettendo di passare da una versione all'altra con un solo comando.
             \end{itemize}
 \end{itemize}
 
@@ -400,10 +400,10 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Prettier
       \item \textbf{Versione}: 3.2.5
       \item \textbf{Link}: \href{https://prettier.io/}{prettier.io}
-      \item \textbf{Descrizione}: Prettier è uno strumento open-source utilizzato per la formattazione del codice sorgente.
+      \item \textbf{Descrizione}: \textit{Prettier} è uno strumento \textit{open-source} utilizzato per la formattazione del codice sorgente.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Prettier permette di formattare il codice sorgente in modo automatico, garantendo uno stile uniforme all'interno del progetto.
+                  \item \textit{Prettier} permette di formattare il codice sorgente in modo automatico, garantendo uno stile uniforme all'interno del progetto.
             \end{itemize}
 \end{itemize}
 
@@ -412,16 +412,16 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Rollup
       \item \textbf{Versione}: 4.18.0
       \item \textbf{Link}: \href{https://rollupjs.org/}{rollupjs.org}
-      \item \textbf{Descrizione}: Rollup è un bundler di moduli JavaScript che permette di risolvere le dipendenze tra i moduli, generando un unico file di output.
+      \item \textbf{Descrizione}: \textit{Rollup} è un \textit{\gls{bundler}\glox} di moduli \textit{JavaScript} che permette di risolvere le dipendenze tra i moduli, generando un unico file di output.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Rollup effettua il tree-shaking, rimuovendo le dipendenze non utilizzate all'interno del codice sorgente;
+                  \item \textit{Rollup} effettua il \textit{\gls{tree-shaking}\glox}, rimuovendo le dipendenze non utilizzate all'interno del codice sorgente;
                   \item Permette di generare bundle in diversi formati, quali \textit{CommonJS} e \textit{ESM};
-                  \item Rollup è noto per la sua velocità ed efficienza nelle build, specialmente per progetti più piccoli o librerie.
-                        Questo può risultare in tempi di build più rapidi e in una migliore esperienza di sviluppo;
-                  \item Rollup ha un sistema di plug-in molto potente e flessibile che permette di estendere le sue funzionalità;
-                  \item Rollup permette di utilizzare TypeScript all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
-                  \item Rollup permette di generare file di dichiarazione TypeScript.
+                  \item \textit{Rollup} è noto per la sua velocità ed efficienza nelle \textit{build}, specialmente per progetti più piccoli o librerie.
+                        Questo può risultare in tempi di \textit{build} più rapidi e in una migliore esperienza di sviluppo;
+                  \item \textit{Rollup} ha un sistema di \textit{plug-in} molto potente e flessibile che permette di estendere le sue funzionalità;
+                  \item \textit{Rollup} permette di utilizzare \textit{TypeScript} all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
+                  \item \textit{Rollup} permette di generare file di dichiarazione \textit{TypeScript}.
             \end{itemize}
 \end{itemize}
 
@@ -430,18 +430,18 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Yarn
       \item \textbf{Versione}: 1.22.22
       \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
-      \item \textbf{Descrizione}: Yarn è un package manager per JavaScript, sviluppato da Facebook, Google e Tilde.
+      \item \textbf{Descrizione}: \textit{Yarn} è un \textit{package manager} per \textit{JavaScript}, sviluppato da \textit{Facebook, Google} e \textit{Tilde}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
-                  \item Yarn è più veloce di npm, ha un sistema di cache più efficiente e permette di installare pacchetti in parallelo.
+                  \item \textit{Yarn} è più veloce di \textit{npm}, ha un sistema di cache più efficiente e permette di installare pacchetti in parallelo.
             \end{itemize}
       \item \textbf{Svantaggi}:
             \begin{itemize}
-                  \item Yarn presenta un registry di dimensione minore rispetto a quello di \textit{npm}.
+                  \item \textit{Yarn} presenta un \textit{registry} di dimensione minore rispetto a quello di \textit{npm}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
-                  \item \textit{npm}: npm è il package manager di default per Node.js, ma è più lento di Yarn e ha un sistema di cache meno efficiente,
+                  \item \textit{npm}: npm è il \textit{package manager} di default per \textit{Node.js}, ma è più lento di \textit{Yarn} e ha un sistema di cache meno efficiente,
                         offrendo inoltre un output meno comprensibile.
             \end{itemize}
 \end{itemize}
@@ -454,7 +454,7 @@ Nella seguente sezione vengono presentati gli strumenti utilizzati per la collab
       \item \textbf{Nome strumento}: Confluence
       \item \textbf{Versione}: Cloud
       \item \textbf{Link}: \href{https://www.atlassian.com/software/confluence}{atlassian.com/software/confluence}
-      \item \textbf{Descrizione}: Confluence è un software di collaborazione sviluppato da Atlassian, utilizzato per la creazione e la gestione della documentazione
+      \item \textbf{Descrizione}: \textit{Confluence} è un software di collaborazione sviluppato da \textit{Atlassian}, utilizzato per la creazione e la gestione della documentazione
             all'interno di un'azienda.
 \end{itemize}
 
@@ -463,13 +463,13 @@ Nella seguente sezione vengono presentati gli strumenti utilizzati per la collab
       \item \textbf{Nome strumento}: Slack
       \item \textbf{Versione}: Cloud
       \item \textbf{Link}: \href{https://slack.com/}{slack.com}
-      \item \textbf{Descrizione}: Slack è un software di collaborazione sviluppato da Slack Technologies, utilizzato per la comunicazione quotidiana e la collaborazione
+      \item \textbf{Descrizione}: \textit{Slack} è un software di collaborazione sviluppato da \textit{Slack Technologies}, utilizzato per la comunicazione quotidiana e la collaborazione
             con il team.
 \end{itemize}
 
 \section{Descrizione del prodotto ottenuto}
-Il prodotto conseguito al termine dello stage consiste in una libreria TypeScript di componenti utilizzati nel processo di creazione di dashboard dinamiche,
-ottenuto a partire dal refactor e l'ottimizzazione della libreria open-source utilizzata all'interno della piattaforma \textit{Redash}.
+Il prodotto conseguito al termine dello stage consiste in una libreria \textit{TypeScript} di componenti utilizzati nel processo di creazione di dashboard dinamiche,
+ottenuto a partire dal refactor e l'ottimizzazione della libreria \textit{open-source} utilizzata all'interno della piattaforma \textit{Redash}.
 La libreria implementata, sotto il nome di \textit{viz-lib}, è stata infatti integrata assieme alla già esistente libreria \textit{dashboard} all'interno del SDK
 \textit{dsdashboard2}, utilizzato all'interno dei prodotti Datasoil S.r.l. per la generazione di dashboard dinamiche.
 La libreria \textit{viz-lib} offre una vasta gamma di grafici, quali:
@@ -485,7 +485,7 @@ La libreria \textit{viz-lib} offre una vasta gamma di grafici, quali:
       \item Tabelle.
 \end{itemize}
 Grazie al refactor e all'ottimizzazione della libreria preesistente, l'SDK prodotto risulta essere più performante, più manutenibile e soprattutto più leggero rispetto
-alla versione preesistente, con un bundle di dimensioni 1.26 MB → 418.03 kB (gzip) rispetto ai 4.11 MB → 1.203 MB (gzip) iniziali.
+alla versione preesistente, con un \textit{bundle} di dimensioni 1.26 MB → 418.03 kB (gzip) rispetto ai 4.11 MB → 1.203 MB (gzip) iniziali.
 
 \section{Organizzazione del testo}
 Nel presente capitolo viene presentata l'introduzione della tesi, fornendo una panoramica sull'azienda, sul contesto applicativo,
@@ -506,13 +506,13 @@ In seguito il documento presenterà la seguente organizzazione:
       \item[{\hyperref[chap:rilascio]{Rilascio}}] descrive l'attività di rilascio dell'SDK realizzato, presentando le modalità di integrazione
             all'interno di un prodotto Datasoil S.r.l.;
 
-      \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo una valutazione oggettiva
-            degli strumenti utilizzati e una riflessione sui possibili punti di insoddisfazione e dei relativi miglioramenti applicabili al prodotto realizzato.
-            La sezione infine si conclude con proposte per future estensioni e sviluppi del progetto.
+      \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo un consuntivo finale delle attività svolte,
+            una valutazione del progetto e una sezione dedicata ai possibili sviluppi futuri del prodotto.
+            La sezione infine si conclude con una riflessione finale sull'esperienza di stage svolta.
 \end{description}
 In merito alla stesura del testo, all'interno del presente documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
-      \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+      \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario;
       \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \textit{parola}\glox\gloxspacing;
       \item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \textit{corsivo}.
 \end{itemize}
