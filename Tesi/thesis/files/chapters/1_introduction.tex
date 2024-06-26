@@ -2,25 +2,25 @@
 \label{chap:introduzione}
 
 \section{L'azienda}
-Lo stage è stato svolto presso l'azienda Datasoil S.r.l. situata nei dintorni della stazione ferroviaria di Padova.
-Fondata nel 2016, Datasoil S.r.l. è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
+Lo stage è stato svolto presso l'azienda \textit{Datasoil S.r.l.} situata nei dintorni della stazione ferroviaria di Padova.
+Fondata nel 2016, \textit{Datasoil S.r.l.} è un'azienda di prodotto che si dedica allo sviluppo di piattaforme per l'industria 4.0,
 \textit{smart building} e \textit{smart city}.
 L'obiettivo dell'azienda è integrare informazioni ed eventi provenienti dai vari livelli aziendali per creare \textit{insight} proattivi
 in tempo reale, garantendo che le informazioni corrette raggiungano le persone giuste al momento più opportuno.
 Il punto di partenza è la spazialità aziendale e tutti gli \textit{asset} che risiedono all'interno di essa, da cui
 provengono tutti i dati raccolti, i quali vengono analizzati trasversalmente grazie a sempre più persone e dispositivi connessi.
-Da qui il nome dell'azienda, Datasoil: fare emergere le informazioni da questo suolo fertile di dati da cui siamo circondati.
+Da qui il nome dell'azienda, \textit{Datasoil}: fare emergere le informazioni da questo suolo fertile di dati da cui siamo circondati.
 
 \begin{figure}[H]
       \centering
-      \includegraphics[alt={Logo Datasoil S.r.l.}, width=0.25\columnwidth]{img/datasoil_logo.jpg}
-      \caption{Logo Datasoil S.r.l.}
+      \includegraphics[alt={Logo \textit{Datasoil S.r.l.}}, width=0.25\columnwidth]{img/datasoil_logo.jpg}
+      \caption{Logo \textit{Datasoil S.r.l.}}
       \label{fig:datasoil}
 \end{figure}
 
 \section{L'idea}
 \subsection{Il contesto applicativo}
-L'azienda Datasoil S.r.l., essendo un'azienda di prodotto, nasce con l'idea di proporre servizi di monitoraggio e controllo
+L'azienda \textit{Datasoil S.r.l.}, essendo un'azienda di prodotto, nasce con l'idea di proporre servizi di monitoraggio e controllo
 di impianti industriali, \textit{smart building} e \textit{smart city}, offrendo come principale prodotto la piattaforma SYN.
 
 \begin{figure}[H]
@@ -39,18 +39,18 @@ in merito ad informazioni filtrate e aggiornate \textit{live}, permettendo di ra
 
 \subsection{Il progetto}
 Il progetto svolto durante lo stage consiste nello sviluppo di una libreria \textit{TypeScript} di componenti per la creazione di dashboard dinamiche.
-Questo è stato realizzato tramite il \gls{refactoring}\glox e l'ottimizzazione di un \textit{tool} grafico preesistente, integrato nei vari prodotti di Datasoil S.r.l.,
+Questo è stato realizzato tramite il \gls{refactoring}\glox e l'ottimizzazione di un \textit{tool} grafico preesistente, integrato nei vari prodotti di \textit{Datasoil S.r.l.},
 tra cui \textit{SYN}. La libreria è stata implementata a partire da un modulo \textit{\gls{open-source}}\glox utilizzato in \textit{Redash} (\href{https://redash.io}{redash.io}),
 una piattaforma per la creazione di dashboard dinamiche tramite interrogazioni sulle fonti di dati configurate all'interno del servizio. \newline
-L'esigenza di tale progetto nasce dalla necessità da parte di Datasoil S.r.l. di avere una libreria grafica aggiornata alle versioni
+L'esigenza di tale progetto nasce dalla necessità da parte di \textit{Datasoil S.r.l.} di avere una libreria grafica aggiornata alle versioni
 correnti delle dipendenze utilizzate, migliorando l'\gls{FCP}\glox e il \gls{TTI}\glox, raggiungendo una maggiore manutenibilità del codice rispetto alla versione
 preesistente, riducendo dove possibile le dipendenze esterne e introducendo migliorie grafiche e funzionali. \newline
 La libreria sviluppata sotto il nome '\textit{viz-lib}', costituisce, insieme alla già esistente libreria '\textit{dashboard}' (la quale ha subito anch'essa in parte un processo di refactoring
 per permettere l'integrazione con la nuova libreria e l'introduzione di nuove funzionalità), il nuovo \gls{SDK}\glox '\textit{dsdashbord2}'
-utilizzato all'interno dei prodotti Datasoil S.r.l. per la realizzazione di dashboard dinamiche.
+utilizzato all'interno dei prodotti \textit{Datasoil S.r.l.} per la realizzazione di dashboard dinamiche.
 
 \section{Principali problematiche}
-Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di Datasoil S.r.l., sono emerse alcune problematiche
+Durante l'analisi iniziale della libreria preesistente in uso all'interno dei prodotti di \textit{Datasoil S.r.l.}, sono emerse alcune problematiche
 legate alla manutenibilità e alla performance del \textit{tool} grafico a seguito di una attenta revisione del codice sorgente. \newline
 Di seguito vengono presentate le principali problematiche riscontrate.
 
@@ -58,11 +58,11 @@ Di seguito vengono presentate le principali problematiche riscontrate.
 La libreria preesistente utilizzava versioni obsolete delle dipendenze esterne, con conseguente degradazione delle prestazioni in termini
 di utilizzo di spazio e di tempo di caricamente delle risorse, data l'assenza di ottimizzazioni e di aggiornamenti del codice sorgente. \newline
 Essendo inoltre la libreria preesistente basata su una versione del modulo di visualizzazioni utilizzato nella piattaforma \textit{Redash},
-le tecnologie utilizzate il più delle volte rappresentavano alternative a quelle già utilizzate nei prodotti Datasoil S.r.l., creando dipendenze
+le tecnologie utilizzate il più delle volte rappresentavano alternative a quelle già utilizzate nei prodotti \textit{Datasoil S.r.l.}, creando dipendenze
 non necessarie, con conseguente aumento delle dimensioni del SDK utilizzato per la generazione delle dashboard.
 
 \subsection{Manutenibilità del codice}
-Il codice sorgente della libreria preesistente, sviluppato in tempistiche rapide a fronte di una esigenza specifica dell'azienda Datasoil S.r.l.,
+Il codice sorgente della libreria preesistente, sviluppato in tempistiche rapide a fronte di una esigenza specifica dell'azienda \textit{Datasoil S.r.l.},
 risultava essere poco manutenibile e assente di documentazione. \newline
 Inoltre, la libreria di visualizzazioni utilizzata da \textit{Redash} su cui si basa l'SDK utilizzato dall'azienda, inizialmente implementata in JavaScript,
 ha subito solo successivamente un refactoring in TypeScript: questo refactoring non è però avvenuto con l'introduzione di interfacce e tipi, bensì con la semplice aggiunta
@@ -71,11 +71,11 @@ poco leggibile e difficile da mantenere.
 
 \subsection{Componenti inutilizzate}
 In quanto la libreria preesistente fosse realizzata a partire dal modulo utilizzato dalla piattaforma \textit{Redash}, non tutti i componenti presenti
-in essa trovavano utilizzo all'interno dei prodotti realizzati da Datasoil S.r.l.: questo in gran parte era dovuto ad un'offerta di grafici non adeguati
+in essa trovavano utilizzo all'interno dei prodotti realizzati da \textit{Datasoil S.r.l.}: questo in gran parte era dovuto ad un'offerta di grafici non adeguati
 a quello che è il contesto applicativo dell'azienda.
 
 \subsection{Assenza di funzionalità}
-La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di Datasoil S.r.l., mancando di alcune funzionalità fondamentali,
+La libreria preesistente non soddisfaceva pienamente le esigenze dei clienti di \textit{Datasoil S.r.l.}, mancando di alcune funzionalità fondamentali,
 quali la possibilità di effettuare il \textit{download} dei dati tabellari o la visualizzazione a pagina piena dei vari \textit{widget}.
 Queste limitazioni hanno reso necessario un intervento di refactoring per colmare le lacune e migliorare le prestazioni complessive.
 
@@ -87,7 +87,7 @@ del codice sorgente, individuando le soluzioni presentate di seguito.
 Per risolvere il problema delle dipendenze obsolete, è stata effettuata un'analisi delle versioni correnti delle dipendenze utilizzate all'interno della libreria,
 verificando che le funzionalità utilizzate non fossero deprecate o rimosse, procedendo con l'eventuale refactoring ad un codice compatibile che tenesse inoltre conto
 delle nuove funzionalità introdotte nelle versioni più recenti. \newline
-Grazie ad uno studio accurato delle librerie utilizzate nei prodotti Datasoil S.r.l., è stato possibile sostituire con librerie equivalenti dipendenze preesistenti,
+Grazie ad uno studio accurato delle librerie utilizzate nei prodotti \textit{Datasoil S.r.l.}, è stato possibile sostituire con librerie equivalenti dipendenze preesistenti,
 riducendo così l'onere di utilizzo dell'SDK all'interno dei prodotti aziendali.
 
 \subsection{Introduzione di interfacce e tipi}
@@ -102,12 +102,12 @@ più leggibile e immediato, eliminando complessità superflue e mantenendo l'eff
 
 \subsection{Rimozione di componenti inutilizzate}
 In merito alla presenza di componenti inutilizzate all'interno della libreria preesistente, è stata effettuata un'accurata analisi delle componenti presenti, selezionando
-quelle che non trovavano un diretto utilizzo all'interno dei prodotti Datasoil S.r.l. e procedendo con la loro rimozione. \newline
+quelle che non trovavano un diretto utilizzo all'interno dei prodotti \textit{Datasoil S.r.l.} e procedendo con la loro rimozione. \newline
 Questo lavoro ha permesso di ridurre le dimensioni del codice sorgente e di migliorare le prestazioni complessive della libreria, diminuendo inoltre il numero di dipendenze
 esterne richiesto per il corretto funzionamento dell'SDK prodotto.
 
 \subsection{Implementazione di nuove funzionalità}
-Per colmare le lacune riscontrate nella libreria preesistente in merito all'assenza di alcune funzionalità richieste dai clienti di Datasoil S.r.l. all'interno dei prodotti forniti,
+Per colmare le lacune riscontrate nella libreria preesistente in merito all'assenza di alcune funzionalità richieste dai clienti di \textit{Datasoil S.r.l.} all'interno dei prodotti forniti,
 è stato condotto un lavoro di implementazione di nuove funzionalità. \newline
 In questo processo, si è cercato di utilizzare dipendenze esterne preferibilmente già in dotazione o che fossero compatibili con il contesto applicativo dell'azienda. Qualora ciò non
 fosse stato possibile, sono state introdotte nuove dipendenze esterne selezionate a seguito di un'analisi dettagliata che tenesse conto delle implicazioni in termini di dimensioni
@@ -235,7 +235,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
                   \item \textit{Plotly.js} offre la possibilità di generare \textit{custom \gls{bundle}\glox} personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
                         così le dimensioni del pacchetto finale;
                   \item \textit{Plotly.js} era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato \textit{\gls{backend}\glox} negli editor
-                        utilizzati per la generazione delle risposte \textit{JSON} da parte dei server Datasoil S.r.l. per la generazione delle dashboard;
+                        utilizzati per la generazione delle risposte \textit{JSON} da parte dei server \textit{Datasoil S.r.l.} per la generazione delle dashboard;
                   \item \textit{Plotly.js} offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
                         e migliorando le prestazioni complessive della libreria.
             \end{itemize}
@@ -298,14 +298,14 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
             \begin{itemize}
                   \item \textit{PrimeReact} offre un'ampia serie di componenti \textit{React} per la creazione di interfacce utente, le quali a loro volta sono altamente personalizzabili, con numerose \textit{feature} integrate;
                   \item \textit{PrimeReact} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
-                  \item \textit{PrimeReact} costituisce una \textit{\gls{peerdependency}\glox} all'interno dei prodotti Datasoil S.r.l., permettendo di utilizzare le componenti \textit{PrimeReact} all'interno
+                  \item \textit{PrimeReact} costituisce una \textit{\gls{peerdependency}\glox} all'interno dei prodotti \textit{Datasoil S.r.l.}, permettendo di utilizzare le componenti \textit{PrimeReact} all'interno
                         della libreria grafica senza comportare l'aggiunta di dipendenze esterne, riducendo così le dimensioni del \textit{bundle} finale;
                   \item \textit{PrimeReact} è supportato da una vasta e attiva \textit{community}.
             \end{itemize}
       \item \textbf{Alternative Esaminate}:
             \begin{itemize}
                   \item \textit{Ant Design}: \textit{Ant Design} è una libreria di componenti \textit{React open-source} utilizzata per la creazione di interfacce utente, la quale non risulta però
-                        essere integrata all'interno dei prodotti Datasoil S.r.l.
+                        essere integrata all'interno dei prodotti \textit{Datasoil S.r.l.}
             \end{itemize}
 \end{itemize}
 
@@ -371,7 +371,7 @@ Gli strumenti verranno presentati in ordine alfabetico secondo la seguente strut
       \item \textbf{Nome strumento}: Jest
       \item \textbf{Versione}: 29.0.7
       \item \textbf{Link}: \href{https://jestjs.io/}{jestjs.io}
-      \item \textbf{Descrizione}: \textit{Jest} è un \textit{framework} di testing \textit{open-source} utilizzato per il testing di codice \textit{JavaScript} e \textit{TypeScript}.
+      \item \textbf{Descrizione}: \textit{Jest} è un \textit{\gls{framework}\glox} di testing \textit{open-source} utilizzato per il testing di codice \textit{JavaScript} e \textit{TypeScript}.
       \item \textbf{Vantaggi}:
             \begin{itemize}
                   \item \textit{Jest} permette di effettuare test unitari, test di integrazione e test \textit{end-to-end}, garantendo la qualità e la stabilità del codice;
@@ -471,7 +471,7 @@ Nella seguente sezione vengono presentati gli strumenti utilizzati per la collab
 Il prodotto conseguito al termine dello stage consiste in una libreria \textit{TypeScript} di componenti utilizzati nel processo di creazione di dashboard dinamiche,
 ottenuto a partire dal refactor e l'ottimizzazione della libreria \textit{open-source} utilizzata all'interno della piattaforma \textit{Redash}.
 La libreria implementata, sotto il nome di \textit{viz-lib}, è stata infatti integrata assieme alla già esistente libreria \textit{dashboard} all'interno del SDK
-\textit{dsdashboard2}, utilizzato all'interno dei prodotti Datasoil S.r.l. per la generazione di dashboard dinamiche.
+\textit{dsdashboard2}, utilizzato all'interno dei prodotti \textit{Datasoil S.r.l.} per la generazione di dashboard dinamiche.
 La libreria \textit{viz-lib} offre una vasta gamma di grafici, quali:
 \begin{itemize}
       \item Contatori;
@@ -504,7 +504,7 @@ In seguito il documento presenterà la seguente organizzazione:
             all'interno della libreria implementata e dei relativi test effettuati per garantire la qualità e la funzionalità del prodotto finale;
 
       \item[{\hyperref[chap:rilascio]{Rilascio}}] descrive l'attività di rilascio dell'SDK realizzato, presentando le modalità di integrazione
-            all'interno di un prodotto Datasoil S.r.l.;
+            all'interno di un prodotto \textit{Datasoil S.r.l.};
 
       \item[{\hyperref[chap:conclusioni]{Conclusioni}}] presentano un epilogo del progetto svolto, includendo un consuntivo finale delle attività svolte,
             una valutazione del progetto e una sezione dedicata ai possibili sviluppi futuri del prodotto.

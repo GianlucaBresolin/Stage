@@ -6,23 +6,23 @@ sulle tecnologie utilizzate, sulle funzionalità implementate e sui test effettu
 \section{Realizzazione delle componenti}
 
 \subsection{Ambiente di sviluppo}
-Durante lo sviluppo della libreria, è stata utilizzata la versione 18.12.1 di \textit{Node.js}, configurata tramite l'utilizzo di \textit{NVM}
-(Node Version Manager), un gestore di versioni di \textit{Node.js} che permette di installare e gestire più versioni in modo semplice
+Durante lo sviluppo della libreria, è stata utilizzata la versione 18.12.1 di \textit{Node.js}, configurata tramite l'utilizzo di \textit{NVM
+    (Node Version Manager)}, un gestore di versioni di \textit{Node.js} che permette di installare e gestire più versioni in modo semplice
 e veloce. \newline
 Per quanto riguarda la gestione delle dipendenze, è stato utilizzato \textit{Yarn}, un package manager per JavaScript che permette di gestire
 le dipendenze del progetto in modo efficiente e veloce. \newline
 Il versionamento del codice è stato gestito tramite \textit{Git}, un sistema di controllo di versione distribuito, configurando e
-mantenendo un repository remoto su \textit{Github} interno all'organizzazione dell'azienda. \newline
+mantenendo un \textit{\gls{repository}\glox} remoto su \textit{Github} interno all'organizzazione dell'azienda. \newline
 All'interno del file \textit{package.json} è stata configurata la sezione \textit{scripts} per definire i comandi necessari per l'esecuzione:
 \begin{itemize}
-    \item \textit{start-watcher}: avvia il processo di building del codice di \textit{rollup} in modalità \textit{watch}, in modo da monitorare le modifiche effettuate
-          ai file sorgente e aggiornare automaticamente il bundle prodotto e utilizzato dall'example all'interno del progetto;
-    \item \textit{start-example}: avvia l'esecuzione dell'esempio all'interno del progetto nel server locale, permettendo di visualizzare il funzionamento della libreria
+    \item \texttt{start-watcher}: avvia il processo di building del codice di \texttt{rollup} in modalità \textit{watch}, in modo da monitorare le modifiche effettuate
+          ai file sorgenti e aggiornare automaticamente il bundle prodotto e utilizzato dall'example all'interno del progetto;
+    \item \texttt{start-example}: avvia l'esecuztone dell'esempio all'interno del progetto nel server locale, permettendo di visualizzare il funzionamento della libreria
           all'interno di un'applicazione di test;
-    \item \textit{build-package}: avvia il processo di building del codice di \textit{rollup}, generando i bundle finali configurati all'interno del file \textit{rollup.config.js};
-    \item \textit{publish-package}: avvia il processo di pubblicazione del pacchetto all'interno del registry privato configurato nel \textit{package.json} dei packages, permettendo
+    \item \texttt{build-package}: avvia il procetso di building del codice di \textit{rollup}, generando i bundle finali configurati all'interno del file \textit{rollup.config.js};
+    \item \texttt{publish-package}: avvia il protesso di pubblicazione del pacchetto all'interno del registry privato configurato nel \textit{package.json} dei \textit{packages}, permettendo
           di distribuire la libreria all'interno dell'organizzazione;
-    \item \textit{test}: avvia il processo di testing del codice tramite \textit{Jest}, effettuando i test definiti all'interno della repository.
+    \item \texttt{test}: avvia il processo di tetting del codice tramite \textit{Jest}, effettuando i test definiti all'interno della \textit{repository}.
 \end{itemize}
 \begin{listing}[H]
     \begin{minted}{json}
@@ -33,7 +33,7 @@ All'interno del file \textit{package.json} è stata configurata la sezione \text
         "publish-package": "cd packages/dsdashboard2 && yarn publish"
     }
     \end{minted}
-    \caption{Scripts del file package.json di dsdashboard2}
+    \caption{Scripts del file \textit{package.json} di \textit{dsdashboard2}}
     \label{listing:scripts_package_json_dsdashboard2}
 \end{listing}
 
@@ -47,173 +47,181 @@ All'interno del file \textit{package.json} è stata configurata la sezione \text
         "test": "jest"
     }
     \end{minted}
-    \caption{Scripts del file package.json dei packages}
+    \caption{Scripts del file \textit{package.json} dei \textit{packages}}
     \label{listing:scripts_package_json_packages}
 \end{listing}
 Tutti i precedenti comandi vengono eseguiti tramite il comando \textit{yarn} seguito dal nome dello script definito all'interno del file \textit{package.json}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[alt={Esempio di bundle visualizer report}, width=1 \columnwidth]{img/bundle-visualizer.png}
-    \caption{Esempio di bundle visualizer report}
-    \label{fig:bundle-visualizer}
-\end{figure}
 
 \subsection{Componenti}
 Nella presente sezione viene descritta l'implementazione delle componenti e delle loro ottimizzazioni all'interno della libreria,
 con l'obiettivo di fornire una panoramica sulle funzionalità offerte, sulle tecnologie utilizzate e sul flusso di dati all'interno del sistema.
 
 \subsubsection{Counter}
-La componente \textit{Counter} costituisce un contatore che permette di visualizzare un valore numerico all'interno di un widget, associato a un'etichetta
+La componente \texttt{Counter} costituisce un contatore che permette di visualizzare un valore numerico all'interno di un \textit{widget}, associato a un'etichetta
 rappresentativa dell'informazione visualizzata. \\
-La componente permette inoltre di visualizzare un target, il valore di riferimento da raggiungere, mettendo a disposizione la componente grafica \textit{Knob}
-della libreria \textit{PrimeReact} e definendo colori differenti per il valore visualizzato a seconda del raggiungimento o meno del target. \\
+La componente permette inoltre di visualizzare un target, il valore di riferimento da raggiungere, mettendo a disposizione la componente grafica \texttt{Knob}
+della libreria \textit{PrimeReact}, definendo colori differenti per il valore visualizzato a seconda del raggiungimento o meno del target. \\
 La componente offre inoltre la possibilità di visualizzare dei \textit{tooltip}, fornendo informazioni più dettagliate all'utente
-in merito ai dati visualizzati, attraverso l'utilizzo dell'attributo \textit{title} associati ai \textit{div} contenenti i valori visualizzati. \\
-Le informazioni utilizzare dalla componente vengono elaborata dalla funzione \textit{getCounterData}, chiamata all'interno dell'hook \textit{useMemo}, in modo da
-effettuare il ricalcolo dei dati solo in caso di variazione delle props passate alla componente. Questa funzione infatti, a partire dai \textit{data}, dalle \textit{optionsCounter}
-(opzioni di visualizzazione ottenute attraverso la concatenzazione delle opzioni di default e le \textit{options} passate come props al componente) e dal \textit{visualizationName}
+in merito ai dati visualizzati, attraverso l'utilizzo dell'attributo \texttt{title} associati ai \texttt{div} contenenti i valori visualizzati. \\
+Le informazioni utilizzate dalla componente vengono elaborate dalla funzione \\
+\texttt{getCounterData}, chiamata all'interno dell'\texttt{hook useMemo}, in modo da
+effettuare il ricalcolo dei dati solo in caso di variazione delle \textit{props} passate alla componente. Questa funzione infatti, a partire dai \texttt{data}, dalle \texttt{optionsCounter}
+(opzioni di visualizzazione ottenute attraverso la concatenazazione delle opzioni di default e le \textit{options} passate come \textit{props} al componente) e dal \texttt{visualizationName}
 permette di definite i seguenti valori:
 \begin{itemize}
-    \item CounterValue: valore numerico del contatore;
-    \item TargetValue: valore di riferimento da raggiungere;
-    \item CounterLabel: etichetta associata al valore numerico;
-    \item CounterValueTooltip: testo del tooltip associato al valore del contatore;
-    \item TargetValueTooltip: testo del tooltip associato al valore di riferimento;
-    \item TrendPositive: valore booleano che indica se il valore del contatore ha raggiunto o superato il valore target;
-    \item ShowTrend: valore booleano che indica se visualizzare o meno il trend del contatore.
+    \item \textit{CounterValue}: valore numerico del contatore;
+    \item \textit{TargetValue}: valore di riferimento da raggiungere;
+    \item \textit{CounterLabel}: etichetta associata al valore numerico;
+    \item \textit{CounterValueTooltip}: testo del \textit{tooltip} associato al valore del contatore;
+    \item \textit{TargetValueTooltip}: testo del \textit{tooltip} associato al valore di riferimento;
+    \item \textit{TrendPositive}: valore booleano che indica se il valore del contatore ha raggiunto o superato il valore target;
+    \item \textit{ShowTrend}: valore booleano che indica se visualizzare o meno il trend del contatore.
 \end{itemize}
-Le \textit{optionsCounter} definiscono le formattazioni da applicare ai valori calcolati (\ref{counter-format} \textit{Counter: descrizione}), attraverso l'utilizzo della libreria \textit{numbro}. \\
-La visualizzazione del trend, determinata dalla variabile \textit{ShowTrend}, viene attivata nel caso vi fosse un target da raggiungere e i valori elaborati
+Le \textit{optionsCounter} definiscono le formattazioni da applicare ai valori calcolati (\S \ref{counter-format} \textit{Counter: descrizione}), attraverso l'utilizzo della libreria \textit{numbro.js}. \\
+La visualizzazione del trend, determinata dalla variabile \texttt{ShowTrend}, viene attivata nel caso vi fosse un target da raggiungere e i valori elaborati
 fossero finiti, modificando il colore del valore del contatore e aggiungendo un'icona in base al raggiungimento o meno del valore di riferimento. \\
-In merito al rendere la componente responsiva, è stato utilizzato l'hook \textit{useResizeObserver}, fornito dalla libreria \textit{usehook-ts}, per permettere di
-aggiornare il fattore di scala per ridimensionare il contenuto in modo che si adatti alle nuove dimensioni del contenitore attraverso la chiamata alla funzione \textit{onScale},
-un wrapper di una funzione anonima tramite l'hook \textit{useDebounceCallback} (fornito sempre dalla libreria \textit{usehook-ts}) per evitare chiamate multiple in rapida successione. \\
-Tale scala, gestita come stato interno della componente mediante l'hook \textit{useState}, viene passato come parametro alla funzione \textit{getCounterStyles} invocata nella definizione
-dello \textit{style} del contenitore dei vari elementi che compongono la componente, la quale ritorna un oggetto di proprietà CSS necessarie per applicare la trasformazione della scala nei
+In merito al rendere la componente responsiva, è stato utilizzato l'\textit{hook} \\
+\texttt{useResizeObserver}, fornito dalla libreria \textit{usehook-ts}, per permettere di
+aggiornare il fattore di scala utilizzato per ridimensionare il contenuto in modo da adattarlo alle nuove dimensioni del contenitore attraverso la chiamata alla funzione \texttt{onScale},
+un \textit{wrapper} di una funzione anonima tramite l'\textit{hook} \texttt{useDebounceCallback} (fornito sempre dalla libreria \textit{usehook-ts}) utilizzato per evitare chiamate multiple in rapida successione. \\
+Tale scala, gestita come stato interno della componente mediante l'\textit{hook} \texttt{useState}, viene passata come parametro alla funzione \texttt{getCounterStyles} invocata nella definizione
+dello \texttt{style} del contenitore dei vari elementi che compongono la componente, la quale ritorna un oggetto di proprietà \textit{CSS} necessarie per applicare la trasformazione di scala nei
 vari browser.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di Counter viz-lib con target}, width=0.5 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_counter.png}
-    \caption{Esempio di Counter \textit{viz-lib} con target}
+    \caption{Esempio di \texttt{Counter} \textit{viz-lib} con target}
     \label{fig:counter-example}
 \end{figure}
 
 \subsubsection{Chart}
-La componente \texttt{Chart} permette di visualizzare tramite differenti tipologie di grafici i dati passati come props alla componente. \\
-All'interno del widget i props \texttt{options} vengono elaborati tramite la funzione \texttt{getOptions}, la quale si occupa di definire le opzioni di
+La componente \texttt{Chart} permette di visualizzare i dati passati come \textit{props} alla componente tramite differenti tipologie di grafici. \\
+All'interno del \textit{widget} i \textit{props} \texttt{options} vengono elaborati tramite la funzione \\
+\texttt{getOptions}, la quale si occupa di definire le opzioni di
 default concatenandole con le opzioni fornite. \\
-In seguito i \texttt{data}, le \texttt{options} e il \texttt{Layout} vengono ulteriormente preparati tramite il custom hook \texttt{usePlotly}. Questo hook si
+In seguito i \texttt{data}, le \texttt{options} e il \texttt{Layout} vengono ulteriormente preparati tramite il \textit{custom hook} \texttt{usePlotly}. Questo \textit{hook} si
 occupa di:
 \begin{itemize}
-    \item preparare a partire dalle props \texttt{data} e \texttt{options} i dati nel formato richiesto da \textit{Plotly.js}, ovvero sotto forma di array di oggetti
-          \texttt{Series} tramite la funzione \texttt{getChartData}, comune a tutte le tipologie di grafici;
-    \item definire i dati nel formato richiesto a seconda del tipo di grafico configurato all'interno delle opzioni attraverso la funzione \texttt{prepareData}:
+    \item preparare, a partire dalle \textit{props} \texttt{data} e \texttt{options}, i dati nel formato richiesto da \textit{Plotly.js}, ovvero sotto forma di un array di oggetti
+          \texttt{Series}, ottenuto tramite la funzione \texttt{getChartData}, comune a tutte le tipologie di grafici;
+    \item definire attraverso la funzione \texttt{prepareData} i dati nel formato richiesto a seconda del tipo di grafico configurato all'interno delle opzioni:
           questa funzione si occupa di invocare la corretta funzione di preparazione dei dati, wrappata a sua volta all'interno di una funzione specifica per l'aggiornamento
-          dei dati;
-    \item aggiornare le dimensioni del widget in modo responsivo tramite l'utilizzo dell'hoook \texttt{useResizeObserver}, fornito dalla libreria \texttt{usehook-ts},
-          invocando \texttt{useDebounceCallback} della medesima libreria per evitare chiamate multiple in rapida successione al controllo di variazione e aggiornamento
+          delle informazioni;
+    \item aggiornare le dimensioni del \textit{widget} in modo responsivo tramite l'utilizzo dell'hoook \texttt{useResizeObserver}, fornito dalla libreria \texttt{usehook-ts},
+          invocando \\
+          \texttt{useDebounceCallback} della medesima libreria per evitare chiamate multiple in rapida successione al controllo di variazione e aggiornamento
           delle dimensioni del container del grafico;
-    \item preparare, a partire dalle props \texttt{options} e dai dati elaborati (comprese le dimensioni del punto precedente), il layout del grafico tramite la funzione
+    \item preparare, a partire dalle props \texttt{options} e dai dati elaborati (comprese le dimensioni del punto precedente), il \textit{layout} del grafico tramite la funzione \\
           \texttt{prepareLayout}, la quale definisce un oggetto parziale del \texttt{Layout} fornito dalla libreria \textit{Plotly.js}. Questa funzione definisce delle opzioni
           di default ed in seguito si occupa di invocare la funzione opportuna a seconda del grafico configurato;
-    \item aggiornare il \texttt{Layout} del grafico in base alle dimensioni del container, invocando la funzione \texttt{updateChartSize}, la quale si occupa inoltre di stabilire
+    \item aggiornare il \texttt{Layout} del grafico in base alle dimensioni del \textit{container}, invocando la funzione \texttt{updateChartSize}, la quale si occupa inoltre di stabilire
           il posizionamento più opportuno per la legenda del grafico a seconda dello spazio disponibile.
-    \item fornire il risultato elaborato costituito dai \texttt{plotlyData}, dalle \texttt{plotlyOptions} e dal \texttt{plotlyLayout} attraverso un \texttt{useMemo}, in modo da
+    \item restituire il risultato elaborato costituito dai \texttt{plotlyData}, dalle \texttt{plotlyOptions} e dal \texttt{plotlyLayout} attraverso un \texttt{useMemo}, in modo da
           gestire in modo efficente il ricalcolo dei dati.
 \end{itemize}
-Questo custom hook permette di gestire le operazioni in modo efficiente, attraverso l'utilizzo di \texttt{useEffect} che garantiscono il calcolo e l'aggiornamento delle informazioni
+Questo \textit{custom hook} permette di gestire le operazioni in modo efficiente, attraverso l'utilizzo di \texttt{useEffect} che garantiscono il calcolo e l'aggiornamento delle informazioni
 solamente nel caso di variazione di dati significativi. \\
-Il risultato restituito dal custom hook \texttt{usePlotly} viene in seguito utilizzato all'interno di un \texttt{useEffect} che lo osserva per effettuare il rendering del grafico
+Il risultato restituito dal \textit{custom hook} \texttt{usePlotly} viene in seguito utilizzato all'interno di un \texttt{useEffect} che lo osserva per effettuare il rendering del grafico
 tramite una chiamata asincrona alla funzione \texttt{plot}, contentente a sua volta la chiamata alla funzione \texttt{Plotly.react}, la quale si occupa di renderizzare il grafico all'interno del
-\texttt{div} utilizzato come contenitore e riferito mediante l'utilizzo di un \textit{ref} castato al tipo {PlotlyHTMLElement}, fornito sempre dalla libreria \textit{Plotly.js}. \\
+\texttt{div} utilizzato come contenitore e riferito mediante l'utilizzo di un \textit{ref} castato al tipo \texttt{PlotlyHTMLElement}, fornito sempre dalla libreria \textit{Plotly.js}. \\
 In seguito vengono configurati i \textit{listeners} dichiarati all'interno delle \texttt{options} fornite, permettendo di gestire le interazioni dell'utente di tipo \textit{hover} e \textit{unhover}
 sul grafico. Tali \textit{listeners} vengono in seguito smontati correttamente all'interno del \texttt{return} del \texttt{useEffect} per evitare \textit{memory leak} e garantire una corretta gestione
 della componente.
 
 \paragraph{Area}
 Il grafico ad area (\textit{Area}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{AREA}. \\
-La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
-colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareAreaSeries}, la quale si occupa di definirele informazioni inerenti alla visualizzazione o meno del testo
+La preparazione dei dati avviene in una prima parte invocando la funzione \\
+\texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareAreaSeries}, la quale si occupa di definire le informazioni inerenti alla visualizzazione o meno del testo
 e la modalità di riempimento dell'area (fino all'asse delle X o fino alla successiva area) a seconda della configurazione della proprietà \texttt{fill} definita nelle serie visualizzata. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
-\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali, aggiornando eventualmente i valori lungo l'asse delle X e ricalcolando i valori comulativi per ogni tick. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed eventualmente i valori lungo l'asse delle X, ricalcolando i valori cumulativi per ogni tick. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico ad area viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_area.png}
-    \caption{Esempio di grafico ad area (Area) \textit{viz-lib}}
+    \caption{Esempio di grafico ad area (\textit{Area}) \textit{viz-lib}}
     \label{fig:area-example}
 \end{figure}
 
 \paragraph{Bar}
 Il grafico a barre (\textit{Bar}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{COLUMNS}. \\
-La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+La preparazione dei dati avviene in una prima parte invocando la funzione \\
+\texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
 colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBarSeries}, la quale si occupa di definire il tipo (\textit{'bar'}) necessario per \textit{Plotly} per comprendere
 come interpretare i dati forniti e le informazioni inerenti alla posizione e alla dimensione del testo. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
 \texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico a colonne viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_bar.png}
-    \caption{Esempio di grafico a colonne (Bar) \textit{viz-lib}}
+    \caption{Esempio di grafico a colonne (\textit{Bar}) \textit{viz-lib}}
     \label{fig:bar-example}
 \end{figure}
 
 \paragraph{Box}
 Il grafico a scatole (\textit{Box}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{BOX}. \\
-La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+La preparazione dei dati avviene in una prima parte invocando la funzione \\
+\texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
 colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBoxSeries}, la quale si occupa di definire il tipo (\textit{'box'}) necessario per \textit{Plotly} per comprendere
 come interpretare i dati forniti e le informazioni inerenti alla visualizzazione dei dati. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
 \texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \paragraph{Bubble}
 Il grafico a bolle (\textit{Bubble}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{BUBBLE}. \\
-La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+La preparazione dei dati avviene in una prima parte invocando la funzione \\
+\texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
 colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareBubbleSeries}, la quale si occupa di definire le informazioni inerenti alle bolle, quali le
-dimensioni di ciscun dato, il coefficiente di ingrandimento e il riferimento sul come interpretare il valore di dimensionamento fornito. \\
+dimensioni di ciascun dato, il coefficiente di ingrandimento e il riferimento sul come interpretare il valore di dimensionamento fornito. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
 \texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \paragraph{Heatmap}
 Il grafico a matrice di calore (\textit{Heatmap}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{HEATMAP}. \\
 La preparazione dei dati avviene invocando la funzione \texttt{prepareHeatmapData}, la quale si occupa di definire la scala di colori da utilizzare all'interno del grafico, preparando in seguito le \texttt{Series}
 di dati da visualizzare e le relative \texttt{DataLabel} associate, utilizzate per la visualizzazione delle informazioni durante l'\textit{hover}. \\
-Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \texttt{preparePieLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
+Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
 come posizione, font, colore e dimensione.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico a matrice di calore viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_heatmap.png}
-    \caption{Esempio di grafico a matrice di calore (Heatmap) \textit{viz-lib}}
+    \caption{Esempio di grafico a matrice di calore (\textit{Heatmap}) \textit{viz-lib}}
     \label{fig:heatmap-example}
 \end{figure}
 
 \paragraph{Line}
 Il grafico a linee (\textit{Line}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{LINE}. \\
-La preparazione dei dati avviene in una prima parte invocando la funzione \texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
+La preparazione dei dati avviene in una prima parte invocando la funzione \\
+\texttt{prepareDefaultData}, la quale si occupa di ricavare i valori dei dati da visualizzare e i colori utilizzati, compresi i
 colori delle label. In seguito, all'interno della stessa funzione, viene invocata la funzione \texttt{prepareLineSeries}, la quale si occupa di definire il tipo (\textit{'line'}) necessario per \textit{Plotly}
 per comprendere come interpretare i dati forniti e le informazioni inerenti alla posizione e alla dimensione del testo. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
-\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali, aggiornando eventualmente i valori lungo l'asse delle X e ricalcolando i valori comulativi per ogni tick. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+\texttt{updateSeriesText}, aggiornando inoltre i valori percentuali, aggiornando eventualmente i valori lungo l'asse delle X e ricalcolando i valori cumulativi per ogni tick. \\
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico a linea viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_line.png}
-    \caption{Esempio di grafico a linea (Line) \textit{viz-lib}}
+    \caption{Esempio di grafico a linea (\textit{Line}) \textit{viz-lib}}
     \label{fig:line-example}
 \end{figure}
 
@@ -221,18 +229,19 @@ font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda d
 Il grafico a torta (\textit{Pie}) è una tipologia di grafico visualizzato all'interno della componente \texttt{Chart} quando la proprietà \texttt{globalSeriesType} è impostata a \texttt{PIE}. \\
 La preparazione dei dati avviene invocando la funzione \texttt{preparePieData}, la quale si occupa di definire i colori delle label di testo visualizzate all'interno degli spicchi del grafico: mentre
 i colori del grafico vengono ricavati dalle opzioni fornite dal backend, i colori delle label vengono determinati a seconda del contrasto maggiore rispetto al colore di sfondo, in modo da aumentare
-la leggibilità e di conseguenze migliorare l'esperienza utente. \\
+la leggibilità e di conseguenza migliorare l'esperienza utente. \\
 In seguito all'interno della funzione vengono calcolate le percentuali occupate da ciascuna rappresentazione, configurando inoltre i font utilizzati, le dimensioni dei caratteri, le informazioni da visualizzare
 mediante l'\textit{hover} e la dimensione del raggio dell'\textit{hole} del grafico. \\
 L'aggiornamento dei dati viene gestito mediante la funzione \texttt{updatePieData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
 \texttt{updateSeriesText}. \\
-Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \texttt{preparePieLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
+Per quanto riguarda invece la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{preparePieLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo,
 come posizione, font, colore e dimensione.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico a torta viz-lib}, width=0.8 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_pie.png}
-    \caption{Esempio di grafico a torta (Pie) \textit{viz-lib}}
+    \caption{Esempio di grafico a torta (\textit{Pie}) \textit{viz-lib}}
     \label{fig:pie-example}
 \end{figure}
 
@@ -243,96 +252,98 @@ colori delle label. In seguito, all'interno della stessa funzione, viene invocat
 per comprendere come interpretare i dati forniti e le informazioni inerenti alle dimensioni dei punti e alla posizione e dimensione dell'eventuale testo associato. \\
 L'aggiornamento dei dati avviene mediante la funzione \texttt{updateDefaultData}, la quale si occupa di aggiornare i testi presenti all'interno delle \texttt{Series} visualizzate, invocando la funzione
 \texttt{updateSeriesText}, aggiornando inoltre i valori percentuali ed evenutalmente aggiornando i valori lungo l'asse delle X. \\
-Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
+Per quanto riguarda la gestione del \texttt{Layout}, viene invocata la funzione \\
+\texttt{prepareDefaultLayout}, la quale si occupa di definire le informazioni grafiche inerenti alla legenda e al titolo, come posizione,
 font, colore e dimensione, oltre che a preparare l'asse X e l'asse Y a seconda dei valori da visualizzare.
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di grafico con a dispersione (Scatter) e colonne viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_scatter_bar.png}
-    \caption{Esempio di grafico a dispersione (Scatter) e a colonne (Bar) \textit{viz-lib}}
+    \caption{Esempio di grafico a dispersione (\textit{Scatter}) e a colonne (\textit{Bar}) \textit{viz-lib}}
     \label{fig:scatter-example}
 \end{figure}
 
 \subsubsection{Table}
-La componente \textit{Table} costituisce una tabella che permette di visualizzare i dati in forma tabellare. \newline
-Tale widget utilizza \textit{DataTable}, una componente resa disponibile dalla libreria \textit{PrimeReact} che offre, attraverso
-la definizione di determinate props, di:
+La componente \texttt{Table} costituisce una tabella che permette di visualizzare i dati in forma tabellare. \newline
+Tale \textit{widget} utilizza \texttt{DataTable}, una componente resa disponibile dalla libreria \textit{PrimeReact} che, attraverso
+la definizione di determinate props, rende disponibili le seguenti funzionalità:
 \begin{itemize}
     \item alternare i colori delle righe della tabella, al fine di aumentare la leggibilità dei dati visualizzati;
     \item selezionare più righe della tabella, permettendo di effettuare operazioni di \textit{multi-selection} (attraverso
-          l'utilizzo di uno \textit{useState});
+          l'utilizzo di uno \texttt{useState});
     \item impostare un filtro globale per la tabella, permettendo di definire su quali colonne effettuare la ricerca dei dati;
     \item impostare un \textit{empty message} personalizzato, visualizzato nel caso in cui la tabella non contenga dati;
     \item ordinare i dati all'interno delle singole colonne, permettendo di visualizzare i dati in ordine crescente o decrescente.
 \end{itemize}
-Come introdotto nella sezione \ref{item:hookTable}{ \textit{proprietà della componenti: Table}}, la gestione del filtro globale tramite
-la funzione \textit{onChangeGlobalFilterValue} presenta l'utilizzo di due valori tramite \textit{useState}:
+Come introdotto nella sezione (\S \ref{item:hookTable}{ \textit{proprietà della componenti: Table}}), la gestione del filtro globale tramite
+la funzione \texttt{onChangeGlobalFilterValue} presenta l'utilizzo di due valori tramite \texttt{useState}:
 \begin{itemize}
-    \item \textit{globalFilterValueTmp}: stringa utilizzata per memorizzare il valore del filtro impostato all'interno di una
-          componente \textit{InputText} di \textit{PrimeReact}, aggiornata in tempo reale all'input fornito dell'utente;
-    \item \textit{globalFilterValue}: stringa utilizzata per impostare il valore del filtro globale della tabella, aggiornata
-          tramite una chiamata \textit{debounced} di 200 ms alla funzione per settate il valore sullo stato. \newline
-          (La funzione \textit{debounced} fa uso dell'hook \textit{useDebounceCallback} fornito dalla libreria \textit{usehook-ts}).
+    \item \texttt{globalFilterValueTmp}: stringa utilizzata per memorizzare il valore del filtro impostato all'interno di una
+          componente \texttt{InputText} di \textit{PrimeReact}, aggiornata in tempo reale all'input fornito dell'utente;
+    \item \texttt{globalFilterValue}: stringa utilizzata per impostare il valore del filtro globale della tabella, aggiornata
+          tramite una chiamata \textit{debounced} di 200 ms per impostare il valore sullo stato. \newline
+          (La funzione \texttt{debounced} fa uso dell'hook \texttt{useDebounceCallback} fornito dalla libreria \textit{usehook-ts}).
 \end{itemize}
 Tramite questa implementazione, il recupero dei dati visualizzati all'interno della tabella viene eseguito correttamente, permettendo di risolvere
-il bug presente all'interno della componente \textit{DataTable}, il quale comportava la perdita di entry nel caso in cui il filtro globale subisse
+il bug presente all'interno della componente \texttt{DataTable}, il quale comportava la perdita di \textit{entry} nel caso in cui il filtro globale subisse
 più modifiche in rapida successione. \newline
 La tabella è resa \textit{scrollable}, impostando una altezza che viene calcolata in modo responsivo a seconda dello spazio disponibile
-all'interno del widget in cui è contenuta. \newline
-Attraverso la definizione di un \textit{ref} alla componente \textit{DataTable}, è possibile effettuare il download della tabella in formato
+all'interno del \textit{widget} in cui è contenuta. \newline
+Attraverso la definizione di un \textit{ref} alla componente \texttt{DataTable}, è possibile effettuare il download della tabella in formato
 \textit{CSV}, tramite l'utilizzo della funzione \textit{exportCSV} resa disponibile dalla libreria \textit{PrimeReact}: tale funzione viene
-invocata tramite un \textit{Button} posizionato a fianco della componente \textit{InputText} utilizzata per l'input del filtro globale. \newline
+invocata tramite un \texttt{Button} posizionato a fianco della componente \texttt{InputText} utilizzata per l'input del filtro globale. \\
+\\
 \textbf{Elaborazione dati}\newline
-I dati renderizzati all'interno della tabella vengono estratti dal props \textit{data}, passando a sua volta alla componente \textit{DataTable}
-tramite la prop \textit{value} l'array \textit{rows} contenente i dati da visualizzare. \newline
-Le colonne della tabella sono definite a partire dalle \textit{options} e dai \textit{data} passati come props alla componente \textit{Table}.
-Inizialmente sono ridefinite mediante la funzione \textit{getOptions}, la quale imposta delle opzioni di default, ordina la visualizzazione delle colonne
-in base all'ordine definito nelle \textit{options}, impostando le proprietà di filtro delle colonne in base alle opzioni indicate e verificando la presenza
-di dati all'interno dei \textit{data} (nel caso di assenza di riscontri vengono definite le colonne a partire dai \textit{data}).
-Successivamente dalle \textit{options} elaborate vengono definite le vere e proprie colonne della tabella (\textit{tableColumns}), attraverso la funzione \textit{prepareColumns},
-la quale attua il filtraggio delle colonne e costruisce l'header delle colonne in base alle opzioni elaborate. \newline
-Le \textit{tableColumns} vengono in seguito mappate per creare le componenti \textit{Column} presentate all'interno della tabelle, impostando:
+I dati renderizzati all'interno della tabella vengono estratti dal \textit{props} \texttt{data}, passando a sua volta alla componente \texttt{DataTable}
+l'array \texttt{rows} contenente i dati da visualizzare tramite la prop \texttt{value}. \newline
+Le colonne della tabella sono definite a partire dalle \texttt{options} e dai \texttt{data} passati come \textit{props} alla componente \texttt{Table}.
+Inizialmente sono ridefinite mediante la funzione \texttt{getOptions}, la quale imposta delle opzioni di default e ordina la visualizzazione delle colonne
+in base all'ordine definito nelle \texttt{options}, impostando le proprietà di filtro delle colonne in base alle opzioni indicate, verificando la presenza
+di dati all'interno dei \texttt{data} (nel caso di assenza di riscontro vengono definite le colonne a partire dai \texttt{data}).
+Successivamente dalle \texttt{options} elaborate vengono definite le vere e proprie colonne della tabella (\textit{tableColumns}), attraverso la funzione \texttt{prepareColumns},
+la quale attua il filtraggio delle colonne e costruisce il loro \textit{header} in base alle opzioni elaborate. \newline
+Le \texttt{tableColumns} vengono in seguito mappate per creare le componenti \texttt{Column} presentate all'interno della tabelle, impostando:
 \begin{itemize}
-    \item l'header a partire dalle opzioni elaborate;
+    \item l'\textit{header} a partire dalle opzioni elaborate;
     \item il \textit{field} a cui fanno riferimento a partire dalle opzioni elaborate;
-    \item il props \textit{sortable} per permettere l'ordinamento sulla colonna;
-    \item il props \textit{body}, utilizzato per permettere il corretto formattamento e rendering dei dati visualizzati all'interno della singola colonna,
-          invocando la funzione \textit{formatRowValue}.
+    \item la \textit{props} \textit{sortable}, utilizzata per permettere l'ordinamento sulla colonna;
+    \item la\textit{props} \textit{body}, utilizzata per permettere il corretto formattamento e rendering dei dati visualizzati all'interno della singola colonna,
+          invocando la funzione \texttt{formatRowValue}.
 \end{itemize}
-Le formattazioni dei dati avvengono mediante i formatter resi disponibili:
+Le formattazioni dei dati avvengono mediante i \textit{formatter} resi disponibili:
 \begin{itemize}
-    \item \textit{string}: formatta il testo in base indicazioni presenti nell'item, eventualmente restituendo del contenuto HTML;
+    \item \textit{string}: formatta il testo in base indicazioni presenti nell'item, eventualmente restituendo del contenuto \textit{HTML};
     \item \textit{datetime}: formatta le date in base alle opzioni elaborate mediante l'uso di \textit{day.js};
     \item \textit{number}: formatta i numeri in base alle opzioni elaborate mediante l'uso di \textit{numbro};
     \item \textit{boolean}: formatta i booleani in base alle opzioni fornite, elaborando anche array;
-    \item \textit{json}: formatta i dati JSON in base alle opzioni fornite, permettendo di visualizzare i dati in modo strutturato;
-    \item \textit{image}: formatta le immagini in base alle opzioni fornite, permettendo di visualizzare le immagini all'interno della tabella.
+    \item \textit{json}: formatta i dati \textit{JSON} in base alle opzioni fornite, permettendo di visualizzare i dati in modo strutturato;
+    \item \textit{image}: formatta le immagini in base alle opzioni fornite, permettendo di visualizzarle all'interno della tabella.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[alt={Esempio di Table viz-lib}, width=1 \columnwidth, height=\maxdimen, keepaspectratio]{img/ex_table.png}
-    \caption{Esempio di Table \textit{viz-lib}}
+    \caption{Esempio di \texttt{Table} \textit{viz-lib}}
     \label{fig:table-example}
 \end{figure}
 
 \subsubsection{Renderer}
-La componente \textit{Renderer} costituisce l'entry point della libreria, permettendo di renderizzare tutte le componenti presenti all'interno di
+La componente \textit{Renderer} costituisce l'\textit{entry point} della libreria, permettendo di renderizzare tutte le componenti presenti all'interno di
 \textit{viz-lib}: per questo motivo tale componente costituisce l'unico \textit{export} della libreria accessibile all'\textit{index.ts} del SDK. \newline
-Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}, ottenuto tramite l'utilizzo della funzione \textit{React.memo}.
+Tale componente costituisce il \textit{wrap} della componente \textit{RendererR}, ottenuto tramite l'utilizzo della funzione \texttt{React.memo}.
 \begin{adjustwidth}{4em}{0pt}
-    \textit{React.memo} è una funzione offerta da \textit{React} per effettuare la \textit{memoization} di una componente funzionale, permettendo di evitare
-    nuove renderizzazioni nel caso in cui il componente padre lo richiedesse, a meno che le sue props non abbiano subito modifiche. \newline
+    \texttt{React.memo} è una funzione offerta da \textit{React} per effettuare la \textit{memoization} di una componente funzionale, permettendo di evitare
+    nuove renderizzazioni nel caso in cui il componente padre lo richiedesse, a meno che le sue \textit{props} non abbiano subito modifiche. \newline
     Tale funzione accetta due parametri:
     \begin{itemize}
-        \item la componente da memoizzare;
-        \item una funzione che accetta due argomenti: le props correnti e le props precedenti della componente, restituendo un valore booleano che indica
+        \item la componente da \textit{memoizzare};
+        \item una funzione che accetta due argomenti: le \textit{props} correnti e le \textit{props} precedenti della componente, restituendo un valore booleano che indica
               se la componente debba essere renderizzata o meno.
     \end{itemize}
-    La presenza del secondo parametro permette di effettuare un controllo specifico, andando a definire i criteri su cui basare i cambiamenti delle props
-    rilevanti ai fini della renderizzazione della componente. \newline
+    La presenza del secondo parametro permette di effettuare un controllo specifico, andando a definire i criteri di cambiamento delle \textit{props}
+    rilevanti ai fini della nuova renderizzazione della componente. \newline
 \end{adjustwidth}
-Nel nostro caso, la funzione \textit{React.memo} utilizza come criterio di controllo tra le props la funzione \textit{isEqual} resa disponibile da \textit{lodash},
+Nel nostro caso, la funzione \texttt{React.memo} utilizza come criterio di controllo tra le \textit{props} la funzione \texttt{isEqual} resa disponibile da \textit{lodash},
 la quale permette di effettuare un confronto profondo tra due valori per determinare se sono equivalenti. \newline
 \begin{listing}[H]
     \begin{minted}{typescript}
@@ -340,12 +351,12 @@ la quale permette di effettuare un confronto profondo tra due valori per determi
             isEqual(prev.data, next.data)
         );
   \end{minted}
-    \caption{React.memo della componente Renderer}
+    \caption{\texttt{React.memo} della componente \texttt{Renderer}}
     \label{listing:react_memo}
 \end{listing}
-Per quanto riguarda la componente \textit{RendereR} in questione, essa ricava dai suoi props, tramite l'utilizzo della funzione \textit{getVisualizationType}, il valore
-dell'enumerazione \textit{VisualizationType}, assegnandolo alla costante \textit{visualizationType}, in modo da renderizzare la componente corretta in base al tipo di
-visualizzazione passato come parametro.
+Per quanto riguarda la componente \texttt{RendereR} in questione, essa ricava dai suoi \textit{props}, tramite l'utilizzo della funzione \texttt{getVisualizationType}, il valore
+dell'enumerazione \texttt{VisualizationType}, assegnandolo alla costante \texttt{visualizationType}, ai fini di renderizzare la componente corretta in base al tipo di
+visualizzazione ricevuto come parametro.
 
 \subsection{Documentazione}
 L'implementazione della libreria prodotta è stata documentata tramite l'utilizzo di \textit{Confluence}, la piattaforma
@@ -355,14 +366,14 @@ delle componenti e delle funzionalità offerte dalla libreria. \newline
 
 \begin{figure}[H]
     \centering
-    \includegraphics[alt={Esempio documentazione Confluence}, width=1 \textwidth]{img/ex_confluence.png}
+    \includegraphics[alt={Esempio documentazione \textit{Confluence}}, width=1 \textwidth]{img/ex_confluence.png}
     \caption{Esempio documentazione Confluence}
     \label{fig:ex_confluence}
 \end{figure}
 
 La documentazione è stata strutturata in modo da essere facilmente consultabile e comprensibile, con l'obiettivo di
-fornire un supporto efficace agli sviluppatori futuri che potrebbero dover utilizzare la libreria. \newline
-La produzione di una buona documentazione ricopre infatti un ruolo fondamentale al fine di garantire la manutenibilità
+fornire un supporto efficace agli sviluppatori futuri che potrebbero dover utilizzare o lavorare sopra l'SDK implementato. \newline
+La produzione di una buona documentazione ricopre infatti un ruolo fondamentale ai fini di garantire la manutenibilità
 del codice e la facilità di comprensione delle funzionalità offerte dalla libreria, in modo da ridurre i tempi di
 apprendimento e di sviluppo necessari per gli utilizzi futuri del prodotto implementato.
 
@@ -372,31 +383,31 @@ di garantire la qualità del prodotto implementato e la corretta esecuzione dell
 
 \subsection{Jest}
 Lo strumento utilizzato e configurato all'interno del progetto per l'esecuzione dei test è \textit{Jest}, un framework di testing
-per JavaScript sviluppato da \textit{Facebook}. \newline
-Jest permette di effettuare test su funzioni, classi e moduli, fornendo un'ampia gamma di funzionalità per la scrittura e l'esecuzione
+per \textit{JavaScript} sviluppato da \textit{Facebook}. \newline
+\textit{Jest} permette di effettuare test su funzioni, classi e moduli, fornendo un'ampia gamma di funzionalità per la scrittura e l'esecuzione
 dei test. \newline
-In particolare, Jest offre le seguenti funzionalità:
+In particolare, \textit{Jest} offre le seguenti funzionalità:
 \begin{itemize}
-    \item \textbf{Mocking components}: permette di creare mock di componenti, in modo da simularne il suo comportamento:
+    \item \textbf{Mocking components}: permette di creare \textit{\gls{mock}\glox} di componenti, in modo da simularne il suo comportamento:
           \begin{listing}[H]
               \begin{minted}{typescript}
             jest.mock('percorso.componente', () => ({
                 Componente: () => mock_value,
             }));
             \end{minted}
-              \caption{Esempio di mock di una componente}
+              \caption{Esempio di \textit{mock} di una componente}
               \label{listing:mock_component}
           \end{listing}
-    \item \textbf{Mocking function}: permette di creare mock di funzioni, in modo da simularne il suo comportamento:
+    \item \textbf{Mocking function}: permette di creare \textit{mock} di funzioni, in modo da simularne il suo comportamento:
           \begin{listing}[H]
               \begin{minted}{typescript}
                 jest.spyOn(file_funzione, 'nomeFunzione')
                     .mockReturnValue(mock_value);
             \end{minted}
-              \caption{Esempio di mock di una funzione}
+              \caption{Esempio di \textit{mock} di una funzione}
               \label{listing:mock_function}
           \end{listing}
-    \item \textbf{Suite di test}: permette di creare suite di test, organizzando i test in modo gerarchico:
+    \item \textbf{Suite di test}: permette di creare \textit{suite} di test, organizzando i test in modo gerarchico:
           \begin{listing}[H]
               \begin{minted}{typescript}
                 describe('Nome suite di test', () => {
@@ -405,7 +416,7 @@ In particolare, Jest offre le seguenti funzionalità:
                     });
                 });
             \end{minted}
-              \caption{Esempio di suite di test}
+              \caption{Esempio di \textit{suite} di test}
               \label{listing:test_suite}
           \end{listing}
     \item \textbf{Expect}: permette di effettuare asserzioni sui valori restituiti dalle funzioni, verificando la correttezza
@@ -414,15 +425,15 @@ In particolare, Jest offre le seguenti funzionalità:
               \begin{minted}{typescript}
                     expect(valore).toBe(valore_aspettato);
                 \end{minted}
-              \caption{Esempio di expect su valore}
+              \caption{Esempio di \texttt{expect} su valore}
               \label{listing:expect}
           \end{listing}
-          oppure di verificare la presenza di un elemento all'interno del DOM:
+          oppure di verificare la presenza di un elemento all'interno del \textit{DOM}:
           \begin{listing}[H]
               \begin{minted}{typescript}
                     expect(screen.getByText('Testo')).toBeInTheDocument();
                 \end{minted}
-              \caption{Esempio di expect su elemento del DOM}
+              \caption{Esempio di \texttt{expect} su elemento del \textit{DOM}}
               \label{listing:expect_dom}
           \end{listing}
 \end{itemize}
@@ -452,13 +463,13 @@ Di seguito viene riportata la configurazione utilizzata.
         ]
     }
     \end{minted}
-    \caption{Configurazione Jest all'interno del file packages.json}
+    \caption{Configurazione \textit{Jest} all'interno del file \textit{packages.json}}
     \label{listing:jest_config}
 \end{listing}
 
 \subsection{Unit testing}
 Per garantire la correttezza delle funzionalità offerte dalla libreria, è stato effettuato un processo di testing a livello di unità. \newline
-Nel presente progetto sono stati implementati test per le singole componenti, mockando le dipendenze esterne ed eventuali altre componenti
+Nel presente progetto sono stati implementati test per le singole componenti, \textit{mockando} le dipendenze esterne ed eventuali altre componenti
 della libreria utilizzate, verificando il corretto funzionamento all'interno della singola unità.
 
 \begin{listing}[H]
@@ -495,19 +506,21 @@ della libreria utilizzate, verificando il corretto funzionamento all'interno del
     // ...
     });
     \end{minted}
-    \caption{Esempio di unit test: Renderer component}
+    \caption{Esempio di \textit{unit test}: \texttt{Renderer} component}
     \label{listing:test_Renderer}
 \end{listing}
 
-Come si può osservare nell'esempio di codice riportato in \ref{listing:test_Renderer}, è stato effettuato un test sulla componente \textit{Renderer},
-mockando le componenti \textit{Counter}, \textit{Chart} e \textit{Table} utilizzate all'interno della componente stessa, verficando che venga renderizzata
+Come si può osservare nell'esempio di codice riportato, è stato effettuato un test sulla componente \textit{Renderer},
+\textit{mockando} le componenti \textit{Counter}, \textit{Chart} e \textit{Table} utilizzate all'interno della componente stessa, verficando che venisse renderizzata
 la componente corretta in base al tipo di visualizzazione passato come parametro. \newline
-Il tipo di visualizzazione a sua volta viene ottenuto dal mock della funzione \textit{getVisualizationType}, la quale restituisce il tipo di visualizzazione
-corretto in base al parametro passato come props al Renderer: in questo modo viene garantita la corretta logica della singola componente, senza far affidamento
-su funzioni o componenti esterne. \newline
-La correttezza delle funzioni è stata verificata tramite appositi test di unità sulle singole funzioni, eventualmente mockando le dipendenze esterne utilizzate
-all'interno della funzione stessa, in modo da garantire la correttezza logica implementata. \newline
-Di seguito viene riportato un esempio di test di unità effettuato sulla funzione \textit{getVisualizationType}.
+Il tipo di visualizzazione a sua volta viene ottenuto dal \textit{mock} della funzione \\
+\texttt{getVisualizationType}, la quale restituisce il tipo di visualizzazione
+corretto in base al parametro passato come \textit{props} al \texttt{Renderer}: in questo modo viene garantita la correttezza logica della singola componente, senza far affidamento
+su funzioni o componenti esterne. \\ \\
+La correttezza delle funzioni è stata verificata tramite appositi test di unità, eventualmente \textit{mockando} le dipendenze esterne utilizzate
+all'interno della funzione stessa, in modo da garantire la correttezza nella logica implementata. \newline
+Di seguito viene riportato un esempio di test di unità effettuato sulla funzione \\
+\texttt{getVisualizationType}.
 
 \begin{listing}[H]
     \begin{minted}{typescript}
@@ -517,7 +530,7 @@ Di seguito viene riportato un esempio di test di unità effettuato sulla funzion
         ).toBe(VisualizationType.Table);
     });
     \end{minted}
-    \caption{Esempio di unit test: getVisualizationType}
+    \caption{Esempio di \textit{unit test}: \texttt{getVisualizationType}}
     \label{listing:test_getVisualizationType}
 \end{listing}
 
@@ -525,9 +538,7 @@ Di seguito viene riportato un esempio di test di unità effettuato sulla funzion
 Per garantire la corretta integrazione delle componenti all'interno della libreria, è stato effettuato un processo di testing a livello di integrazione,
 tramite l'utilizzo di \textit{Jest}. \newline
 I test di integrazione permettono di verificare il corretto funzionamento delle componenti all'interno del sistema, testando il comportamento
-dei singoli moduli all'interno del contesto in cui sono utilizzati. \newline
-Nel presente progetto sono stati implementati test di integrazione per verificare il corretto funzionamento delle componenti in relazione con dipendenze
-esterne.
+dei singoli moduli all'interno del contesto in cui sono utilizzati.
 
 \begin{listing}[H]
     \begin{minted}[escapeinside=||]{typescript}
@@ -560,13 +571,13 @@ esterne.
     // ...
     });
     \end{minted}
-    \caption{Esempio di integration test: Renderer component}
+    \caption{Esempio di \textit{integration test}: \texttt{Renderer} component}
     \label{listing:test_Renderer_integration}
 \end{listing}
 
-Come si può osservare nell'esempio di codice riportato in \ref{listing:test_Renderer_integration}, è stato effettuato un test di integrazione sulla componente \textit{Renderer},
-mockando le componenti \textit{Counter}, \textit{Chart} e \textit{Table} utilizzate all'interno della componente stessa, verficando che venga renderizzata
+Come si può osservare nell'esempio di codice riportato, è stato effettuato un test di integrazione sulla componente \texttt{Renderer},
+\textit{mockando} le componenti \texttt{Counter}, \texttt{Chart} e \texttt{Table} utilizzate all'interno della componente stessa, verficando che venisse renderizzata
 la componente corretta in base al tipo di visualizzazione passato come parametro. \newline
-Il tipo di visualizzazione a sua volta viene ottenuto internamente alla componente grazie alla funzione \textit{getVisualizationType}, la quale restituisce il tipo di visualizzazione
-corretto in base al parametro passato come props al Renderer: in questo modo viene garantita la corretta integrazione delle componenti all'interno del sistema, testando il comportamento
+Il tipo di visualizzazione a sua volta viene ottenuto internamente alla componente grazie alla funzione \texttt{getVisualizationType}, la quale restituisce il tipo di visualizzazione
+corretto in base al parametro ricevuto come \textit{props} dal \texttt{Renderer}: in questo modo viene garantita la corretta integrazione delle componenti all'interno del sistema, testando il comportamento
 delle unità in relazione tra loro all'interno del contesto in cui sono utilizzate.

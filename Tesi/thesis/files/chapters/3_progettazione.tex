@@ -1,7 +1,7 @@
 \chapter{Progettazione}
 \label{chap:progettazione}
 Nel presente capitolo verrà presentata l'attività di progettazione relativa al progetto di stage focalizzato sul refactoring e
-sull'ottimizzazione dello SDK impiegato dall'azienda Datasoil S.r.l. per lo sviluppo di dashboard dinamiche.
+sull'ottimizzazione dello SDK impiegato dall'azienda \textit{Datasoil S.r.l.} per lo sviluppo di dashboard dinamiche.
 Verrà analizzato l'approccio adottato per individuare le soluzioni volte al soddisfacimento dei requisiti individuati durante
 la fase di analisi dei requisiti, proseguendo con la descrizione dell'architettura progettata per la realizzazione della libreria grafica \textit{viz-lib}
 appartenente al \textit{development kit}, concludendo con la definizione dei tipi e delle interfacce e la progettazione delle singole componenti individuate.
@@ -45,7 +45,7 @@ leggibilità e manutenibilità del codice, permettendo di usufruire a pieno dei 
 I tipi e le interfacce verranno presentati in ordine alfabetico.
 
 \subsection{ChartBaseVisualizationOptions}
-Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione comuni a tutti i \textit{Chart}.
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione comuni a tutti i \texttt{Chart}.
 \begin{minted}{typescript}
 export interface ChartBaseVisualizationOptions {
       globalSeriesType: string; 
@@ -121,7 +121,7 @@ export interface ChartBaseVisualizationOptions {
 }
 \end{minted}
 \begin{listing}[H]
-      \caption{Definizione dell'interfaccia ChartBaseVisualizationOptions}
+      \caption{Definizione dell'interfaccia \texttt{ChartBaseVisualizationOptions}}
       \label{listing:chartBaseVisualizationOptions}
 \end{listing}
 \begin{itemize}
@@ -218,7 +218,7 @@ export interface Column {
 }
 \end{minted}
 \begin{listing}[H]
-      \caption{Definizione dell'interfaccia Column}
+      \caption{Definizione dell'interfaccia \texttt{Column}}
       \label{listing:column}
 \end{listing}
 \begin{itemize}
@@ -247,7 +247,7 @@ export interface Column {
 \end{itemize}
 
 \subsection{CounterVisualizationOptions}
-Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Counter}.
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \texttt{Counter}.
 \begin{listing}[H]
       \begin{minted}{typescript}
       export interface CounterBaseVisualizationOptions {
@@ -266,7 +266,7 @@ Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazio
             formatTargetValue?: boolean;
       }
       \end{minted}
-      \caption{Definizione dell'interfaccia CounterVisualizationOptions}
+      \caption{Definizione dell'interfaccia \texttt{CounterVisualizationOptions}}
       \label{listing:counterVisualizationOptions}
 \end{listing}
 \begin{itemize}
@@ -302,7 +302,7 @@ export interface DataLabels {
 }
 \end{minted}
 \begin{listing}[H]
-      \caption{Definizione dell'interfaccia DataLabels}
+      \caption{Definizione dell'interfaccia \texttt{DataLabels}}
       \label{listing:dataLabels}
 \end{listing}
 \begin{itemize}
@@ -330,7 +330,7 @@ export interface PlotlyOptions {
 }
 \end{minted}
 \begin{listing}[H]
-      \caption{Definizione dell'interfaccia PlotlyOptions}
+      \caption{Definizione dell'interfaccia \texttt{PlotlyOptions}}
       \label{listing:plotlyOptions}
 \end{listing}
 \begin{itemize}
@@ -342,7 +342,7 @@ export interface PlotlyOptions {
 \end{itemize}
 
 \subsection{RendererProps}
-Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Renderer, Counter, Chart} e \textit{Table}.
+Interfaccia che definisce i tipi dei dati passati alla componenti \texttt{Renderer, Counter, Chart} e \texttt{Table}.
 \begin{listing}[H]
       \begin{minted}{typescript}
       export interface RendererProps {
@@ -354,7 +354,7 @@ Interfaccia che definisce i tipi dei dati passati alla componenti \textit{Render
             options: VisualizationOptions;
       }
       \end{minted}
-      \caption{Definizione dell'interfaccia RendererProps}
+      \caption{Definizione dell'interfaccia \texttt{RendererProps}}
       \label{listing:rendererProps}
 \end{listing}
 \begin{itemize}
@@ -430,7 +430,7 @@ export interface Series {
 }
 \end{minted}
 \begin{listing}[H]
-      \caption{Definizione dell'interfaccia Series}
+      \caption{Definizione dell'interfaccia \texttt{Series}}
       \label{listing:series}
 \end{listing}
 \begin{itemize}
@@ -483,7 +483,7 @@ export interface Series {
 \end{itemize}
 
 \subsection{TableBaseVisualizationOptions}
-Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \textit{Table}.
+Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazione del componente \texttt{Table}.
 \begin{listing}[H]
       \begin{minted}{typescript}
       export interface TableBaseVisualizationOptions {
@@ -492,7 +492,7 @@ Interfaccia che definisce i tipi dei dati relativi alle opzioni di visualizzazio
             paginationSize?: string;
       }
       \end{minted}
-      \caption{Definizione dell'interfaccia TableBaseVisualizationOptions}
+      \caption{Definizione dell'interfaccia \texttt{TableBaseVisualizationOptions}}
       \label{listing:tableBaseVisualizationOptions}
 \end{listing}
 \begin{itemize}
@@ -510,11 +510,11 @@ Tipo che definisce le opzioni di visualizzazione delle componenti.
             | ChartBaseVisualizationOptions 
             | TableBaseVisualizationOptions;
       \end{minted}
-      \caption{Definizione del tipo VisualizationOptions}
+      \caption{Definizione del tipo \texttt{VisualizationOptions}}
       \label{listing:visualizationOptions}
 \end{listing}
 Questa definizione permette di definire le opzioni di visualizzazione specifiche per ciascun tipo di componente, garantendo una maggiore flessibilità
-nella definizione di \textit{RendererProps}.
+nella definizione di \texttt{RendererProps}.
 
 \subsection{VisualizationSettings}
 Interfaccia che definisce i tipi dei dati relativi alle impostazioni di visualizzazione delle componenti.
@@ -532,7 +532,7 @@ Interfaccia che definisce i tipi dei dati relativi alle impostazioni di visualiz
             choroplethAvailableMaps: any;
       }
       \end{minted}
-      \caption{Definizione dell'interfaccia VisualizationSettings}
+      \caption{Definizione dell'interfaccia \texttt{VisualizationSettings}}
       \label{listing:visualizationSettings}
 \end{listing}
 \begin{itemize}
@@ -558,7 +558,7 @@ Enumerazione che definisce i possibili valori dei tipi di visualizzazione suppor
             None = 'NONE',
       }
       \end{minted}
-      \caption{Definizione dell'enumerazione VisualizationType}
+      \caption{Definizione dell'enumerazione \texttt{VisualizationType}}
       \label{listing:visualizationType}
 \end{listing}
 I possibili valori dell'enumerazione sono i seguenti:
@@ -572,10 +572,10 @@ I possibili valori dell'enumerazione sono i seguenti:
 \section{Progettazione delle componenti}
 Nella seguente sezione verranno presentate le componenti individuate durante l'attività di progettazione, con una descrizione dettagliata delle
 funzionalità offerte e delle possibili ottimizzazioni individuate. \newline
-L'attività di progettazione è avvenuta seguendo il principio \textit{single responsability principle}, invididuando componenti operabili all'interno
+L'attività di progettazione è avvenuta seguendo il \textit{single responsability principle}, invididuando componenti operabili all'interno
 del design pattern \textit{Component Composition} proprio di \textit{React}, il quale prevede la combinazione di composizioni di componenti più piccole
 per ottenere componenti più complesse, favorendo il riutilizzo, la modularità e la manutenibilità del codice. \newline
-Le componenti verranno presentate in ordine alfabetico, presentando la seguente struttura:
+Le componenti verranno presentate in ordine alfabetico, secondo la seguente struttura:
 \begin{itemize}
       \item \textbf{Nome della componente}: breve descrizione della componente;
       \item \textbf{Descrizione}: descrizione dettagliata delle funzionalità offerte dalla componente;
@@ -585,11 +585,11 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
 
 \subsection{Counter}
 \begin{itemize}
-      \item \textbf{Nome della componente}: Counter;
-      \item \textbf{Descrizione}: La componente Counter prevede la visualizzazione di un contatore, il cui valore viene definito a partire dai dati passati
-            come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+      \item \textbf{Nome della componente}: \texttt{Counter};
+      \item \textbf{Descrizione}: La componente \texttt{Counter} prevede la visualizzazione di un contatore, il cui valore viene definito a partire dai dati passati
+            come \textit{props} tra le varie componenti e forniti dalla risposta in formato \textit{JSON} ricevuta dai \textit{server Datasoil}. \newline
             La componente permette inoltre di confrontare il valore attuale del contatore con un valore target (opzionale) da raggiungere, anch'esso ricavato
-            dalla risposta in formato JSON ricevuta dal server. \newline
+            dalla risposta in formato \textit{JSON} ricevuta dal \textit{server}. \newline
             Il valore del contatore può essere formattato in base alle preferenze definite lato backend, presentando le seguenti opzioni:
             \begin{itemize}
                   \label{counter-format}
@@ -601,8 +601,9 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
             \end{itemize}
             (Queste formattazioni sono applicabili anche al valore target e ai \textit{tooltip} visualizzati al passaggio del mouse sul contatore).\\
             L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}.
-      \item \textbf{Props}: I props della componente Counter sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
-            delle informazioni \textit{data, options} e \textit{visualizationName}.
+      \item \textbf{Props}: I \textit{props} della componente \texttt{Counter} sono definiti dall'interfaccia \\
+            \texttt{RendererProps}, su cui il componente ne effettua il \textit{picking}
+            (ovvero la selezione) delle informazioni \textit{data, options} e \textit{visualizationName}.
             \begin{listing}[H]
                   \begin{minted}{typescript}
                   export function Counter({
@@ -614,34 +615,34 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                               | 'options' 
                               | 'visualizationName'>);
                   \end{minted}
-                  \caption{Definizione delle props della componente Counter}
+                  \caption{Definizione delle \textit{props} della componente \texttt{Counter}}
                   \label{listing:counterProps}
             \end{listing}
       \item \textbf{Ottimizzazioni}:
             \begin{itemize}
                   \item Utilizzo della libreria \textit{numbro.js} a favore della libreria \textit{numeral.js} precedentemente utilizzata, più pesante e non più mantenuta,
-                        per la formattazione delle label numeriche all'interno del counter;
-                  \item La progettazione della presente componente prevede l'utilizzo di hooks per la gestione del suo stato interno e per il calcolo delle dimensioni
-                        del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali hooks permette di garantire
+                        per la formattazione delle label numeriche all'interno del \texttt{Counter};
+                  \item La progettazione della presente componente prevede l'utilizzo di \textit{hooks} per la gestione del suo stato interno e per il calcolo delle dimensioni
+                        del contatore, necessarie per permettere la visualizzazione responsiva della componente: l'utilizzo di tali \textit{hooks} permette di garantire
                         un'implementazione efficiente e performante, riducendo il numero di renderizzazioni e computazioni non necessarie.
             \end{itemize}
 \end{itemize}
 
 \subsection{Chart}
 \begin{itemize}
-      \item \textbf{Nome della componente}: Chart;
-      \item \textbf{Descrizione}: La componente Chart prevede la visualizzazione di un grafico, il cui tipo e i dati da visualizzare vengono definiti a partire dai dati passati
-            come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+      \item \textbf{Nome della componente}: \texttt{Chart};
+      \item \textbf{Descrizione}: La componente \texttt{Chart} prevede la visualizzazione di un grafico, il cui tipo e i dati da visualizzare vengono definiti a partire dai dati passati
+            come \textit{props} tra le varie componenti e forniti dalla risposta in formato \textit{JSON} ricevuta dai \textit{server Datasoil}. \newline
             I tipi di grafici che tale componente permette di renderizzare sono i seguenti:
             \begin{itemize}
-                  \item Area Chart: grafico ad area;
-                  \item Bar Chart: grafico a barre;
-                  \item Box Plot Chart: grafico a scatola;
-                  \item Bubble Chart: grafico a bolle;
-                  \item HeatMap Chart: grafico a matrice;
-                  \item Line Chart: grafico a linee;
-                  \item Pie Chart: grafico a torta;
-                  \item Scatter Chart: grafico a dispersione.
+                  \item \textit{Area Chart}: grafico ad area;
+                  \item \textit{Bar Chart}: grafico a barre;
+                  \item \textit{Box Plot Chart}: grafico a scatola;
+                  \item \textit{Bubble Chart}: grafico a bolle;
+                  \item \textit{HeatMap Chart}: grafico a matrice;
+                  \item \textit{Line Chart}: grafico a linee;
+                  \item \textit{Pie Chart}: grafico a torta;
+                  \item \textit{Scatter Chart}: grafico a dispersione.
             \end{itemize}
             La componente permette inoltre, a seconda del tipo di grafico renderizzato, di:
             \begin{itemize}
@@ -656,21 +657,24 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
             A fronte di tali funzionalità, l'implementazione della componente prevede l'utilizzo della libreria \textit{Plotly.js}, la quale permette
             di renderizzare grafici in modo reattivo. \newline
             Le evenutali label applicate ai grafici possono essere formattate in base alle preferenze definite lato backend, presentando le seguenti opzioni. \newline
-            Label numeriche:
             \begin{itemize}
-                  \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore della label;
-                  \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
-                  \item Separatore decimale: carattere da utilizzare come separatore decimale;
-                  \item suffessi: stringa da aggiungere dopo il valore della label, ad esempio \textit{\%}.
+                  \item Label numeriche:
+                        \begin{itemize}
+                              \item Numero di cifre decimali: numero di cifre decimali da visualizzare nel valore della label;
+                              \item Separatore delle migliaia: carattere da utilizzare come separatore delle migliaia;
+                              \item Separatore decimale: carattere da utilizzare come separatore decimale;
+                              \item suffissi: stringa da aggiungere dopo il valore della label, ad esempio '\textit{\%}'.
+                        \end{itemize}
+                        L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}. \newline
+                  \item Label temporali:
+                        \begin{itemize}
+                              \item Formato della data: formato da utilizzare per la visualizzazione della data;
+                              \item Formato dell'ora: formato da utilizzare per la visualizzazione dell'ora.
+                        \end{itemize}
+                        L'implementazione delle formattazioni temporali prevede l'utilizzo della liberia \textit{day.js}.
             \end{itemize}
-            L'implementazione delle formattazioni numeriche prevede l'utilizzo della libreria \textit{numbro.js}. \newline
-            Label temporali:
-            \begin{itemize}
-                  \item Formato della data: formato da utilizzare per la visualizzazione della data;
-                  \item Formato dell'ora: formato da utilizzare per la visualizzazione dell'ora.
-            \end{itemize}
-            L'implementazione delle formattazioni temporali prevede l'utilizzo della liberia \textit{day.js}.
-      \item \textbf{Props}: I props della componente Chart sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+      \item \textbf{Props}: I \textit{props} della componente \texttt{Chart} sono definiti dall'interfaccia \\
+            \texttt{RendererProps}, su cui il componente ne effettua il \textit{picking}
             delle informazioni \textit{data} e \textit{options}.
             \begin{listing}[H]
                   \begin{minted}{typescript}
@@ -681,36 +685,37 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                               'data' 
                               | 'options'>);
                   \end{minted}
-                  \caption{Definizione delle props della componente Chart}
+                  \caption{Definizione delle \textit{props} della componente \texttt{Chart}}
                   \label{listing:chartProps}
             \end{listing}
       \item \textbf{Ottimizzazioni}:
             \begin{itemize}
-                  \item Utilizzo di un custom-bundle di \textit{Plotly.js} in modo da ridurre le dimensioni del bundle finale, evitando la registrazione
-                        di grafici non utilizzati all'interno delle dashboard Datasoil S.r.l. Tale ottimizzazione permette inoltre di evitare la registrazione
+                  \item Utilizzo di un \textit{custom bundle} di \textit{Plotly.js} in modo da ridurre le dimensioni del \textit{bundle} finale, evitando la registrazione
+                        di grafici non utilizzati all'interno delle dashboard \textit{Datasoil S.r.l.} Tale ottimizzazione permette inoltre di evitare la registrazione
                         manuale delle \textit{traces}, necessaria nelle versioni rese disponibili da \textit{Plotly.js} a causa di un bug noto non risolto della libreria.
                   \item Utilizzo della libreria \textit{numbro.js} a favore della libreria \textit{numeral.js} precedentemente utilizzata, più pesante e non più mantenuta,
                         per la formattazione delle label numeriche all'interno dei grafici;
-                  \item Utilizzo della libreria \textit{day.js} a favore della libreria \textit{moment.js} precedentemente utilizzata, in quanto questa libreria costituisce una
-                        peerdependency di \textit{dashboard}, riducendo così le dimensioni del bundle finale;
-                  \item Utilizzo di un custom hooks per la gestione dello stato interno della componente e per il calcolo delle dimensioni del grafico, necessarie per permettere
-                        la visualizzazione responsiva della componente. L'utilizzo dell'hooks è volto a garantire un'implementazione efficiente e performante della componente.
+                  \item Utilizzo della libreria \textit{day.js} a favore della libreria \textit{moment.js} precedentemente utilizzata, in quanto costituisce una
+                        \textit{peerdependency} all'interno dei prodotti \textit{Datasoil S.r.l.}, riducendo così le dimensioni del \textit{bundle} finale;
+                  \item Utilizzo di un \textit{custom hooks} per la gestione dello stato interno della componente e per il calcolo delle dimensioni del grafico, necessarie per permettere
+                        la visualizzazione responsiva della componente. L'utilizzo dell'\textit{hooks} è volto a garantire un'implementazione efficiente e performante della componente.
             \end{itemize}
 \end{itemize}
 
 \subsection{Table}
 \begin{itemize}
-      \item \textbf{Nome della componente}: Table;
-      \item \textbf{Descrizione}: La componente Table prevede la visualizzazione di una tabella, i cui dati e la cui struttura (intesa come colonne e tipo di dato visualizzato
-            all'interno di esse) vengono definiti a partire dai dati passati come props tra le varie componenti e forniti dalla risposta in formato JSON ricevuta dai server Datasoil. \newline
+      \item \textbf{Nome della componente}: \texttt{Table};
+      \item \textbf{Descrizione}: La componente \texttt{Table} prevede la visualizzazione di una tabella, i cui dati e la cui struttura (intesa come colonne e tipo di dato visualizzato
+            all'interno di esse) vengono definiti a partire dai dati passati come \textit{props} tra le varie componenti e forniti dalla risposta in formato \textit{JSON} ricevuta dai \textit{server Datasoil}. \newline
             La componente permette inoltre di:
             \begin{itemize}
                   \item Ordinare le colonne della tabella;
-                  \item Filtrare le entry della tabella grazie ad un filtro globale;
+                  \item Filtrare le \textit{entry} della tabella grazie ad un filtro globale;
                   \item Effettuare il download della tabella in formato \textit{.csv};
             \end{itemize}
             A fronte di tali funzionalità, l'implementazione della componente prevede l'utilizzo della componente fornita dalla libreria \textit{PrimeReact}.
-      \item \textbf{Props}: I props della componente Table sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
+      \item \textbf{Props}: I \textit{props} della componente \texttt{Table} sono definiti dall'interfaccia \\
+            \texttt{RendererProps}, su cui il componente ne effettua il \textit{picking}
             delle informazioni \textit{data, options} e \textit{visualizationName}.
             \begin{listing}[H]
                   \begin{minted}{typescript}
@@ -723,28 +728,29 @@ Le componenti verranno presentate in ordine alfabetico, presentando la seguente 
                               | 'options' 
                               | 'visualizationName'>);
                   \end{minted}
-                  \caption{Definizione delle props della componente Table}
+                  \caption{Definizione delle \textit{props} della componente \texttt{Table}}
                   \label{listing:tableProps}
             \end{listing}
       \item \textbf{Ottimizzazioni}:
             \begin{itemize}
-                  \item Utilizzo della componente \textit{DataTable} fornita dalla libreria \textit{PrimeReact} a favore della componente \textit{Table} di \textit{AntD} precedentemente utilizzata,
-                        in quanto la libreria \textit{PrimeReact} offre una maggiore flessibilità e personalizzazione delle tabelle, oltre che a costituire una peerdependency all'interno dei
-                        prodotti Datasoil S.r.l., riducendo così le dimensioni del bundle finale;
-                  \item Utilizzo di hook per la gestione del filtro globale, in modo da garantire un'implementazione efficiente e performante della componente, a differenza dell'implementazione
+                  \item Utilizzo della componente \texttt{DataTable} fornita dalla libreria \textit{PrimeReact} a favore della componente \texttt{Table} di \textit{AntD} precedentemente utilizzata,
+                        in quanto la libreria \textit{PrimeReact} offre una maggiore flessibilità e personalizzazione delle tabelle, oltre che a costituire una \textit{peerdependency} all'interno dei
+                        prodotti \textit{Datasoil S.r.l.}, riducendo così le dimensioni del \textit{bundle} finale;
+                  \item Utilizzo di \textit{hook} per la gestione del filtro globale, in modo da garantire un'implementazione efficiente e performante della componente, a differenza dell'implementazione
                         fornita da \textit{PrimeReact} che comporta un bug noto non risolto. \label{item:hookTable}
             \end{itemize}
 \end{itemize}
 
 \subsection{Renderer}
 \begin{itemize}
-\item \textbf{Nome della componente}: Renderer;
-\item \textbf{Descrizione}: La componente Renderer seleziona dinamicamente un sottocomponente tra quelli resi disponibili dalla libreria \textit{viz-lib}
-in base al tipo di visualizzazione definito nei dati passati come props, costituendo l'entry point della libreria. \newline
-\item \textbf{Props}: I props della componente Renderer sono definiti dall'interfaccia \textit{RendererProps}, su cui il componente ne effettua il picking
-delle informazioni \textit{data, options} e \textit{visualizationName}.
-\begin{listing}[H]
-      \begin{minted}{typescript}
+      \item \textbf{Nome della componente}: \texttt{Renderer};
+      \item \textbf{Descrizione}: La componente \texttt{Renderer} seleziona dinamicamente un sottocomponente tra quelli resi disponibili dalla libreria \textit{viz-lib}
+            in base al tipo di visualizzazione definito nei dati passati come \textit{props}, costituendo l'\textit{entry point} della libreria. \newline
+      \item \textbf{Props}: I \textit{props} della componente \texttt{Renderer} sono definiti dall'interfaccia \\
+            \texttt{RendererProps}, su cui il componente ne effettua il \textit{picking}
+            delle informazioni \textit{data, options} e \textit{visualizationName}.
+            \begin{listing}[H]
+                  \begin{minted}{typescript}
                   export function Renderer({
                         data,
                         options,
@@ -754,21 +760,22 @@ delle informazioni \textit{data, options} e \textit{visualizationName}.
                               | 'options' 
                               | 'visualizationName'>);
                   \end{minted}
-      \caption{Definizione delle props della componente Renderer}
-      \label{listing:rendererPropsInComponent}
-\end{listing}
-\item \textbf{Ottimizzazioni}:
-\begin{itemize}
-      \item La componente prevede l'utilizzo di \textit{hooks} per ottimizzare le prestazioni, rendendo il componente memoizzato, prevenendo i rendering
-            non necessari, garantendo così un'implementazione efficiente e performante.
+                  \caption{Definizione delle \textit{props} della componente \texttt{Renderer}}
+                  \label{listing:rendererPropsInComponent}
+            \end{listing}
+      \item \textbf{Ottimizzazioni}:
+            \begin{itemize}
+                  \item La componente prevede l'utilizzo di \textit{hooks} per ottimizzare le prestazioni, rendendo il componente \gls{memoizzato}\glox, prevenendo i rendering
+                        non necessari, garantendo così un'implementazione efficiente e performante.
+            \end{itemize}
 \end{itemize}
 
 \subsection{VisualizationWidgetHeader}
 \begin{itemize}
-      \item \textbf{Nome della componente}: VisualizationWidgetHeader;
-      \item \textbf{Descrizione}: La componente VisualizationWidgetHeader appartiene alla libreria \textit{dashboard}, appartenente sempre al SDK prodotto. Questa componente costituisce l'header
-            del container per la visualizzazione delle componenti da renderizzare all'interno della dashboard. \newline
-      \item \textbf{Props}: I props della componente VisualizationWidgetHeader sono definiti delle informazioni \textit{name, visualization} e \textit{dataDialog}.
+      \item \textbf{Nome della componente}: \texttt{VisualizationWidgetHeader};
+      \item \textbf{Descrizione}: La componente \texttt{VisualizationWidgetHeader} appartiene alla libreria \textit{dashboard}, appartenente sempre al SDK prodotto. Questa componente costituisce l'\textit{header}
+            del \textit{container} per la visualizzazione delle componenti da renderizzare all'interno della dashboard. \newline
+      \item \textbf{Props}: I \textit{props} della componente \texttt{VisualizationWidgetHeader} sono definiti delle informazioni \textit{name, visualization} e \textit{dataDialog}.
             \begin{listing}[H]
                   \begin{minted}{typescript}
                   function VisualizationWidgetHeader({
@@ -781,13 +788,13 @@ delle informazioni \textit{data, options} e \textit{visualizationName}.
                         dataDialog: WidgetData | undefined;
                         });
                   \end{minted}
-                  \caption{Definizione delle props della componente VisualizationWidgetHeader}
+                  \caption{Definizione delle \textit{props} della componente \texttt{VisualizationWidgetHeader}}
                   \label{listing:visualizationWidgetHeaderProps}
             \end{listing}
       \item \textbf{Ottimizzazioni}:
             \begin{itemize}
-                  \item Ridefinizione dei props della componente in modo da permettere la visualizzazione di un dialog contenente la componente visualizzata all'interno del container;
-                  \item Ridefinizione della componente in modo da permettere la visualizzazione di un dialog contenente la componente visualizzata all'interno del container, attraverso
+                  \item Ridefinizione dei \textit{props} della componente in modo da permettere la visualizzazione di un \textit{dialog} contenente la componente visualizzata all'interno del \textit{container};
+                  \item Ridefinizione della componente in modo da permettere la visualizzazione di un \textit{dialog} contenente la componente visualizzata all'interno del \textit{container}, attraverso
                         l'utilizzo di componenti fornite dalla libreria \textit{PrimeReact}.
             \end{itemize}
 \end{itemize}
