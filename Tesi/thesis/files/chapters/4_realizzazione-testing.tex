@@ -3,13 +3,366 @@
 Nella seguente sezione verranno presentate le attività di realizzazione e testing effettuate durante lo sviluppo della libreria, con l'obiettivo di fornire una panoramica
 sulle tecnologie utilizzate, sulle funzionalità implementate e sui test effettuati per garantire la qualità del prodotto sviluppato.
 
+\section{Strumenti utilizzati}
+La seguente sezione fornisce gli strumenti utilizzati durante lo svolgimento dello stage per la realizzazione della libreria grafica.
+Gli strumenti verranno presentati in ordine alfabetico secondo la seguente struttura:
+\begin{itemize}
+    \item \textbf{Nome strumento}: nome dello strumento utilizzato;
+    \item \textbf{Versione}: versione utilizzata nel progetto durante lo stage;
+    \item \textbf{Link}: link di riferimento per ulteriori informazioni sullo strumento;
+    \item \textbf{Descrizione}: breve descrizione dello strumento e delle sue funzionalità;
+    \item \textbf{Vantaggi}: principali vantaggi derivanti dall'utilizzo dello strumento; \textit{(Opzionale)}
+    \item \textbf{Svantaggi}: principali svantaggi derivanti dall'utilizzo dello strumento; \textit{(Opzionale)}
+    \item \textbf{Alternative Esaminate}: alternative studiate e prese in considerazione durante la scelta dello strumento, con una breve considerazione
+          su di esse e la motivazione per la quale non sono state selezionate. \textit{(Opzionale)}
+\end{itemize}
+
+\subsection{Tecnologie frontend}
+
+\subsubsection{D3-color}
+\begin{itemize}
+    \item \textbf{Nome strumento}: D3-color
+    \item \textbf{Versione}: 3.1.0
+    \item \textbf{Link}: \href{https://d3js.org/d3-color}{d3js.org/d3-color}
+    \item \textbf{Descrizione}: D3-color è una libreria JavaScript open-source utilizzata per la manipolazione dei colori.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{D3-color} offre un'ampia serie di funzionalità per la manipolazione dei colori, quali la conversione tra spazi di colori, la manipolazione dei colori
+                    e la generazione di scale di colori;
+              \item \textit{D3-color} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+    \item \textit{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{Chroma-js}: \textit{Chroma-js} è una libreria \textit{JavaScript} \textit{open-source} utilizzata per la manipolazione dei colori, ma risulta essere più pesante di \textit{D3-color}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{D3-scale}
+\begin{itemize}
+    \item \textbf{Nome strumento}: D3-scale
+    \item \textbf{Versione}: 4.0.2
+    \item \textbf{Link}: \href{https://d3js.org/d3-scale}{d3js.org/d3-scale}
+    \item \textbf{Descrizione}: \textit{D3-scale} è una libreria \textit{JavaScript} open-source utilizzata per la generazione di scale di colori, di posizioni e di dimensioni.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{D3-scale} offre un'ampia serie di funzionalità per la generazione di scale di colori, di posizioni e di dimensioni, quali la generazione di scale lineari,
+                    logaritmiche e ordinali;
+              \item \textit{D3-scale} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Day.js}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Dayjs
+    \item \textbf{Versione}: 1.11.7
+    \item \textbf{Link}: \href{https://day.js.org/}{day.js.org}
+    \item \textbf{Descrizione}: \textit{Day.js} è una libreria \textit{JavaScript} open-source utilizzata per la manipolazione delle date e degli orari.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Day.js} è una libreria molto leggera, con un'ampia serie di funzionalità per la manipolazione delle date e degli orari;
+              \item \textit{Day.js} viene fornito con dichiarazioni ufficiali di tipo per \textit{TypeScript};
+              \item \textit{Day.js} è tutt'ora supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{Moment.js}: \textit{Moment.js} è una libreria \textit{JavaScript} open-source utilizzata per la manipolazione delle date e degli orari, ma risulta essere più pesante
+                    di \textit{Day.js}. \textit{Moment.js} è inoltre considerato \textit{deprecated} a favore di Day.js, che offre una maggiore leggerezza e una maggiore efficienza.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Lodash}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Lodash
+    \item \textbf{Versione}: 4.14.0
+    \item \textbf{Link}: \href{https://lodash.com/}{lodash.com}
+    \item \textbf{Descrizione}: \textit{Lodash} è una libreria \textit{JavaScript} \textit{open-source} utilizzata per la manipolazione di oggetti e array.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Lodash} offre un'ampia serie di funzionalità implementate con efficienza per la manipolazione di oggetti e array,
+                    quali la ricerca, la modifica e la rimozione di elementi;
+              \item \textit{Lodash} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+    \item \textbf{Svantaggi}
+          \begin{itemize}
+              \item \textit{Lodash} è una libreria molto pesante, con un'ampia serie di funzionalità che possono non essere utilizzate all'interno del progetto:
+                    per questo motivo in questo progetto sono eseguiti degli \texttt{import} sui moduli specifici, riducendo così le dimensioni del \textit{\gls{package}\glox} finale.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Numbro}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Numbro
+    \item \textbf{Versione}: 2.5.0
+    \item \textbf{Link}: \href{http://numbrojs.com/}{numbrojs.com}
+    \item \textbf{Descrizione}: \textit{Numbro} è una libreria \textit{JavaScript} open-source utilizzata per la formattazione dei numeri.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Numbro} offre un'ampia serie di funzionalità per la formattazione dei numeri, quali la formattazione delle cifre decimali, la formattazione delle valute
+                    e la formattazione dei numeri in notazione scientifica;
+              \item \textit{Numbro} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{Numeral.js}: libreria \textit{JavaScript} open-source utilizzata per la formattazione dei numeri, ma risulta non essere più mantenuta attivamente dalla \textit{community}, oltre
+                    che ad essere più pesante di \textit{Numbro}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Plotly.js}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Plotly.js
+    \item \textbf{Versione}: custom-bundle: 2.33.0
+    \item \textbf{Link}: \href{https://plotly.com/javascript/}{plotly.com/javascript}
+    \item \textbf{Descrizione}: \textit{Plotly.js} è una libreria \textit{JavaScript open-source}, con supporto per \textit{TypeScript}, utilizzata per la visualizzazione di dati mediante grafici interattivi.
+          Costruito sopra \textit{D3.js}, \textit{Plotly.js} offre un vasto panorama di grafici dinamici in formato \textit{\gls{SVG}\glox}, altamente personalizzabili.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Plotly.js} offre funzionalità di interattività avanzate, quali zoom, pan, selezione e salvataggio dei grafici;
+              \item Le disponibilità di grafici offerte da \textit{Plotly.js} sono molto ampie, permettendo di soddisfare la maggior parte delle esigenze
+                    all'interno della libreria grafica;
+              \item \textit{Plotly.js} è supportato da una vasta e attiva \textit{community}, con ampie serie di esempi disponibili su \textit{CodePen} (\href{https://codepen.io/}{codepen.io}, una piattaforma di condivisione di codice
+                    \textit{online} che permette di visualizzare e modificare codice \textit{HTML, CSS e JavaScript});
+              \item \textit{Plotly.js} offre la possibilità di generare \textit{custom bundle} personalizzati, permettendo di registrare le sole \textit{traces} che si vogliono utilizzare, riducendo
+                    così le dimensioni del pacchetto finale;
+              \item \textit{Plotly.js} era già precedentemente utilizzato all'interno della libreria preesistente, non necessitando così di modifiche lato \textit{\gls{backend}\glox} negli editor
+                    utilizzati per la generazione delle risposte \textit{JSON} da parte dei server \textit{Datasoil S.r.l.} per la generazione delle dashboard;
+              \item \textit{Plotly.js} offre una funzionalità, \textit{Plotly.react}, che permette di aggiornare i grafici in modo efficiente, riducendo il tempo di rendering
+                    e migliorando le prestazioni complessive della libreria.
+          \end{itemize}
+    \item \textbf{Svantaggi}:
+          \begin{itemize}
+              \item \textit{Plotly.js} è una libreria molto pesante in termini sia di spazio che di rallentamenti \textit{\gls{runtime}\glox}, dovuto anche dal fatto che è implementata sopra un \textit{wrapper} proprietario di \textit{D3.js},
+                    impedendo l'ottimizzazione di alcune dipendenze non necessarie in quanto non utilizzate;
+              \item La documentazione ufficiale di \textit{Plotly.js} è vaga e poco esaustiva;
+              \item La versione ufficiale di \textit{Plotly.js} presenta degli errori durante la registrazione delle \textit{traces}, impedendo di importare correttamente
+                    \textit{Plotly} all'interno dei moduli \textit{TypeScript}, motivo per il quale è stata utilizzata una versione \textit{custom bundle} di \textit{Plotly.js}.
+          \end{itemize}
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{D3.js}: \textit{D3.js} è una libreria \textit{JavaScript open-source} utilizzata per la generazione di grafici dinamici e manipolazione dati, la quale dalla sua parte risulta però
+                    essere più complessa rispetto a \textit{Plotly.js}, richiedendo una maggiore curva di apprendimento e una maggiore quantità di codice per la generazione di grafici.
+              \item \textit{Chart.js}: \textit{Chart.js} è una libreria \textit{JavaScript open-source} utilizzata per la generazione di grafici dinamici, la quale risulta essere più leggera di \textit{Plotly.js},
+                    ma offre una minore quantità di grafici disponibili; il suo utilizzo avrebbe inoltre comportato la richiesta di modifiche lato \textit{backend}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeFlex}
+\begin{itemize}
+    \item \textbf{Nome strumento}: PrimeFlex
+    \item \textbf{Versione}: 3.3.0
+    \item \textbf{Link}: \href{https://primereact.org/}{primefaces.org/primeflex}
+    \item \textbf{Descrizione}: \textit{PrimeFlex} è una libreria \textit{CSS open-source} utilizzata per la creazione di \textit{layout} flessibili e \textit{\gls{responsive}\glox}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{PrimeFlex} offre un'ampia serie di classi \textit{CSS} per la creazione di \textit{layout} flessibili e responsivi, permettendo di adattare il \textit{layout}
+                    in base alla grandezza dello schermo;
+              \item \textit{PrimeFlex} è una libreria molto leggera;
+              \item \textit{PrimeFlex} è fortemente integrata con le componenti di \textit{PrimeReact};
+              \item \textit{PrimeFlex} può essere integrato a \textit{tailwind};
+              \item \textit{PrimeFlex} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeIcons}
+\begin{itemize}
+    \item \textbf{Nome strumento}: PrimeIcons
+    \item \textbf{Versione}: 6.0.1
+    \item \textbf{Link}: \href{https://primefaces.org/primeicons}{primefaces.org/primeicons}
+    \item \textbf{Descrizione}: \textit{PrimeIcons} è una libreria di icone \textit{open-source} utilizzata per la creazione di interfacce utente.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{PrimeIcons} offre un'ampia serie di icone per la creazione di interfacce utente, le quali sono altamente personalizzabili e facilmente integrabili;
+              \item \textit{PrimeIcons} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+              \item \textit{PrimeIcons} è fortemente integrata con le componenti di \textit{PrimeReact};
+              \item \textit{PrimeIcons} è supportato da una vasta e attiva community.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{PrimeReact}
+\begin{itemize}
+    \item \textbf{Nome strumento}: PrimeReact
+    \item \textbf{Versione}: 10.0.0
+    \item \textbf{Link}: \href{https://primefaces.org/primereact}{primefaces.org/primereact}
+    \item \textbf{Descrizione}: \textit{PrimeReact} è una libreria di componenti \textit{React open-source} utilizzata per la creazione di interfacce utente.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{PrimeReact} offre un'ampia serie di componenti \textit{React} per la creazione di interfacce utente, le quali a loro volta sono altamente personalizzabili, con numerose \textit{feature} integrate;
+              \item \textit{PrimeReact} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci;
+              \item \textit{PrimeReact} costituisce una \textit{\gls{peerdependency}\glox} all'interno dei prodotti \textit{Datasoil S.r.l.}, permettendo di utilizzare le componenti \textit{PrimeReact} all'interno
+                    della libreria grafica senza comportare l'aggiunta di dipendenze esterne, riducendo così le dimensioni del \textit{bundle} finale;
+              \item \textit{PrimeReact} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{Ant Design}: \textit{Ant Design} è una libreria di componenti \textit{React open-source} utilizzata per la creazione di interfacce utente, la quale non risulta però
+                    essere integrata all'interno dei prodotti \textit{Datasoil S.r.l.}
+          \end{itemize}
+\end{itemize}
+
+
+\subsubsection{React}
+\begin{itemize}
+    \item \textbf{Nome strumento}: React
+    \item \textbf{Versione}: 18.0.0
+    \item \textbf{Link}: \href{https://reactjs.org/}{reactjs.org}
+    \item \textbf{Descrizione}: \textit{React} è una libreria \textit{React open-source} per la creazione di interfacce utente, sviluppata da Facebook.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{React} offre un'ampia serie di funzionalità per la creazione di interfacce utente, quali il \textit{Virtual DOM}, il \textit{JSX} e \textit{Hooks};
+              \item \textit{React} è supportato da una vasta e attiva \textit{community};
+              \item \textit{React} è una libreria molto leggera, permettendo di creare interfacce utente performanti e veloci.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{TypeScript}
+\begin{itemize}
+    \item \textbf{Nome strumento}: TypeScript
+    \item \textbf{Versione}: 5.1.6
+    \item \textbf{Link}: \href{https://www.typescriptlang.org/}{typescriptlang.org}
+    \item \textbf{Descrizione}: \textit{TypeScript} è un linguaggio di programmazione open-source sviluppato da \textit{Microsoft}, che fa da \textit{\gls{super-set}\glox} a \textit{JavaScript}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{TypeScript} permette di definire tipi ed interfacce per le variabili e i parametri delle funzioni, garantendo una maggiore sicurezza e affidabilità del codice;
+              \item \textit{TypeScript} permette di effettuare controlli statici sul codice sorgente, riducendo il numero di errori a \textit{runtime}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{usehook-ts}
+\begin{itemize}
+    \item \textbf{Nome strumento}: usehook-ts
+    \item \textbf{Versione}: 3.1.0
+    \item \textbf{Link}: \href{https://usehooks-ts.com/}{usehooks-ts.com}
+    \item \textbf{Descrizione}: \textit{usehook-ts} è una libreria \textit{open-source} di \textit{custom hook React}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{usehook-ts} offre un'ampia serie di \textit{hook} personalizzati per la creazione di interfacce utente;
+              \item \textit{usehook-ts} è supportato da una vasta e attiva \textit{community}.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Strumenti per lo sviluppo}
+
+\subsubsection{ESLint}
+\begin{itemize}
+    \item \textbf{Nome strumento}: ESLint
+    \item \textbf{Versione}: 8.3.0
+    \item \textbf{Link}: \href{https://eslint.org/}{eslint.org}
+    \item \textbf{Descrizione}: \textit{ESLint} è uno strumento \textit{open-source} utilizzato per l'analisi statica del codice sorgente, per identificare pattern problematici o codice che non rispetta
+          le linee guida definite all'interno del progetto.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{ESLint} permette di definire regole personalizzate per l'analisi del codice sorgente, garantendo la coerenza e la qualità del codice;
+              \item \textit{ESLint} permette di integrarsi con gli strumenti di \textit{build}, permettendo di eseguire l'analisi statica del codice sorgente durante il processo di \textit{build}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Jest}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Jest
+    \item \textbf{Versione}: 29.0.7
+    \item \textbf{Link}: \href{https://jestjs.io/}{jestjs.io}
+    \item \textbf{Descrizione}: \textit{Jest} è un \textit{framework} di testing \textit{open-source} utilizzato per il testing di codice \textit{JavaScript} e \textit{TypeScript}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Jest} permette di effettuare test unitari, test di integrazione e test \textit{end-to-end}, garantendo la qualità e la stabilità del codice;
+              \item \textit{Jest} permette di effettuare test in parallelo, riducendo i tempi di esecuzione dei test;
+              \item \textit{Jest} permette di generare report dettagliati sui test effettuati, permettendo di identificare e correggere eventuali errori.
+          \end{itemize}
+\end{itemize}
+
+
+\subsubsection{NVM}
+\begin{itemize}
+    \item \textbf{Nome strumento}: NVM
+    \item \textbf{Versione}: 1.1.12
+    \item \textbf{Link}: \href{https://github.com/nvm-sh/nvm}{github.com/nvm-sh/nvm}
+    \item \textbf{Descrizione}: \textit{NVM (Node Version Manager)} è uno strumento \textit{open-source} utilizzato per la gestione delle versioni di \textit{Node.js}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{NVM} permette di installare e gestire più versioni di \textit{Node.js} all'interno del sistema, permettendo di selezionare la versione corretta
+                    per il progetto in corso;
+              \item \textit{NVM} permette di gestire le versioni di \textit{Node.js} in modo semplice e veloce, permettendo di passare da una versione all'altra con un solo comando.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Prettier}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Prettier
+    \item \textbf{Versione}: 3.2.5
+    \item \textbf{Link}: \href{https://prettier.io/}{prettier.io}
+    \item \textbf{Descrizione}: \textit{Prettier} è uno strumento \textit{open-source} utilizzato per la formattazione del codice sorgente.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Prettier} permette di formattare il codice sorgente in modo automatico, garantendo uno stile uniforme all'interno del progetto.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Rollup}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Rollup
+    \item \textbf{Versione}: 4.18.0
+    \item \textbf{Link}: \href{https://rollupjs.org/}{rollupjs.org}
+    \item \textbf{Descrizione}: \textit{Rollup} è un \textit{\gls{bundler}\glox} di moduli \textit{JavaScript} che permette di risolvere le dipendenze tra i moduli, generando un unico file di output.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Rollup} effettua il \textit{\gls{tree-shaking}\glox}, rimuovendo le dipendenze non utilizzate all'interno del codice sorgente;
+              \item Permette di generare bundle in diversi formati, quali \textit{CommonJS} e \textit{ESM};
+              \item \textit{Rollup} è noto per la sua velocità ed efficienza nelle \textit{build}, specialmente per progetti più piccoli o librerie.
+                    Questo può risultare in tempi di \textit{build} più rapidi e in una migliore esperienza di sviluppo;
+              \item \textit{Rollup} ha un sistema di \textit{plug-in} molto potente e flessibile che permette di estendere le sue funzionalità;
+              \item \textit{Rollup} permette di utilizzare \textit{TypeScript} all'interno del progetto, integrando la configurazione dichiarata nel file \textit{tsconfig.json};
+              \item \textit{Rollup} permette di generare file di dichiarazione \textit{TypeScript}.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Yarn}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Yarn
+    \item \textbf{Versione}: 1.22.22
+    \item \textbf{Link}: \href{https://yarnpkg.com/}{yarnpkg.com}
+    \item \textbf{Descrizione}: \textit{Yarn} è un \textit{package manager} per \textit{JavaScript}, sviluppato da \textit{Facebook, Google} e \textit{Tilde}.
+    \item \textbf{Vantaggi}:
+          \begin{itemize}
+              \item \textit{Yarn} è più veloce di \textit{npm}, ha un sistema di cache più efficiente e permette di installare pacchetti in parallelo.
+          \end{itemize}
+    \item \textbf{Svantaggi}:
+          \begin{itemize}
+              \item \textit{Yarn} presenta un \textit{registry} di dimensione minore rispetto a quello di \textit{npm}.
+          \end{itemize}
+    \item \textbf{Alternative Esaminate}:
+          \begin{itemize}
+              \item \textit{npm}: npm è il \textit{package manager} di default per \textit{Node.js}, ma è più lento di \textit{Yarn} e ha un sistema di cache meno efficiente,
+                    offrendo inoltre un output meno comprensibile.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Strumenti per la Collaborazione e la Gestione del Progetto}
+Nella seguente sezione vengono presentati gli strumenti utilizzati per la collaborazione e la gestione del progetto durante lo svolgimento dello stage.
+
+\subsubsection{Confluence}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Confluence
+    \item \textbf{Versione}: Cloud
+    \item \textbf{Link}: \href{https://www.atlassian.com/software/confluence}{atlassian.com/software/confluence}
+    \item \textbf{Descrizione}: \textit{Confluence} è un software di collaborazione sviluppato da \textit{Atlassian}, utilizzato per la creazione e la gestione della documentazione
+          all'interno di un'azienda.
+\end{itemize}
+
+\subsubsection{Slack}
+\begin{itemize}
+    \item \textbf{Nome strumento}: Slack
+    \item \textbf{Versione}: Cloud
+    \item \textbf{Link}: \href{https://slack.com/}{slack.com}
+    \item \textbf{Descrizione}: \textit{Slack} è un software di collaborazione sviluppato da \textit{Slack Technologies}, utilizzato per la comunicazione quotidiana e la collaborazione
+          con il team.
+\end{itemize}
+
 \section{Realizzazione delle componenti}
 
 \subsection{Ambiente di sviluppo}
-Durante lo sviluppo della libreria, è stata utilizzata la versione 18.12.1 di \textit{Node.js}, configurata tramite l'utilizzo di \textit{NVM
-    (Node Version Manager)}, un gestore di versioni di \textit{Node.js} che permette di installare e gestire più versioni in modo semplice
-e veloce. \newline
-Per quanto riguarda la gestione delle dipendenze, è stato utilizzato \textit{Yarn}, un package manager per JavaScript che permette di gestire
+Durante lo sviluppo della libreria, è stata utilizzata la versione 18.12.1 di \textit{Node.js}, configurata tramite l'utilizzo di \textit{NVM (Node Version Manager)},
+un gestore di versioni di \textit{Node.js} che permette di installare e gestire più versioni in modo semplice e veloce. \newline
+Per quanto riguarda la gestione delle dipendenze, è stato utilizzato \textit{Yarn}, un \textit{package manager} per \textit{JavaScript} che permette di gestire
 le dipendenze del progetto in modo efficiente e veloce. \newline
 Il versionamento del codice è stato gestito tramite \textit{Git}, un sistema di controllo di versione distribuito, configurando e
 mantenendo un \textit{\gls{repository}\glox} remoto su \textit{Github} interno all'organizzazione dell'azienda. \newline
