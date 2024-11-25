@@ -1,5 +1,5 @@
 <div align="left">
-  <img src="https://img.shields.io/badge/Project%20Status-In%20Progress-orange" alt="Status">
+  <img src="https://img.shields.io/badge/Project%20Status-Completed-brightgreen" alt="Status">
 </div>
 <br>
 
